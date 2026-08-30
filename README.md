@@ -43,7 +43,7 @@ Importer rozmów czyta lokalną bazę SQLite OpenCode bezpośrednio:
 npm run transcripts:import
 ```
 
-Można wskazać inną kopię bazy przez `OPENCODE_DB`. Importer publikuje wyłącznie wiadomości użytkownika, tekstowe odpowiedzi modelu i krótkie statusy narzędzi, a następnie skaner blokuje podejrzane dane.
+Można wskazać inną kopię bazy przez `OPENCODE_DB`. Importer publikuje wyłącznie wiadomości użytkownika, tekstowe odpowiedzi modelu i krótkie statusy narzędzi. Operacje plikowe pokazują ścieżki względne wobec katalogu danego modelu, a skaner blokuje podejrzane dane.
 
 ## GitHub Pages
 

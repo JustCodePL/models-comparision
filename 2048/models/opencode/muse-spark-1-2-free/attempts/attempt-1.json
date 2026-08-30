@@ -16,7 +16,7 @@
       "role": "tool",
       "tool": "read",
       "status": "completed",
-      "text": "Narzędzie read: zakończone."
+      "text": "Narzędzie read · .: zakończone."
     },
     {
       "role": "tool",
@@ -28,19 +28,19 @@
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · index.html: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · style.css: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · script.js: zakończone."
     },
     {
       "role": "tool",

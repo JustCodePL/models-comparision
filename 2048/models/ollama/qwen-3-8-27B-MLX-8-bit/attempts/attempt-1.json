@@ -22,13 +22,13 @@
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · index.html: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · style.css: zakończone."
     },
     {
       "role": "assistant",
@@ -38,7 +38,7 @@
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · game.js: zakończone."
     },
     {
       "role": "assistant",
@@ -48,37 +48,37 @@
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · game.js: zakończone."
     },
     {
       "role": "tool",
       "tool": "read",
       "status": "completed",
-      "text": "Narzędzie read: zakończone."
+      "text": "Narzędzie read · game.js: zakończone."
     },
     {
       "role": "tool",
       "tool": "read",
       "status": "completed",
-      "text": "Narzędzie read: zakończone."
+      "text": "Narzędzie read · game.js: zakończone."
     },
     {
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · game.js: zakończone."
     },
     {
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · game.js: zakończone."
     },
     {
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · game.js: zakończone."
     },
     {
       "role": "assistant",
@@ -88,13 +88,13 @@
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · index.html: zakończone."
     },
     {
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · index.html: zakończone."
     },
     {
       "role": "assistant",
@@ -104,7 +104,7 @@
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · test.mjs: zakończone."
     },
     {
       "role": "tool",
@@ -116,7 +116,7 @@
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · test.cjs: zakończone."
     },
     {
       "role": "tool",
@@ -144,7 +144,7 @@
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · game.js: zakończone."
     },
     {
       "role": "tool",
@@ -160,25 +160,25 @@
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · test.cjs: zakończone."
     },
     {
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · test.cjs: zakończone."
     },
     {
       "role": "tool",
       "tool": "edit",
       "status": "error",
-      "text": "Narzędzie edit: błąd. Narzędzie zgłosiło błąd."
+      "text": "Narzędzie edit · test.cjs: błąd. Narzędzie zgłosiło błąd."
     },
     {
       "role": "tool",
       "tool": "edit",
       "status": "completed",
-      "text": "Narzędzie edit: zakończone."
+      "text": "Narzędzie edit · test.cjs: zakończone."
     },
     {
       "role": "tool",
@@ -200,7 +200,7 @@
       "role": "tool",
       "tool": "read",
       "status": "completed",
-      "text": "Narzędzie read: zakończone."
+      "text": "Narzędzie read · game.js: zakończone."
     },
     {
       "role": "assistant",
@@ -210,7 +210,7 @@
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · README.md: zakończone."
     },
     {
       "role": "tool",

@@ -28,7 +28,7 @@
       "role": "tool",
       "tool": "write",
       "status": "error",
-      "text": "Narzędzie write: błąd. Operacja została odrzucona przez użytkownika."
+      "text": "Narzędzie write · ../index.html: błąd. Operacja została odrzucona przez użytkownika."
     },
     {
       "role": "user",
@@ -42,7 +42,7 @@
       "role": "tool",
       "tool": "write",
       "status": "error",
-      "text": "Narzędzie write: błąd. Operacja została odrzucona przez użytkownika."
+      "text": "Narzędzie write · ../index.html: błąd. Operacja została odrzucona przez użytkownika."
     },
     {
       "role": "user",
@@ -52,7 +52,7 @@
       "role": "tool",
       "tool": "write",
       "status": "error",
-      "text": "Narzędzie write: błąd. Operacja została odrzucona przez użytkownika."
+      "text": "Narzędzie write · ../index.html: błąd. Operacja została odrzucona przez użytkownika."
     }
   ]
 }

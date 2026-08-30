@@ -28,9 +28,46 @@ function cleanText(value) {
     .trim();
 }
 
-function toolMessage(part) {
+function relativeToolPath(value, provider, slug) {
+  const raw = String(value ?? "").trim().replaceAll("\\", "/");
+  if (!raw) return ".";
+  if (raw.startsWith("/var/folders/") || raw.startsWith("/tmp/")) {
+    return `<plik-tymczasowy>/${path.posix.basename(raw)}`;
+  }
+  const modelMarker = `/${slug}`;
+  const modelIndex = raw.indexOf(modelMarker);
+  if (modelIndex >= 0) {
+    const relative = raw.slice(modelIndex + modelMarker.length).replace(/^\/+/, "");
+    return relative || ".";
+  }
+  if (raw.startsWith("/Users/artur/projects/2048/")) {
+    const historicalRoots = [
+      `/Users/artur/projects/2048/${slug}`,
+      `/Users/artur/projects/2048/local/${slug}`,
+      `/Users/artur/projects/2048/opencode/${slug}`,
+      `/Users/artur/projects/2048/openrouter/${slug}`
+    ];
+    return historicalRoots
+      .map((directory) => path.posix.relative(directory, raw) || ".")
+      .sort((left, right) => left.split("/").length - right.split("/").length)[0];
+  }
+  if (raw.startsWith("/")) return `<poza-katalogiem-zadania>/${path.posix.basename(raw)}`;
+  return path.posix.normalize(raw).replace(/^\.\//, "") || ".";
+}
+
+function toolTarget(part, provider, slug) {
+  const input = part.state?.input ?? {};
+  const filePath = input.filePath ?? input.filepath ?? input.file ?? input.path ?? input.directory;
+  const base = filePath !== undefined ? relativeToolPath(filePath, provider, slug) : undefined;
+  const pattern = typeof input.pattern === "string" ? input.pattern.trim() : "";
+  if (base && pattern) return base === "." ? pattern : path.posix.join(base, pattern);
+  return base ?? (pattern || undefined);
+}
+
+function toolMessage(part, provider, slug) {
   const state = part.state ?? {};
   const failed = state.status === "error";
+  const target = toolTarget(part, provider, slug);
   let detail = "";
   const error = String(state.error ?? state.output ?? "");
   if (failed && /reject|permission/i.test(error)) detail = " Operacja została odrzucona przez użytkownika.";
@@ -39,7 +76,7 @@ function toolMessage(part) {
     role: "tool",
     tool: String(part.tool ?? "narzędzie"),
     status: failed ? "error" : "completed",
-    text: `Narzędzie ${part.tool ?? "narzędzie"}: ${failed ? "błąd" : "zakończone"}.${detail}`
+    text: `Narzędzie ${part.tool ?? "narzędzie"}${target ? ` · ${target}` : ""}: ${failed ? "błąd" : "zakończone"}.${detail}`
   };
 }
 
@@ -66,7 +103,7 @@ function importSession(provider, slug, attemptId, sessionId) {
       const previous = messages.at(-1);
       if (!previous || previous.role !== item.role || previous.text !== item.text) messages.push(item);
     } else if (part.type === "tool" && message.role === "assistant") {
-      messages.push(toolMessage(part));
+      messages.push(toolMessage(part, provider, slug));
     }
   }
 

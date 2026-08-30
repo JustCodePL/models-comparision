@@ -12,7 +12,7 @@
       "role": "tool",
       "tool": "glob",
       "status": "completed",
-      "text": "Narzędzie glob: zakończone."
+      "text": "Narzędzie glob · *: zakończone."
     },
     {
       "role": "assistant",
@@ -22,7 +22,7 @@
       "role": "tool",
       "tool": "glob",
       "status": "completed",
-      "text": "Narzędzie glob: zakończone."
+      "text": "Narzędzie glob · *: zakończone."
     },
     {
       "role": "assistant",
@@ -38,43 +38,43 @@
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · index.html: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · styles.css: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · tsconfig.json: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · package.json: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · src/game.ts: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · src/ui.ts: zakończone."
     },
     {
       "role": "tool",
       "tool": "write",
       "status": "completed",
-      "text": "Narzędzie write: zakończone."
+      "text": "Narzędzie write · README.md: zakończone."
     },
     {
       "role": "assistant",
