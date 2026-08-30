@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T14:48:14.250Z",
+  "generatedAt": "2026-08-30T14:49:52.715Z",
   "models": {
     "deepseek-v4-flash-iq2": {
       "status": "success",
@@ -119,7 +119,7 @@
           "id": "startup",
           "label": "Start bez błędów",
           "status": "failed",
-          "details": "HTTP 404: http://127.0.0.1:62567/artifacts/2048/ollama/gpt-oss-20B/compiled/main.js"
+          "details": "HTTP 404: http://127.0.0.1:62636/artifacts/2048/ollama/gpt-oss-20B/compiled/main.js"
         },
         {
           "id": "board",

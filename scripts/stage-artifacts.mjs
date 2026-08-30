@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
+import { execSync } from "node:child_process";
 
 const root = process.cwd();
 const comparison = JSON.parse(fs.readFileSync(path.join(root, "2048/comparison.json"), "utf8"));
@@ -12,7 +12,7 @@ for (const ref of comparison.models) {
   const model = JSON.parse(fs.readFileSync(path.join(source, "model.json"), "utf8"));
   if (model.artifact.kind === "none") continue;
   if (model.artifact.build) {
-    execFileSync("/bin/zsh", ["-lc", model.artifact.build], { cwd: source, stdio: "inherit" });
+    execSync(model.artifact.build, { cwd: source, stdio: "inherit", shell: "/bin/sh" });
   }
   const destination = path.join(destinationRoot, ref.provider, ref.slug);
   fs.mkdirSync(destination, { recursive: true });
