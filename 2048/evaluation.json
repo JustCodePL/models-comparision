@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T14:49:52.715Z",
+  "generatedAt": "2026-08-30T19:20:05.675Z",
   "models": {
     "deepseek-v4-flash-iq2": {
       "status": "success",
@@ -18,7 +18,7 @@
           "id": "board",
           "label": "Plansza 4 × 4",
           "status": "passed",
-          "details": "Wykryto 16 pól."
+          "details": "Wykryto 16 pól; rozmiar planszy: 480 × 480 px."
         },
         {
           "id": "initial",
@@ -70,7 +70,7 @@
           "id": "board",
           "label": "Plansza 4 × 4",
           "status": "passed",
-          "details": "Wykryto 16 pól."
+          "details": "Wykryto 16 pól; rozmiar planszy: 440 × 440 px."
         },
         {
           "id": "initial",
@@ -119,7 +119,7 @@
           "id": "startup",
           "label": "Start bez błędów",
           "status": "failed",
-          "details": "HTTP 404: http://127.0.0.1:62636/artifacts/2048/ollama/gpt-oss-20B/compiled/main.js"
+          "details": "HTTP 404: http://127.0.0.1:64786/artifacts/2048/ollama/gpt-oss-20B/compiled/main.js"
         },
         {
           "id": "board",
@@ -186,7 +186,7 @@
           "id": "board",
           "label": "Plansza 4 × 4",
           "status": "passed",
-          "details": "Wykryto 16 pól."
+          "details": "Wykryto 16 pól; rozmiar planszy: 440 × 440 px."
         },
         {
           "id": "initial",
@@ -238,7 +238,7 @@
           "id": "board",
           "label": "Plansza 4 × 4",
           "status": "passed",
-          "details": "Wykryto 16 pól."
+          "details": "Wykryto 16 pól; rozmiar planszy: 494 × 494 px."
         },
         {
           "id": "initial",
@@ -290,7 +290,7 @@
           "id": "board",
           "label": "Plansza 4 × 4",
           "status": "passed",
-          "details": "Wykryto 16 pól."
+          "details": "Wykryto 16 pól; rozmiar planszy: 480 × 480 px."
         },
         {
           "id": "initial",
@@ -326,13 +326,54 @@
       ]
     },
     "nemotron-3-5-lightning": {
-      "status": "not-evaluated",
+      "status": "partial",
       "checks": [
         {
           "id": "artifact",
-          "label": "Dostępność artefaktu",
-          "status": "skipped",
-          "details": "Brak sesji i artefaktu."
+          "label": "Dostępność plików",
+          "status": "passed"
+        },
+        {
+          "id": "startup",
+          "label": "Start bez błędów",
+          "status": "passed"
+        },
+        {
+          "id": "board",
+          "label": "Plansza 4 × 4",
+          "status": "failed",
+          "details": "Wykryto 16 pól; rozmiar planszy: 205 × 59 px."
+        },
+        {
+          "id": "initial",
+          "label": "Dwa kafelki początkowe",
+          "status": "passed",
+          "details": "Wykryto 2 kafelków."
+        },
+        {
+          "id": "restart",
+          "label": "Restart",
+          "status": "passed"
+        },
+        {
+          "id": "movement",
+          "label": "Sterowanie ruchem",
+          "status": "passed"
+        },
+        {
+          "id": "merge",
+          "label": "Łączenie 2 + 2 = 4",
+          "status": "passed"
+        },
+        {
+          "id": "spawn",
+          "label": "Nowy kafelek po prawidłowym ruchu",
+          "status": "passed"
+        },
+        {
+          "id": "mobile",
+          "label": "Widok mobilny",
+          "status": "passed"
         }
       ]
     }

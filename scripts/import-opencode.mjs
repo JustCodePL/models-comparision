@@ -14,6 +14,7 @@ const targets = [
   ["ollama", "qwen-3-5-4B", "attempt-1", "ses_fb5ffee25ffe0XT3t5fv58fSHN"],
   ["ollama", "qwen-3-8-27B-MLX-8-bit", "attempt-1", "ses_fb62140adffec4qKr0pNqe0mFK"],
   ["opencode", "muse-spark-1-2-free", "attempt-1", "ses_fb5d601efffezSLDkiYDt47HDY"],
+  ["opencode", "nemotron-3-5-lightning", "attempt-1", "ses_fac46622fffe88xbhlPQJiLC4v"],
   ["openrouter", "kimi-k3", "attempt-1", "ses_fae51d4dbffeUx2FGmJleCj2SL"]
 ];
 

@@ -10,7 +10,7 @@ test("transkrypty zawierają tylko publiczne typy wiadomości", () => {
     const attempts = path.join(models, provider, slug, "attempts");
     if (fs.existsSync(attempts)) for (const file of fs.readdirSync(attempts)) files.push(path.join(attempts, file));
   }
-  assert.equal(files.length, 8);
+  assert.equal(files.length, 9);
   for (const file of files) {
     const raw = fs.readFileSync(file, "utf8");
     assert.doesNotMatch(raw, /\/Users\//);

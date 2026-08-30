@@ -21,7 +21,7 @@ const forbidden = [
   [/authorization\s*[:=]\s*(?!\[USUNIĘTO\])/i, "nagłówek autoryzacji"]
 ];
 
-if (files.length !== 8) throw new Error(`Oczekiwano 8 transkryptów, znaleziono ${files.length}`);
+if (files.length !== 9) throw new Error(`Oczekiwano 9 transkryptów, znaleziono ${files.length}`);
 for (const file of files) {
   const raw = fs.readFileSync(file, "utf8");
   for (const [pattern, label] of forbidden) if (pattern.test(raw)) throw new Error(`${file}: wykryto ${label}`);

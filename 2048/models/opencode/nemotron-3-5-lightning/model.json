@@ -2,10 +2,12 @@
   "slug": "nemotron-3-5-lightning",
   "name": "Nemotron 3.5",
   "provider": "opencode",
-  "modelId": "nemotron-3.5-lightning",
-  "status": "not-evaluated",
-  "summary": "Nie znaleziono sesji OpenCode ani artefaktu, więc model nie został oceniony.",
-  "artifact": { "kind": "none" },
-  "attempts": [],
+  "modelId": "nemotron-3.5-lightning-free",
+  "status": "partial",
+  "summary": "Logika gry działa, ale plansza nie renderuje się jako widoczna siatka 4 × 4 — puste pola zapadają się do niemal jednego wiersza.",
+  "artifact": { "kind": "web", "entrypoint": "index.html", "include": ["index.html", "style.css", "script.js"] },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fac46622fffe88xbhlPQJiLC4v", "title": "Pierwsza próba", "status": "partial", "startedAt": "2026-08-30T17:31:08.624Z", "durationSeconds": 1541, "tokens": { "input": 300442, "output": 28459, "reasoning": 16265 }, "openCodeVersion": "1.18.25", "summary": "Model ukończył samodzielny artefakt HTML, CSS i JavaScript, lecz plansza ma wadliwy układ wizualny.", "transcript": "attempts/attempt-1.json" }
+  ],
   "evaluation": []
 }

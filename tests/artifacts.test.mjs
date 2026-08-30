@@ -25,6 +25,9 @@ test("sukces oznacza przejście wszystkich wspólnych kontroli", () => {
     assert.ok(report.models[slug].checks.length >= 8);
     assert.ok(report.models[slug].checks.every((item) => item.status === "passed"));
   }
+
+  assert.equal(report.models["nemotron-3-5-lightning"].status, "partial");
+  assert.equal(report.models["nemotron-3-5-lightning"].checks.find((item) => item.id === "board").status, "failed");
 });
 
 test("GPT OSS nadal wskazuje brakujący entrypoint", () => {

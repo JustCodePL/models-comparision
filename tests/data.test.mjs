@@ -27,15 +27,16 @@ test("każdy wpis ma poprawny schemat i unikalne sesje", () => {
       if (attempt.sessionId) sessions.push(attempt.sessionId);
     }
   }
-  assert.equal(sessions.length, 8);
+  assert.equal(sessions.length, 9);
   assert.equal(new Set(sessions).size, sessions.length);
 });
 
-test("DeepSeek ma dwie próby, a Nemotron nie udaje wyniku", () => {
+test("DeepSeek ma dwie próby, a Nemotron ma częściowo ukończoną próbę", () => {
   const deepseek = JSON.parse(fs.readFileSync(path.join(root, "2048/models/ollama/deepseek-v4-flash-iq2/model.json"), "utf8"));
   const nemotron = JSON.parse(fs.readFileSync(path.join(root, "2048/models/opencode/nemotron-3-5-lightning/model.json"), "utf8"));
   assert.equal(deepseek.attempts.length, 2);
   assert.deepEqual(deepseek.attempts.map((attempt) => attempt.status), ["failed", "success"]);
-  assert.equal(nemotron.status, "not-evaluated");
-  assert.equal(nemotron.attempts.length, 0);
+  assert.equal(nemotron.status, "partial");
+  assert.equal(nemotron.attempts.length, 1);
+  assert.equal(nemotron.artifact.kind, "web");
 });

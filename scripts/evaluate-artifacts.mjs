@@ -35,6 +35,7 @@ const adapters = {
   "glm-4-7-flash-q4-k-m": { cells: "#game-board [data-row]", tiles: "#game-board [data-row]", restart: ".new-game-btn", board: "#game-board", logicalCells: true },
   "qwen-3-8-27B-MLX-8-bit": { cells: "#board .cell", tiles: "#board .tile", restart: "#new-game", board: "#board" },
   "muse-spark-1-2-free": { cells: "#board .cell", tiles: "#board .tile", restart: "#newGameBtn", board: "#board" },
+  "nemotron-3-5-lightning": { cells: "#board .tile", tiles: "#board .tile:not(:empty)", restart: "#newGame", board: "#board" },
   "kimi-k3": { cells: "#cells .cell", tiles: "#tiles .tile", restart: "#new-game", board: "#board" }
 };
 
@@ -82,7 +83,11 @@ for (const ref of manifest.models) {
       for (const [id, label] of [["board", "Plansza 4 × 4"], ["initial", "Dwa kafelki początkowe"], ["restart", "Restart"], ["movement", "Sterowanie ruchem"], ["merge", "Łączenie 2 + 2 = 4"], ["spawn", "Nowy kafelek po ruchu"], ["mobile", "Widok mobilny"]]) checks.push(check(id, label, "skipped"));
     } else {
       const cellCount = adapter.logicalCells ? await page.evaluate(() => eval("board.length === 4 && board.every(row => row.length === 4)") ? 16 : 0) : await page.locator(adapter.cells).count();
-      checks.push(check("board", "Plansza 4 × 4", cellCount === 16 ? "passed" : "failed", `Wykryto ${cellCount} pól.`));
+      const boardBounds = await page.locator(adapter.board).first().boundingBox();
+      const boardHasGridShape = boardBounds && boardBounds.width >= 150 && boardBounds.height >= 150 && boardBounds.height / boardBounds.width >= 0.65;
+      const boardPassed = cellCount === 16 && boardHasGridShape;
+      const boardSize = boardBounds ? `${Math.round(boardBounds.width)} × ${Math.round(boardBounds.height)} px` : "brak wymiarów";
+      checks.push(check("board", "Plansza 4 × 4", boardPassed ? "passed" : "failed", `Wykryto ${cellCount} pól; rozmiar planszy: ${boardSize}.`));
       const tileValues = async () => page.locator(adapter.tiles).allTextContents().then((items) => items.map((item) => Number(item.trim())).filter(Number.isFinite));
       const initial = await tileValues();
       checks.push(check("initial", "Dwa kafelki początkowe", initial.length === 2 ? "passed" : "failed", `Wykryto ${initial.length} kafelków.`));
