@@ -1,0 +1,11 @@
+{
+  "slug": "nemotron-3-5-lightning",
+  "name": "Nemotron 3.5",
+  "provider": "opencode",
+  "modelId": "nemotron-3.5-lightning",
+  "status": "not-evaluated",
+  "summary": "Nie znaleziono sesji OpenCode ani artefaktu, więc model nie został oceniony.",
+  "artifact": { "kind": "none" },
+  "attempts": [],
+  "evaluation": []
+}

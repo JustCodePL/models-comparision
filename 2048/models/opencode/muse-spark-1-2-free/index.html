@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>2048 — Neon Fusion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
+
+<div class="app">
+  <header class="header">
+    <div class="title-block">
+      <h1 class="logo">2048<span class="logo-dot">.</span></h1>
+      <p class="subtitle">NEON FUSION — połącz kafelki, sięgnij nieskończoności</p>
+    </div>
+    <div class="header-right">
+      <div class="scores">
+        <div class="score-box">
+          <span class="score-label">WYNIK</span>
+          <span class="score-value" id="score">0</span>
+          <span class="score-add" id="scoreAdd"></span>
+        </div>
+        <div class="score-box best">
+          <span class="score-label">REKORD</span>
+          <span class="score-value" id="best">0</span>
+        </div>
+      </div>
+      <button class="btn-new" id="newGameBtn">Nowa gra</button>
+    </div>
+  </header>
+
+  <div class="top-bar">
+    <p class="howto"><strong>Jak grać:</strong> Użyj <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> lub <kbd>WASD</kbd> / swipe, aby przesuwać kafelki. Połącz równe liczby!</p>
+  </div>
+
+  <div class="board-wrap">
+    <div class="board" id="board"></div>
+    <!-- Overlays -->
+    <div class="overlay hidden" id="winOverlay">
+      <div class="overlay-card win-card">
+        <div class="overlay-icon">✦</div>
+        <h2>Osiągnięto 2048!</h2>
+        <p>Jesteś mistrzem fuzji. Chcesz kontynuować i odkryć co jest dalej?</p>
+        <div class="overlay-actions">
+          <button class="btn btn-primary" id="continueBtn">Kontynuuj</button>
+          <button class="btn btn-ghost" id="winNewGameBtn">Nowa gra</button>
+        </div>
+      </div>
+    </div>
+    <div class="overlay hidden" id="gameOverOverlay">
+      <div class="overlay-card lose-card">
+        <div class="overlay-icon">◼</div>
+        <h2>Koniec gry</h2>
+        <p>Brak dostępnych ruchów. Plansza zablokowana.</p>
+        <button class="btn btn-primary" id="retryBtn">Spróbuj ponownie</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls-mobile">
+    <div class="dpad">
+      <button class="dpad-btn up" data-dir="up" aria-label="Góra">▲</button>
+      <div class="dpad-row">
+        <button class="dpad-btn left" data-dir="left" aria-label="Lewo">▲</button>
+        <button class="dpad-btn down" data-dir="down" aria-label="Dół">▲</button>
+        <button class="dpad-btn right" data-dir="right" aria-label="Prawo">▲</button>
+      </div>
+    </div>
+    <p class="mobile-hint">Dotknij strzałek lub przesuń palcem po planszy</p>
+  </div>
+
+  <footer class="footer">
+    <span>2048 Neon Fusion • Zbudowano bez frameworków</span>
+    <span class="footer-dot">•</span>
+    <span id="tileCount">0 kafelków</span>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

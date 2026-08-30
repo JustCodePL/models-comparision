@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>2048 · Neon</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <h1 class="logo">2048</h1>
+        <p class="tagline">Łącz kafelki i zdobądź 2048.</p>
+      </div>
+      <div class="scores">
+        <div class="score-box" id="score-box">
+          <span class="score-label">Wynik</span>
+          <span class="score-value" id="score">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">Rekord</span>
+          <span class="score-value" id="best">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls-row">
+      <p class="hint">Strzałki &middot; WASD &middot; swipe</p>
+      <button class="btn" id="new-game" type="button">Nowa gra</button>
+    </div>
+
+    <div class="board-wrap">
+      <div class="board" id="board">
+        <div class="cells" id="cells"></div>
+        <div class="tiles" id="tiles"></div>
+
+        <div class="overlay hidden" id="win-overlay">
+          <div class="overlay-card">
+            <h2 class="overlay-title win-title">Wygrana!</h2>
+            <p class="overlay-text">Zdobyłeś kafelek 2048. Możesz grać dalej.</p>
+            <div class="overlay-actions">
+              <button class="btn btn-ghost" id="keep-going" type="button">Graj dalej</button>
+              <button class="btn" id="win-new-game" type="button">Nowa gra</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay hidden" id="over-overlay">
+          <div class="overlay-card">
+            <h2 class="overlay-title over-title">Koniec gry</h2>
+            <p class="overlay-text">
+              Brak możliwych ruchów. Twój wynik: <strong id="final-score">0</strong>
+            </p>
+            <div class="overlay-actions">
+              <button class="btn" id="retry" type="button">Spróbuj ponownie</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/logic.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

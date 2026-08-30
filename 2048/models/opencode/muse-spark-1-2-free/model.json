@@ -1,0 +1,13 @@
+{
+  "slug": "muse-spark-1-2-free",
+  "name": "Muse Spark 1.2",
+  "provider": "opencode",
+  "modelId": "muse-spark-1.2-contributor-free",
+  "status": "success",
+  "summary": "Kompletna gra przechodzi wspólną ewaluację przeglądarkową.",
+  "artifact": { "kind": "web", "entrypoint": "index.html", "include": ["index.html", "style.css", "script.js"] },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fb5d601efffezSLDkiYDt47HDY", "title": "Pierwsza próba", "status": "success", "startedAt": "2026-08-28T20:57:41.136Z", "durationSeconds": 7715, "tokens": { "input": 21009, "output": 8850, "reasoning": 1188 }, "openCodeVersion": "1.18.25", "summary": "Powstała kompletna, responsywna gra.", "transcript": "attempts/attempt-1.json" }
+  ],
+  "evaluation": []
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "qwen-3-8-27B-MLX-8-bit",
+  "name": "Qwen 3.8 27B",
+  "provider": "ollama",
+  "modelId": "qwen3.8:27b-mlx-8bit",
+  "status": "success",
+  "summary": "Kompletna gra przechodzi wspólną ewaluację przeglądarkową.",
+  "artifact": { "kind": "web", "entrypoint": "index.html", "include": ["index.html", "style.css", "game.js", "README.md"] },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fb62140adffec4qKr0pNqe0mFK", "title": "Pierwsza próba", "status": "success", "startedAt": "2026-08-28T19:35:29.874Z", "durationSeconds": 1976, "tokens": { "input": 832812, "output": 25377, "reasoning": 0 }, "openCodeVersion": "1.18.25", "summary": "Powstał kompletny artefakt z responsywnym interfejsem.", "transcript": "attempts/attempt-1.json" }
+  ],
+  "evaluation": []
+}

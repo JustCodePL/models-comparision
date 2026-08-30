@@ -1,0 +1,190 @@
+:root {
+  --bg: #0f0e17;
+  --panel: #1a1930;
+  --panel-strong: #222143;
+  --grid-gap: 12px;
+  --text: #e8e6ee;
+  --text-dim: #9a97b5;
+  --accent: #7f5af0;
+  --board-size: min(90vw, 480px);
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at 50% 0%, #1b1a39, var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#app {
+  width: var(--board-size);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(120deg, var(--accent), #e0aaff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -1px;
+}
+
+.scores { display: flex; gap: 8px; }
+
+.score-box {
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 8px 14px;
+  text-align: center;
+  min-width: 84px;
+}
+
+.score-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+.score-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #0f0e17;
+  background: linear-gradient(120deg, var(--accent), #a78bfa);
+  transition: transform 0.1s ease, filter 0.15s ease;
+}
+
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: scale(0.96); }
+
+.hint { font-size: 0.78rem; color: var(--text-dim); }
+
+.board-wrap { position: relative; }
+
+.board {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  background: var(--panel-strong);
+  padding: var(--grid-gap);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  touch-action: none;
+  user-select: none;
+}
+
+.grid-background,
+.tiles {
+  position: absolute;
+  inset: var(--grid-gap);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: var(--grid-gap);
+}
+
+.grid-background { z-index: 0; }
+.grid-background .grid-cell { background: rgba(255, 255, 255, 0.05); border-radius: 8px; }
+
+.tiles { z-index: 1; pointer-events: none; }
+
+.tile {
+  position: absolute;
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: var(--font-size);
+  color: #0f0e17;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: transform 0.12s ease-in-out;
+  z-index: 1;
+}
+
+.tile-2   { background: #f3f3f3; }
+.tile-4   { background: #e8d5ff; }
+.tile-8   { background: #d0b2ff; }
+.tile-16  { background: #b48cff; }
+.tile-32  { background: #9666ff; }
+.tile-64  { background: #7a45f0; color: #fff; }
+.tile-128 { background: #e0aa2f; }
+.tile-256 { background: #d48a2f; }
+.tile-512 { background: #c86a2f; color: #fff; }
+.tile-1024{ background: #bc4a2f; color: #fff; }
+.tile-2048{ background: #2fb05c; color: #fff; }
+.tile-super{ background: linear-gradient(120deg, #111, #333); color: #fff; }
+
+.message {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 14, 23, 0.72);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius);
+}
+
+.message.hidden { display: none; }
+
+.message-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.message-text {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.message-text.win { color: #2fb05c; }
+.message-text.lose { color: #ff6b6b; }
+
+/* Responsiveness */
+@media (max-width: 520px) {
+  .title { font-size: 2.1rem; }
+  .score-box { min-width: 68px; padding: 6px 10px; }
+  .score-value { font-size: 1.1rem; }
+  .hint { display: none; }
+}

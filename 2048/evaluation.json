@@ -1,0 +1,340 @@
+{
+  "generatedAt": "2026-08-30T14:48:14.250Z",
+  "models": {
+    "deepseek-v4-flash-iq2": {
+      "status": "success",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność plików",
+          "status": "passed"
+        },
+        {
+          "id": "startup",
+          "label": "Start bez błędów",
+          "status": "passed"
+        },
+        {
+          "id": "board",
+          "label": "Plansza 4 × 4",
+          "status": "passed",
+          "details": "Wykryto 16 pól."
+        },
+        {
+          "id": "initial",
+          "label": "Dwa kafelki początkowe",
+          "status": "passed",
+          "details": "Wykryto 2 kafelków."
+        },
+        {
+          "id": "restart",
+          "label": "Restart",
+          "status": "passed"
+        },
+        {
+          "id": "movement",
+          "label": "Sterowanie ruchem",
+          "status": "passed"
+        },
+        {
+          "id": "merge",
+          "label": "Łączenie 2 + 2 = 4",
+          "status": "passed"
+        },
+        {
+          "id": "spawn",
+          "label": "Nowy kafelek po prawidłowym ruchu",
+          "status": "passed"
+        },
+        {
+          "id": "mobile",
+          "label": "Widok mobilny",
+          "status": "passed"
+        }
+      ]
+    },
+    "glm-4-7-flash-q4-k-m": {
+      "status": "partial",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność plików",
+          "status": "passed"
+        },
+        {
+          "id": "startup",
+          "label": "Start bez błędów",
+          "status": "passed"
+        },
+        {
+          "id": "board",
+          "label": "Plansza 4 × 4",
+          "status": "passed",
+          "details": "Wykryto 16 pól."
+        },
+        {
+          "id": "initial",
+          "label": "Dwa kafelki początkowe",
+          "status": "passed",
+          "details": "Wykryto 2 kafelków."
+        },
+        {
+          "id": "restart",
+          "label": "Restart",
+          "status": "failed"
+        },
+        {
+          "id": "movement",
+          "label": "Sterowanie ruchem",
+          "status": "passed"
+        },
+        {
+          "id": "merge",
+          "label": "Łączenie 2 + 2 = 4",
+          "status": "failed",
+          "details": "Wartości po ruchu: 2, 2, 2, 2, 2, 2."
+        },
+        {
+          "id": "spawn",
+          "label": "Nowy kafelek po prawidłowym ruchu",
+          "status": "failed"
+        },
+        {
+          "id": "mobile",
+          "label": "Widok mobilny",
+          "status": "passed"
+        }
+      ]
+    },
+    "gpt-oss-20B": {
+      "status": "failed",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność plików",
+          "status": "failed",
+          "details": "Brak: compiled/main.js"
+        },
+        {
+          "id": "startup",
+          "label": "Start bez błędów",
+          "status": "failed",
+          "details": "HTTP 404: http://127.0.0.1:62567/artifacts/2048/ollama/gpt-oss-20B/compiled/main.js"
+        },
+        {
+          "id": "board",
+          "label": "Plansza 4 × 4",
+          "status": "skipped"
+        },
+        {
+          "id": "initial",
+          "label": "Dwa kafelki początkowe",
+          "status": "skipped"
+        },
+        {
+          "id": "restart",
+          "label": "Restart",
+          "status": "skipped"
+        },
+        {
+          "id": "movement",
+          "label": "Sterowanie ruchem",
+          "status": "skipped"
+        },
+        {
+          "id": "merge",
+          "label": "Łączenie 2 + 2 = 4",
+          "status": "skipped"
+        },
+        {
+          "id": "spawn",
+          "label": "Nowy kafelek po ruchu",
+          "status": "skipped"
+        },
+        {
+          "id": "mobile",
+          "label": "Widok mobilny",
+          "status": "skipped"
+        }
+      ]
+    },
+    "qwen-3-5-4B": {
+      "status": "failed",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność artefaktu",
+          "status": "failed",
+          "details": "Model nie utworzył plików."
+        }
+      ]
+    },
+    "qwen-3-8-27B-MLX-8-bit": {
+      "status": "success",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność plików",
+          "status": "passed"
+        },
+        {
+          "id": "startup",
+          "label": "Start bez błędów",
+          "status": "passed"
+        },
+        {
+          "id": "board",
+          "label": "Plansza 4 × 4",
+          "status": "passed",
+          "details": "Wykryto 16 pól."
+        },
+        {
+          "id": "initial",
+          "label": "Dwa kafelki początkowe",
+          "status": "passed",
+          "details": "Wykryto 2 kafelków."
+        },
+        {
+          "id": "restart",
+          "label": "Restart",
+          "status": "passed"
+        },
+        {
+          "id": "movement",
+          "label": "Sterowanie ruchem",
+          "status": "passed"
+        },
+        {
+          "id": "merge",
+          "label": "Łączenie 2 + 2 = 4",
+          "status": "passed"
+        },
+        {
+          "id": "spawn",
+          "label": "Nowy kafelek po prawidłowym ruchu",
+          "status": "passed"
+        },
+        {
+          "id": "mobile",
+          "label": "Widok mobilny",
+          "status": "passed"
+        }
+      ]
+    },
+    "muse-spark-1-2-free": {
+      "status": "success",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność plików",
+          "status": "passed"
+        },
+        {
+          "id": "startup",
+          "label": "Start bez błędów",
+          "status": "passed"
+        },
+        {
+          "id": "board",
+          "label": "Plansza 4 × 4",
+          "status": "passed",
+          "details": "Wykryto 16 pól."
+        },
+        {
+          "id": "initial",
+          "label": "Dwa kafelki początkowe",
+          "status": "passed",
+          "details": "Wykryto 2 kafelków."
+        },
+        {
+          "id": "restart",
+          "label": "Restart",
+          "status": "passed"
+        },
+        {
+          "id": "movement",
+          "label": "Sterowanie ruchem",
+          "status": "passed"
+        },
+        {
+          "id": "merge",
+          "label": "Łączenie 2 + 2 = 4",
+          "status": "passed"
+        },
+        {
+          "id": "spawn",
+          "label": "Nowy kafelek po prawidłowym ruchu",
+          "status": "passed"
+        },
+        {
+          "id": "mobile",
+          "label": "Widok mobilny",
+          "status": "passed"
+        }
+      ]
+    },
+    "kimi-k3": {
+      "status": "success",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność plików",
+          "status": "passed"
+        },
+        {
+          "id": "startup",
+          "label": "Start bez błędów",
+          "status": "passed"
+        },
+        {
+          "id": "board",
+          "label": "Plansza 4 × 4",
+          "status": "passed",
+          "details": "Wykryto 16 pól."
+        },
+        {
+          "id": "initial",
+          "label": "Dwa kafelki początkowe",
+          "status": "passed",
+          "details": "Wykryto 2 kafelków."
+        },
+        {
+          "id": "restart",
+          "label": "Restart",
+          "status": "passed"
+        },
+        {
+          "id": "movement",
+          "label": "Sterowanie ruchem",
+          "status": "passed"
+        },
+        {
+          "id": "merge",
+          "label": "Łączenie 2 + 2 = 4",
+          "status": "passed"
+        },
+        {
+          "id": "spawn",
+          "label": "Nowy kafelek po prawidłowym ruchu",
+          "status": "passed"
+        },
+        {
+          "id": "mobile",
+          "label": "Widok mobilny",
+          "status": "passed"
+        }
+      ]
+    },
+    "nemotron-3-5-lightning": {
+      "status": "not-evaluated",
+      "checks": [
+        {
+          "id": "artifact",
+          "label": "Dostępność artefaktu",
+          "status": "skipped",
+          "details": "Brak sesji i artefaktu."
+        }
+      ]
+    }
+  }
+}

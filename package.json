@@ -1,0 +1,29 @@
+{
+  "name": "models-comparision",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm run artifacts:stage && npm run artifacts:evaluate && next build",
+    "dev": "next dev",
+    "start": "next start",
+    "transcripts:import": "node scripts/import-opencode.mjs",
+    "transcripts:check": "node scripts/check-transcripts.mjs",
+    "artifacts:stage": "node scripts/stage-artifacts.mjs",
+    "artifacts:evaluate": "node scripts/evaluate-artifacts.mjs",
+    "test:data": "node --test tests/data.test.mjs tests/transcripts.test.mjs tests/artifacts.test.mjs",
+    "test:kimi": "node --test 2048/models/openrouter/kimi-k3/test/logic.test.js",
+    "test": "npm run transcripts:check && npm run artifacts:stage && npm run artifacts:evaluate && npm run test:data && npm run test:kimi && next build && node --test tests/export.test.mjs"
+  },
+  "dependencies": {
+    "next": "16.3.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}

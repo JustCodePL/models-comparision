@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+public/artifacts/
+public/previews/
+playwright-report/
+test-results/
+.DS_Store
+*.tsbuildinfo

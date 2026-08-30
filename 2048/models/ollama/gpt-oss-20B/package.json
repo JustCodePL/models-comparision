@@ -1,0 +1,13 @@
+{
+  "name": "2048-game",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && npx serve -s . -l 5000"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.4",
+    "serve": "^14.2.3"
+  }
+}

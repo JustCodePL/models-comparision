@@ -1,0 +1,13 @@
+{
+  "slug": "glm-4-7-flash-q4-k-m",
+  "name": "GLM 4.7 Flash",
+  "provider": "ollama",
+  "modelId": "glm-4.7-flash:q4_K_M",
+  "status": "partial",
+  "summary": "Strona startuje i renderuje planszę, ale łączenie kafelków jest błędne: 2 + 2 daje 8.",
+  "artifact": { "kind": "web", "entrypoint": "index.html", "include": ["index.html"] },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fb5f1cc55ffeupswUvGToG1oQV", "title": "Pierwsza próba", "status": "partial", "startedAt": "2026-08-28T20:27:19.850Z", "durationSeconds": 295, "tokens": { "input": 41472, "output": 5489, "reasoning": 0 }, "openCodeVersion": "1.18.25", "summary": "Powstała pojedyncza strona HTML z błędem w regule łączenia.", "transcript": "attempts/attempt-1.json" }
+  ],
+  "evaluation": []
+}

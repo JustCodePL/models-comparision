@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>2048 — Neon Grid</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <main class="game">
+    <header class="hud">
+      <div class="title-block">
+        <h1 class="title">2048</h1>
+        <p class="tagline">neon grid</p>
+      </div>
+      <div class="scores">
+        <div class="score-box">
+          <span class="score-label">Wynik</span>
+          <span class="score-value" id="score">0</span>
+          <span class="score-delta" id="score-delta"></span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">Rekord</span>
+          <span class="score-value" id="best">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls-row">
+      <button class="new-game-btn sound" id="sound" type="button" aria-label="przełącz dźwięk">DŹWIĘK: WŁ</button>
+      <button class="new-game-btn" id="new-game" type="button">Nowa gra</button>
+    </div>
+
+    <div class="board-wrap" id="board-wrap">
+      <div class="board" id="board"></div>
+
+      <div class="overlay hidden" id="overlay">
+        <div class="overlay-panel">
+          <h2 class="overlay-title" id="overlay-title">Koniec gry</h2>
+          <p class="overlay-text" id="overlay-text"></p>
+          <div class="overlay-actions">
+            <button class="new-game-btn" id="overlay-continue" type="button">Graj dalej</button>
+            <button class="new-game-btn primary" id="overlay-restart" type="button">Nowa gra</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

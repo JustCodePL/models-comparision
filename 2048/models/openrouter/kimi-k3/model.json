@@ -1,0 +1,13 @@
+{
+  "slug": "kimi-k3",
+  "name": "Kimi K3",
+  "provider": "openrouter",
+  "modelId": "moonshotai/kimi-k3",
+  "status": "success",
+  "summary": "Kompletna gra; 22 scenariusze logiki i wspólna ewaluacja przeglądarkowa przechodzą.",
+  "artifact": { "kind": "web", "entrypoint": "index.html", "include": ["index.html", "css", "js", "README.md"] },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fae51d4dbffeUx2FGmJleCj2SL", "title": "Pierwsza próba", "status": "success", "startedAt": "2026-08-30T07:59:23.940Z", "durationSeconds": 2329, "tokens": { "input": 137817, "output": 21487, "reasoning": 25353 }, "openCodeVersion": "1.18.25", "summary": "Artefakt zawiera osobny moduł logiki z 22 przechodzącymi scenariuszami testowymi.", "transcript": "attempts/attempt-1.json" }
+  ],
+  "evaluation": []
+}

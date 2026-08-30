@@ -1,0 +1,13 @@
+{
+  "slug": "gpt-oss-20B",
+  "name": "GPT OSS 20B",
+  "provider": "ollama",
+  "modelId": "gpt-oss:20b",
+  "status": "failed",
+  "summary": "Artefakt nie startuje: index.html odwołuje się do nieistniejącego compiled/main.js.",
+  "artifact": { "kind": "web", "entrypoint": "index.html", "include": ["index.html", "styles.css", "compiled", "src", "README.md", "package.json", "package-lock.json", "tsconfig.json"], "build": "npm ci && npm run build" },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fb5ddfceaffe0OwxRFKHkhPf0i", "title": "Pierwsza próba", "status": "failed", "startedAt": "2026-08-28T20:48:58.133Z", "durationSeconds": 73, "tokens": { "input": 120147, "output": 4637, "reasoning": 0 }, "openCodeVersion": "1.18.25", "summary": "Build TypeScript nie tworzy pliku wskazanego przez stronę.", "transcript": "attempts/attempt-1.json" }
+  ],
+  "evaluation": []
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "qwen-3-5-4B",
+  "name": "Qwen 3.5 4B",
+  "provider": "ollama",
+  "modelId": "qwen3.5:4b",
+  "status": "failed",
+  "summary": "Próba nie utworzyła żadnych plików. Trzy operacje zapisu zostały odrzucone.",
+  "artifact": { "kind": "none" },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fb5ffee25ffe0XT3t5fv58fSHN", "title": "Pierwsza próba", "status": "failed", "startedAt": "2026-08-28T20:11:53.690Z", "durationSeconds": 2207, "tokens": { "input": 76670, "output": 21765, "reasoning": 0 }, "openCodeVersion": "1.18.25", "summary": "Model trzykrotnie próbował zapisać pliki, ale operacje zostały odrzucone; artefakt nie powstał.", "transcript": "attempts/attempt-1.json" }
+  ],
+  "evaluation": []
+}

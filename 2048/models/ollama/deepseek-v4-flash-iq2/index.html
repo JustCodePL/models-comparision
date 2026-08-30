@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2048</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1 class="title">2048</h1>
+      <div class="scores">
+        <div class="score-box">
+          <span class="score-label">Wynik</span>
+          <span id="score" class="score-value">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">Najlepszy</span>
+          <span id="best" class="score-value">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls">
+      <button id="new-game" class="btn">Nowa gra</button>
+      <div class="hint">Sterowanie: strzałki / WASD</div>
+    </div>
+
+    <div class="board-wrap">
+      <div id="board" class="board" aria-label="Plansza gry 2048">
+        <div class="grid-background"></div>
+        <div id="tiles" class="tiles"></div>
+      </div>
+
+      <div id="message" class="message hidden">
+        <div class="message-inner">
+          <div id="message-text" class="message-text"></div>
+          <button id="message-action" class="btn">Zagraj ponownie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+  <script src="tile.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

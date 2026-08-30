@@ -1,0 +1,41 @@
+/* 2048 Game Styles */
+
+body {
+  font-family: 'Arial', sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  margin:0;
+  background:#faf8ef;
+}
+
+#game-container{width:100%;max-width:500px;}
+
+#score-panel{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+#score{font-size:1.5rem;font-weight:bold;}
+#new-game{padding:0.5rem 1rem;background:#8f7a66;color:#f9f6f2;border:none;border-radius:3px;cursor:pointer;}
+#new-game:hover{background:#776e62;}
+
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;background:#bbada0;border-radius:6px;padding:5px;position:relative;}
+.tile{display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;border-radius:3px;transition:background 0.1s ease,transform 0.1s ease;}
+.tile.empty{background:transparent;}
+
+/* Colors for tiles */
+.tile-2{background:#eee4da;color:#776e65}
+.tile-4{background:#ede0c8;color:#776e65}
+.tile-8{background:#f2b179;color:#f9f6f2}
+.tile-16{background:#f59563;color:#f9f6f2}
+.tile-32{background:#f67c5f;color:#f9f6f2}
+.tile-64{background:#f65e3b;color:#f9f6f2}
+.tile-128{background:#edcf72;color:#f9f6f2}
+.tile-256{background:#edcc61;color:#f9f6f2}
+.tile-512{background:#edc850;color:#f9f6f2}
+.tile-1024{background:#edc53f;color:#f9f6f2}
+.tile-2048{background:#edc22e;color:#f9f6f2}
+
+.message{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(238,228,218,0.75);font-size:3rem;font-weight:bold;display:none;}
+
+/* Responsive */
+@media (max-width:400px){ .tile{font-size:1.5rem;} }

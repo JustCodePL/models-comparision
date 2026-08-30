@@ -1,0 +1,14 @@
+{
+  "slug": "deepseek-v4-flash-iq2",
+  "name": "DeepSeek V4 Flash",
+  "provider": "ollama",
+  "modelId": "deepseek-v4-flash:iq2_m",
+  "status": "success",
+  "summary": "Pierwsza sesja została przerwana przez problemy wykonawcze. Druga zakończyła się działającym artefaktem.",
+  "artifact": { "kind": "web", "entrypoint": "index.html", "include": ["index.html", "style.css", "game.js", "tile.js", "app.js"] },
+  "attempts": [
+    { "id": "attempt-1", "sessionId": "ses_fb556aa77ffeGnRluz2YNz9ZF4", "title": "Pierwsza próba", "status": "failed", "startedAt": "2026-08-28T23:16:46.600Z", "durationSeconds": 410, "tokens": { "input": 10550, "output": 91, "reasoning": 0 }, "openCodeVersion": "1.18.25", "summary": "Przerwana po błędzie wykonania i przekroczeniu kontekstu.", "transcript": "attempts/attempt-1.json" },
+    { "id": "attempt-2", "sessionId": "ses_fb54e8c18ffeoteK96DBiNgleE", "title": "Ponowienie", "status": "success", "startedAt": "2026-08-28T23:25:38.663Z", "durationSeconds": 5712, "tokens": { "input": 731889, "output": 86756, "reasoning": 0 }, "openCodeVersion": "1.18.25", "summary": "Po początkowym błędzie Compute error model dokończył grę.", "transcript": "attempts/attempt-2.json" }
+  ],
+  "evaluation": []
+}
