@@ -1,0 +1,32 @@
+{
+  "slug": "gpt-6-luna",
+  "name": "GPT-6 Luna",
+  "provider": "codex",
+  "modelId": "gpt-6-luna",
+  "status": "success",
+  "summary": "Samodzielny plik HTML z pełną grą; wszystkie 9 wspólnych kontroli zaliczone.",
+  "artifact": {
+    "kind": "web",
+    "entrypoint": "index.html",
+    "include": [
+      "index.html"
+    ]
+  },
+  "attempts": [
+    {
+      "id": "attempt-1",
+      "sessionId": "01a0ef1b-358c-7540-90ba-a8e74ed43ab5",
+      "title": "Pierwsza i jedyna próba",
+      "status": "success",
+      "startedAt": "2026-09-29T21:38:52.175173Z",
+      "durationSeconds": 171,
+      "tokens": {
+        "input": 331302,
+        "output": 7414
+      },
+      "summary": "Jednoplikowa gra z obsługą klawiatury i dotyku. Jedna sesja bez kolejnych poleceń.",
+      "transcript": "attempts/attempt-1.json"
+    }
+  ],
+  "evaluation": []
+}

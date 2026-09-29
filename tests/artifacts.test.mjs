@@ -20,7 +20,7 @@ test("znane porażki są jawne i zgodne z ewaluacją", () => {
 });
 
 test("sukces oznacza przejście wszystkich wspólnych kontroli", () => {
-  for (const slug of ["deepseek-v4-flash-iq2", "qwen-3-8-27B-MLX-8-bit", "muse-spark-1-2-free", "kimi-k3"]) {
+  for (const slug of ["deepseek-v4-flash-iq2", "qwen-3-8-27B-MLX-8-bit", "muse-spark-1-2-free", "kimi-k3", "gpt-6-luna", "gpt-6-sol", "gpt-6-astra"]) {
     assert.equal(report.models[slug].status, "success");
     assert.ok(report.models[slug].checks.length >= 8);
     assert.ok(report.models[slug].checks.every((item) => item.status === "passed"));

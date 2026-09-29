@@ -14,7 +14,7 @@ export type Attempt = {
   status: OutcomeStatus;
   startedAt?: string;
   durationSeconds?: number;
-  tokens?: { input: number; output: number; reasoning: number };
+  tokens?: { input: number; output: number; reasoning?: number };
   openCodeVersion?: string;
   summary: string;
   transcript?: string;
@@ -37,7 +37,7 @@ export type Artifact = {
 export type ModelEntry = {
   slug: string;
   name: string;
-  provider: "ollama" | "opencode" | "openrouter";
+  provider: "ollama" | "opencode" | "openrouter" | "codex";
   modelId: string;
   status: OutcomeStatus;
   summary: string;

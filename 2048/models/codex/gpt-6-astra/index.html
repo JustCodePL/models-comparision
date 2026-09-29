@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f2ea">
+  <meta name="description" content="Mała plansza, wielkie możliwości. Autorska gra 2048 — graj strzałkami lub gestami.">
+  <title>2048 — Jeszcze jeden ruch</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="engine.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="./index.html" aria-label="2048 — strona główna"><span class="brand-icon">◈</span> małe gry<span class="brand-dot">.</span></a><span class="edition">NO. 001 <span> / </span> GRA LOGICZNA</span></header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <div class="eyebrow"><span></span> CZTERY NA CZTERY. NIESKOŃCZENIE MOŻLIWOŚCI.</div>
+      <h1 id="title">20<span>48</span><span class="title-dot">.</span></h1>
+      <h2>Jeszcze jeden ruch.</h2>
+      <p class="description">Przesuwaj. Łącz. Daj się wciągnąć.<br>Połącz liczby i znajdź swoją drogę do <strong>2048.</strong></p>
+      <div class="howto"><span class="section-number">01 / JAK GRAĆ</span><div class="key-row"><div class="arrows" aria-hidden="true"><kbd>↑</kbd><div><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></div></div><p>Użyj <strong>strzałek</strong> lub <strong>WASD.</strong><br>Na telefonie przesuń palcem.</p></div><div class="merge-example" aria-hidden="true"><span>2</span><b>+</b><span>2</span><b>→</b><span class="example-result">4</span></div><p class="small-copy">Takie same liczby tworzą większą.<br>Każdy ruch to nowy początek.</p></div>
+      <div class="note"><span>✳</span> Bez pośpiechu. Dobry ruch potrzebuje chwili.</div>
+    </section>
+    <section class="game" aria-label="Gra 2048">
+      <div class="game-toolbar"><div class="scores"><div class="score-box"><span>WYNIK</span><strong id="score">0</strong><span id="gain" aria-hidden="true"></span></div><div class="score-box best"><span>REKORD <span aria-hidden="true">↗</span></span><strong id="best">0</strong></div></div><button id="new-game" class="new-button"><span aria-hidden="true">↻</span> Nowa gra</button></div>
+      <div class="board-wrap"><div id="board" class="board" tabindex="0" role="group" aria-label="Plansza 4 na 4. Użyj strzałek do gry."></div><div id="overlay" class="overlay" hidden><div class="end-card"><span id="end-icon" class="end-icon" aria-hidden="true">✳</span><span class="section-number" id="end-label">CEL OSIĄGNIĘTY</span><h2 id="end-title">Piękny ruch!</h2><p id="end-description"></p><button id="continue" class="primary-button">Gram dalej <span aria-hidden="true">→</span></button><button id="restart" class="secondary-button">Zacznij od nowa</button><button id="finish" class="text-button">Zakończ rozgrywkę</button></div></div></div>
+      <div class="board-caption"><span><span class="live-dot"></span> <span id="game-status">Twój ruch</span></span><span>CEL <strong>2048</strong></span></div>
+      <div class="progress-panel"><div><span>MAŁE KROKI, WIELKIE LICZBY</span><span id="milestone">2 / 2048</span></div><div id="progress" class="progress" aria-label="Postęp do kafelka 2048"></div></div>
+      <p id="announcement" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+    </section>
+  </main>
+  <footer><span>PO PROSTU GRAJ.</span><span>16 pól. Jeden dobry pomysł.</span><span class="footer-symbol">✳</span></footer>
+</body>
+</html>

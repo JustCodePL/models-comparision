@@ -29,7 +29,7 @@ export default function Home() {
           <span className="number-watermark">2048</span>
         </div>
         <div className="comparison-copy">
-          <div className="tag-row"><span className="tag">GRA</span><span className="tag">FRONTEND</span><span className="tag">8 MODELI</span></div>
+          <div className="tag-row"><span className="tag">GRA</span><span className="tag">FRONTEND</span><span className="tag">{models.length} MODELI</span></div>
           <h3>2048 w przeglądarce</h3>
           <p>{comparison.description}</p>
           <div className="score-strip">

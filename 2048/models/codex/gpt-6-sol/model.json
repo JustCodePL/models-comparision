@@ -1,0 +1,36 @@
+{
+  "slug": "gpt-6-sol",
+  "name": "GPT-6 Sol",
+  "provider": "codex",
+  "modelId": "gpt-6-sol",
+  "status": "success",
+  "summary": "Gra z osobnym modułem logiki; 9 wspólnych kontroli i 11 testów modelu zaliczonych.",
+  "artifact": {
+    "kind": "web",
+    "entrypoint": "index.html",
+    "include": [
+      "README.md",
+      "app.js",
+      "game-logic.js",
+      "index.html",
+      "style.css"
+    ]
+  },
+  "attempts": [
+    {
+      "id": "attempt-1",
+      "sessionId": "01a0ef1b-34f4-7b43-88da-9a1db73fce0a",
+      "title": "Pierwsza i jedyna próba",
+      "status": "success",
+      "startedAt": "2026-09-29T21:38:52.169081Z",
+      "durationSeconds": 321,
+      "tokens": {
+        "input": 486505,
+        "output": 16064
+      },
+      "summary": "Pięć plików aplikacji i 11 testów modelu. Jedna sesja bez kolejnych poleceń.",
+      "transcript": "attempts/attempt-1.json"
+    }
+  ],
+  "evaluation": []
+}

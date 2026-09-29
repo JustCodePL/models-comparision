@@ -12,7 +12,8 @@
     "artifacts:evaluate": "node scripts/evaluate-artifacts.mjs",
     "test:data": "node --test tests/data.test.mjs tests/transcripts.test.mjs tests/artifacts.test.mjs",
     "test:kimi": "node --test 2048/models/openrouter/kimi-k3/test/logic.test.js",
-    "test": "npm run transcripts:check && npm run artifacts:stage && npm run artifacts:evaluate && npm run test:data && npm run test:kimi && next build && node --test tests/export.test.mjs"
+    "test:gpt6": "node --test 2048/models/codex/gpt-6-sol/app.test.js 2048/models/codex/gpt-6-sol/game-logic.test.js 2048/models/codex/gpt-6-astra/app.test.cjs 2048/models/codex/gpt-6-astra/engine.test.cjs",
+    "test": "npm run transcripts:check && npm run artifacts:stage && npm run artifacts:evaluate && npm run test:data && npm run test:kimi && npm run test:gpt6 && next build && node --test tests/export.test.mjs"
   },
   "dependencies": {
     "next": "16.3.3",

@@ -44,14 +44,15 @@ export default async function ModelPage({ params }: { params: Promise<{ slug: st
           <dl className="metadata">
             <div><dt>Dostawca</dt><dd>{model.provider}</dd></div>
             <div><dt>Prób</dt><dd>{model.attempts.length}</dd></div>
-            <div><dt>OpenCode</dt><dd>{model.attempts[0]?.openCodeVersion ?? "—"}</dd></div>
+            <div><dt>Narzędzie</dt><dd>{model.attempts[0]?.openCodeVersion ? `OpenCode ${model.attempts[0].openCodeVersion}` : model.provider === "codex" ? "Codex CLI" : "—"}</dd></div>
+            {model.provider === "codex" && <div><dt>Tryb</dt><dd>Jeden prompt, bez dalszych poleceń</dd></div>}
             <div><dt>Model</dt><dd>{model.modelId}</dd></div>
           </dl>
         </div>
       </section>
 
       <section className="transcripts">
-        <p className="eyebrow">HISTORIA OPENCODE</p>
+        <p className="eyebrow">HISTORIA PRÓB</p>
         <h2>Rozmowa i próby</h2>
         <p className="muted">Reasoning, komunikaty systemowe, pełne wyniki narzędzi i dane lokalne zostały usunięte.</p>
         {model.attempts.map((attempt) => {
@@ -62,8 +63,8 @@ export default async function ModelPage({ params }: { params: Promise<{ slug: st
               <summary><span><strong>{attempt.title}</strong><small>{attempt.summary}</small></span><span className={`status-pill ${attempt.status}`}>{statusLabels[attempt.status]}</span></summary>
               <div className="attempt-meta">
                 <span>{attempt.durationSeconds ? `${Math.round(attempt.durationSeconds / 60)} min` : "—"}</span>
-                <span>{tokens ? `${(tokens.input + tokens.output + tokens.reasoning).toLocaleString("pl-PL")} tokenów` : "—"}</span>
-                <span>{attempt.openCodeVersion ? `OpenCode ${attempt.openCodeVersion}` : "—"}</span>
+                <span>{tokens ? `${(tokens.input + tokens.output + (tokens.reasoning ?? 0)).toLocaleString("pl-PL")} tokenów` : "—"}</span>
+                <span>{attempt.openCodeVersion ? `OpenCode ${attempt.openCodeVersion}` : model.provider === "codex" ? "Codex CLI" : "—"}</span>
               </div>
               <div className="messages">
                 {messages.map((message, index) => <article className={`message ${message.role}`} key={`${attempt.id}-${index}`}><span>{message.role === "user" ? "Użytkownik" : message.role === "assistant" ? "Model" : message.tool ?? "Narzędzie"}</span><p>{message.text}</p></article>)}
@@ -71,7 +72,7 @@ export default async function ModelPage({ params }: { params: Promise<{ slug: st
             </details>
           );
         })}
-        {model.attempts.length === 0 && <div className="empty-state">Nie znaleziono rozmowy OpenCode dla tego modelu.</div>}
+        {model.attempts.length === 0 && <div className="empty-state">Nie znaleziono rozmowy dla tego modelu.</div>}
       </section>
     </main>
   );

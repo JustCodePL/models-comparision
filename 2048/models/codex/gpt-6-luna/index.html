@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f2ec">
+  <title>2048 — Pracownia liczb</title>
+  <style>
+    :root { color-scheme: light; --paper:#f5f2ec; --ink:#22233a; --muted:#77788a; --violet:#6754d9; --board:#dcd9e4; }
+    * { box-sizing:border-box }
+    body { margin:0; min-height:100vh; background:var(--paper); color:var(--ink); font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,sans-serif; display:grid; place-items:center; padding:24px; }
+    .app { width:min(100%,480px); }
+    header { display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:18px; }
+    .eyebrow { margin:0 0 3px; color:var(--violet); font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase }
+    h1 { margin:0; font-size:clamp(38px,10vw,54px); line-height:1; letter-spacing:-.07em; }
+    .scores { display:flex; gap:8px; }
+    .score { min-width:76px; padding:9px 12px 8px; border-radius:14px; background:#e6e2ef; text-align:center; }
+    .score span { display:block; color:var(--muted); font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase }
+    .score strong { display:block; margin-top:1px; font-size:20px; line-height:1.1; }
+    .intro { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:15px; color:#5f6072; font-size:14px; }
+    button { border:0; border-radius:11px; padding:11px 15px; background:var(--ink); color:white; font:700 13px inherit; font-size:13px; font-weight:750; cursor:pointer; transition:transform .12s,background .12s; }
+    button:hover { background:var(--violet); transform:translateY(-1px) }
+    button:active { transform:translateY(1px) }
+    button:focus-visible { outline:3px solid #a69af6; outline-offset:3px }
+    .board-wrap { position:relative; }
+    .board { display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(7px,2vw,11px); padding:clamp(9px,2.5vw,13px); aspect-ratio:1; background:var(--board); border-radius:20px; touch-action:none; user-select:none; }
+    .cell { min-width:0; min-height:0; display:grid; place-items:center; border-radius:13px; background:rgba(255,255,255,.47); font-size:clamp(21px,7vw,39px); font-weight:850; letter-spacing:-.055em; animation:appear .16s ease-out; }
+    .cell[data-value="0"] { color:transparent }
+    .cell[data-value="2"] { background:#fbfaf7; color:#414154 }
+    .cell[data-value="4"] { background:#f3e9d5; color:#5b4b3c }
+    .cell[data-value="8"] { background:#f5c995; color:#5b3522 }
+    .cell[data-value="16"] { background:#f49c71; color:white }
+    .cell[data-value="32"] { background:#ef765e; color:white }
+    .cell[data-value="64"] { background:#df526b; color:white }
+    .cell[data-value="128"] { background:#d5c65e; color:white; font-size:clamp(17px,5.6vw,31px) }
+    .cell[data-value="256"] { background:#b9be54; color:white; font-size:clamp(17px,5.6vw,31px) }
+    .cell[data-value="512"] { background:#83b78b; color:white; font-size:clamp(17px,5.6vw,31px) }
+    .cell[data-value="1024"] { background:#6e9fd1; color:white; font-size:clamp(14px,4.8vw,26px) }
+    .cell[data-value="2048"] { background:var(--violet); color:white; font-size:clamp(14px,4.8vw,26px); box-shadow:0 0 22px #6754d955 }
+    .cell[data-value="big"] { background:#393c69; color:#fff; font-size:clamp(12px,4vw,22px) }
+    @keyframes appear { from { transform:scale(.82); opacity:.65 } to { transform:scale(1); opacity:1 } }
+    .notice { min-height:43px; margin-top:12px; display:flex; align-items:center; justify-content:center; gap:7px; color:var(--muted); font-size:13px; text-align:center; }
+    .notice strong { color:var(--violet) }
+    .tips { display:flex; justify-content:space-between; gap:10px; margin-top:4px; color:#858595; font-size:11px; }
+    .overlay { position:absolute; inset:0; display:grid; place-items:center; padding:20px; border-radius:20px; background:rgba(245,242,236,.88); backdrop-filter:blur(5px); text-align:center; }
+    .overlay[hidden] { display:none }
+    .dialog { max-width:290px }
+    .dialog .emoji { font-size:35px }
+    .dialog h2 { margin:7px 0; font-size:30px; letter-spacing:-.04em }
+    .dialog p { margin:0 0 17px; color:#626377; font-size:14px; line-height:1.5 }
+    .dialog .actions { display:flex; justify-content:center; gap:8px; flex-wrap:wrap }
+    .secondary { background:#e5e1ec; color:var(--ink) }
+    @media(max-width:420px) { body { padding:17px } .score { min-width:65px; padding:8px 9px } .intro { font-size:13px } .tips { font-size:10px } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important } }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div><p class="eyebrow">Pracownia liczb</p><h1>2048<span style="color:var(--violet)">.</span></h1></div>
+      <div class="scores" aria-label="Wyniki"><div class="score"><span>Wynik</span><strong id="score">0</strong></div><div class="score"><span>Rekord</span><strong id="best">0</strong></div></div>
+    </header>
+    <div class="intro"><span>Łącz liczby i znajdź drogę do 2048.</span><button id="newGame">Nowa gra</button></div>
+    <section class="board-wrap" aria-label="Gra 2048">
+      <div id="board" class="board" role="grid" aria-label="Plansza 4 na 4"></div>
+      <div id="overlay" class="overlay" hidden><div class="dialog"><div class="emoji" id="dialogEmoji">✨</div><h2 id="dialogTitle"></h2><p id="dialogText"></p><div class="actions" id="dialogActions"></div></div></div>
+    </section>
+    <div class="notice" id="notice" aria-live="polite">Każde połączenie dodaje punkty. <strong>Spróbuj pobić rekord!</strong></div>
+    <div class="tips"><span>Ruch: strzałki lub WASD</span><span>Telefon: przesuń palcem</span></div>
+  </main>
+  <script>
+    (() => {
+      const SIZE = 4;
+      const boardEl = document.querySelector('#board');
+      const scoreEl = document.querySelector('#score');
+      const bestEl = document.querySelector('#best');
+      const overlay = document.querySelector('#overlay');
+      const notice = document.querySelector('#notice');
+      let board, score, best = Number(localStorage.getItem('pracownia-2048-best')) || 0;
+      let won = false, keepPlaying = false, ended = false;
+
+      function spawn() {
+        const empty = [];
+        board.forEach((value, i) => { if (!value) empty.push(i); });
+        if (!empty.length) return false;
+        const spot = empty[Math.floor(Math.random() * empty.length)];
+        board[spot] = Math.random() < .9 ? 2 : 4;
+        return true;
+      }
+      function render() {
+        boardEl.replaceChildren();
+        board.forEach((value, i) => {
+          const cell = document.createElement('div');
+          cell.className = 'cell'; cell.setAttribute('role', 'gridcell');
+          cell.dataset.value = value > 2048 ? 'big' : String(value);
+          cell.textContent = value || '';
+          cell.setAttribute('aria-label', value ? `Pole ${i + 1}: ${value}` : `Pole ${i + 1}: puste`);
+          boardEl.append(cell);
+        });
+        scoreEl.textContent = score;
+        bestEl.textContent = best;
+      }
+      function lineFor(direction, n) {
+        if (direction === 'left') return Array.from({length:4}, (_, c) => n * 4 + c);
+        if (direction === 'right') return Array.from({length:4}, (_, c) => n * 4 + 3 - c);
+        if (direction === 'up') return Array.from({length:4}, (_, r) => r * 4 + n);
+        return Array.from({length:4}, (_, r) => (3 - r) * 4 + n);
+      }
+      function move(direction) {
+        if (ended || (won && !keepPlaying)) return;
+        const before = board.slice();
+        let gained = 0;
+        for (let n = 0; n < SIZE; n++) {
+          const indices = lineFor(direction, n);
+          const values = indices.map(i => board[i]).filter(Boolean);
+          const merged = [];
+          for (let i = 0; i < values.length; i++) {
+            if (values[i] === values[i + 1]) {
+              const doubled = values[i] * 2;
+              merged.push(doubled); gained += doubled; i++;
+            } else merged.push(values[i]);
+          }
+          indices.forEach((index, i) => { board[index] = merged[i] || 0; });
+        }
+        const changed = board.some((value, i) => value !== before[i]);
+        if (!changed) return;
+        score += gained;
+        if (score > best) { best = score; localStorage.setItem('pracownia-2048-best', best); }
+        spawn(); render();
+        if (!won && board.includes(2048)) { won = true; showWin(); }
+        else if (!canMove()) showLoss();
+        else if (gained) notice.innerHTML = `Świetne połączenie! <strong>+${gained}</strong>`;
+        else notice.textContent = 'Dobry ruch. Szukaj kolejnego połączenia.';
+      }
+      function canMove() {
+        if (board.some(v => !v)) return true;
+        for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+          const i = r * 4 + c;
+          if (c < 3 && board[i] === board[i + 1]) return true;
+          if (r < 3 && board[i] === board[i + 4]) return true;
+        }
+        return false;
+      }
+      function showDialog(emoji, title, message, actions) {
+        document.querySelector('#dialogEmoji').textContent = emoji;
+        document.querySelector('#dialogTitle').textContent = title;
+        document.querySelector('#dialogText').textContent = message;
+        const actionBox = document.querySelector('#dialogActions'); actionBox.replaceChildren();
+        actions.forEach(({label, action, secondary = false}) => {
+          const button = document.createElement('button'); button.textContent = label;
+          if (secondary) button.className = 'secondary';
+          button.addEventListener('click', action); actionBox.append(button);
+        });
+        overlay.hidden = false;
+      }
+      function showWin() {
+        showDialog('✨', 'Masz 2048!', 'Cel osiągnięty. Możesz świętować albo grać dalej i odkrywać większe liczby.', [
+          {label:'Gram dalej', action:() => { keepPlaying = true; overlay.hidden = true; notice.innerHTML = '2048 zdobyte! <strong>Gra trwa dalej.</strong>'; if (!canMove()) showLoss(); }},
+          {label:'Nowa gra', action:newGame, secondary:true}
+        ]);
+      }
+      function showLoss() {
+        ended = true;
+        showDialog('🌙', 'Koniec gry', `Brak możliwych ruchów. Twój wynik: ${score}.`, [{label:'Zagraj ponownie', action:newGame}]);
+      }
+      function newGame() {
+        board = Array(16).fill(0); score = 0; won = false; keepPlaying = false; ended = false;
+        overlay.hidden = true; spawn(); spawn(); render();
+        notice.innerHTML = 'Każde połączenie dodaje punkty. <strong>Spróbuj pobić rekord!</strong>';
+      }
+      const keys = {ArrowLeft:'left', a:'left', A:'left', ArrowRight:'right', d:'right', D:'right', ArrowUp:'up', w:'up', W:'up', ArrowDown:'down', s:'down', S:'down'};
+      window.addEventListener('keydown', event => {
+        const direction = keys[event.key];
+        if (direction) { event.preventDefault(); move(direction); }
+        if (event.key === 'Escape' && !overlay.hidden) overlay.hidden = true;
+      });
+      document.querySelector('#newGame').addEventListener('click', newGame);
+      let touchStart = null;
+      boardEl.addEventListener('pointerdown', event => { touchStart = [event.clientX, event.clientY]; });
+      boardEl.addEventListener('pointerup', event => {
+        if (!touchStart) return;
+        const dx = event.clientX - touchStart[0], dy = event.clientY - touchStart[1]; touchStart = null;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) return;
+        move(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
+      });
+      newGame();
+    })();
+  </script>
+</body>
+</html>

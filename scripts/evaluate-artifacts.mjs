@@ -36,7 +36,10 @@ const adapters = {
   "qwen-3-8-27B-MLX-8-bit": { cells: "#board .cell", tiles: "#board .tile", restart: "#new-game", board: "#board" },
   "muse-spark-1-2-free": { cells: "#board .cell", tiles: "#board .tile", restart: "#newGameBtn", board: "#board" },
   "nemotron-3-5-lightning": { cells: "#board .tile", tiles: "#board .tile:not(:empty)", restart: "#newGame", board: "#board" },
-  "kimi-k3": { cells: "#cells .cell", tiles: "#tiles .tile", restart: "#new-game", board: "#board" }
+  "kimi-k3": { cells: "#cells .cell", tiles: "#tiles .tile", restart: "#new-game", board: "#board" },
+  "gpt-6-luna": { cells: "#board .cell", tiles: "#board .cell:not(:empty)", restart: "#newGame", board: "#board" },
+  "gpt-6-sol": { cells: "#board .cell", tiles: "#board .tile", restart: "#new-game", board: "#board" },
+  "gpt-6-astra": { cells: "#board .cell", tiles: "#board .tile", restart: "#new-game", board: "#board" }
 };
 
 function check(id, label, status, details) {

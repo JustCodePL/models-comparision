@@ -19,4 +19,9 @@ test("odnośniki do artefaktów zawierają prefiks repozytorium", () => {
 test("wyeksportowano artefakty i zrzuty", () => {
   assert.ok(fs.existsSync(path.join(out, "artifacts/2048/openrouter/kimi-k3/index.html")));
   assert.ok(fs.existsSync(path.join(out, "previews/2048/kimi-k3.png")));
+  for (const variant of ["luna", "sol", "astra"]) {
+    const slug = `gpt-6-${variant}`;
+    assert.ok(fs.existsSync(path.join(out, "artifacts/2048/codex", slug, "index.html")));
+    assert.ok(fs.existsSync(path.join(out, "previews/2048", `${slug}.png`)));
+  }
 });

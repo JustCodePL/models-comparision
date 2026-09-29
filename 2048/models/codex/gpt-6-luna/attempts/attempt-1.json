@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "sessionId": "01a0ef1b-358c-7540-90ba-a8e74ed43ab5",
+  "title": "Jednorazowy prompt: gra 2048 w przeglądarce",
+  "source": "Codex CLI 0.157.1 — eksport oczyszczony",
+  "messages": [
+    {
+      "role": "user",
+      "text": "# Zadanie: stwórz kompletną grę 2048 działającą w przeglądarce\n\nTwoim zadaniem jest stworzenie od podstaw kompletnej, grywalnej wersji gry **2048**, działającej bezpośrednio w przeglądarce internetowej.\n\n\nMasz pełną swobodę w wyborze:\n\n\n* języka programowania,\n* frameworka lub biblioteki,\n* silnika,\n* architektury aplikacji,\n* sposobu renderowania,\n* stylu graficznego,\n* animacji,\n* kolorystyki,\n* typografii,\n* dodatkowych efektów wizualnych i dźwiękowych.\n\n\nMożesz użyć np. czystego HTML/CSS/JavaScript, TypeScriptu, Reacta, Vue, Svelte, Canvas, WebGL lub dowolnej innej technologii, pod warunkiem że końcowy rezultat działa jako gra uruchamiana w przeglądarce.\n\n\n## Cel gry\n\n\n2048 jest grą logiczną rozgrywaną na planszy o wymiarach **4 × 4 pola**.\n\n\nNa planszy znajdują się kafelki zawierające liczby będące potęgami liczby 2:\n\n\n2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 itd.\n\n\nCelem gracza jest łączenie kafelków o takich samych wartościach i uzyskanie kafelka o wartości **2048**.\n\n\nPo osiągnięciu 2048 gracz powinien mieć możliwość dalszego kontynuowania rozgrywki.\n\n\n## Stan początkowy\n\n\nPo rozpoczęciu nowej gry:\n\n\n1. Plansza 4 × 4 jest pusta.\n2. Na planszy pojawiają się **dwa losowe kafelki**.\n3. Każdy nowy kafelek ma wartość:\n\n\n   * `2` — z dużym prawdopodobieństwem,\n   * `4` — z mniejszym prawdopodobieństwem.\n\n\nZalecana proporcja to około:\n\n\n* 90% szans na `2`,\n* 10% szans na `4`.\n\n\nKafelki muszą pojawiać się wyłącznie na pustych polach.\n\n\n## Sterowanie\n\n\nGra musi obsługiwać sterowanie klawiaturą za pomocą:\n\n\n* strzałki w górę,\n* strzałki w dół,\n* strzałki w lewo,\n* strzałki w prawo.\n\n\nDopuszczalne jest również dodatkowe sterowanie:\n\n\n* klawiszami WASD,\n* gestami swipe na urządzeniach dotykowych.\n\n\nSterowanie dotykowe nie jest obowiązkowe, ale będzie zaletą.\n\n\n## Zasada wykonywania ruchu\n\n\nPo naciśnięciu kierunku wszystkie kafelki przesuwają się maksymalnie w wybraną stronę.\n\n\nPrzykład dla ruchu w lewo:\n\n\n`[2][ ][2][ ]`\n\n\npowinno zmienić się w:\n\n\n`[4][ ][ ][ ]`\n\n\nInny przykład:\n\n\n`[2][2][4][4]`\n\n\npo ruchu w lewo:\n\n\n`[4][8][ ][ ]`\n\n\n## Łączenie kafelków\n\n\nDwa sąsiadujące kafelki o tej samej wartości mogą połączyć się w jeden kafelek o wartości będącej ich sumą.\n\n\nPrzykłady:\n\n\n* `2 + 2 = 4`\n* `4 + 4 = 8`\n* `8 + 8 = 16`\n* `1024 + 1024 = 2048`\n\n\nPodczas pojedynczego ruchu kafelek powstały w wyniku połączenia **nie może zostać ponownie połączony w tym samym ruchu**.\n\n\nPrzykład:\n\n\n`[2][2][2][2]`\n\n\npo ruchu w lewo powinien dać:\n\n\n`[4][4][ ][ ]`\n\n\na nie:\n\n\n`[8][ ][ ][ ]`\n\n\nPodobnie:\n\n\n`[4][4][8][ ]`\n\n\npo ruchu w lewo:\n\n\n`[8][8][ ][ ]`\n\n\nPierwsze dwa kafelki 4 łączą się w 8, ale nowo utworzony kafelek 8 nie powinien w tym samym ruchu połączyć się z istniejącym już kafelkiem 8.\n\n\n## Pojawianie się nowych kafelków\n\n\nPo każdym **poprawnym ruchu**, który rzeczywiście zmienił stan planszy:\n\n\n* przesunął co najmniej jeden kafelek lub\n* połączył kafelki,\n\n\nna jednym z pustych pól powinien pojawić się nowy losowy kafelek o wartości 2 lub 4.\n\n\nJeżeli gracz naciśnie kierunek, ale plansza się nie zmieni, nowy kafelek **nie może się pojawić**.\n\n\n## Wynik\n\n\nGra musi posiadać licznik punktów.\n\n\nPunkty są przyznawane za łączenie kafelków.\n\n\nJeżeli:\n\n\n`2 + 2 = 4`\n\n\ngracz otrzymuje 4 punkty.\n\n\nJeżeli:\n\n\n`64 + 64 = 128`\n\n\ngracz otrzymuje 128 punktów.\n\n\nJeżeli podczas jednego ruchu wystąpi kilka połączeń, wszystkie zdobyte punkty należy zsumować.\n\n\nPrzykład:\n\n\n`[2][2][4][4]`\n\n\npo ruchu daje:\n\n\n`[4][8][ ][ ]`\n\n\nGracz zdobywa:\n\n\n`4 + 8 = 12 punktów`.\n\n\nAktualny wynik powinien być widoczny podczas gry.\n\n\nOpcjonalnie można również przechowywać i prezentować najlepszy wynik.\n\n\n## Warunek zwycięstwa\n\n\nGdy gracz po raz pierwszy utworzy kafelek **2048**, gra powinna poinformować go o osiągnięciu celu.\n\n\nGracz powinien mieć możliwość:\n\n\n* zakończenia gry,\n* rozpoczęcia nowej gry,\n* dalszego grania powyżej 2048.\n\n\nNie blokuj automatycznie planszy po utworzeniu kafelka 2048.\n\n\n## Warunek przegranej\n\n\nGra kończy się przegraną, gdy jednocześnie:\n\n\n1. wszystkie 16 pól planszy jest zajętych,\n2. nie istnieje żaden możliwy ruch,\n3. żadne dwa sąsiadujące poziomo ani pionowo kafelki nie mają tej samej wartości.\n\n\nPrzykładowo pełna plansza nadal nie oznacza przegranej, jeżeli istnieją dwa sąsiadujące kafelki o tej samej wartości i możliwe jest ich połączenie.\n\n\nPo przegranej należy wyświetlić jasną informację o zakończeniu gry oraz możliwość rozpoczęcia nowej rozgrywki.\n\n\n## Nowa gra\n\n\nInterfejs powinien posiadać przycisk pozwalający rozpocząć grę od początku.\n\n\nPo jego użyciu należy:\n\n\n* wyczyścić planszę,\n* wyzerować wynik,\n* utworzyć dwa nowe kafelki początkowe,\n* przywrócić normalny stan rozgrywki.\n\n\n## Interfejs\n\n\nGra powinna posiadać co najmniej:\n\n\n* planszę 4 × 4,\n* widoczny aktualny wynik,\n* przycisk rozpoczęcia nowej gry,\n* informację o wygranej,\n* informację o przegranej.\n\n\nResztę wyglądu zaprojektuj samodzielnie.\n\n\nNie próbuj wiernie kopiować oryginalnej oprawy wizualnej gry 2048. Zaprojektuj własną interpretację.\n\n\nMożesz zastosować dowolny styl, np.:\n\n\n* minimalistyczny,\n* retro,\n* pixel-art,\n* arcade,\n* futurystyczny,\n* neonowy,\n* glassmorphism,\n* skeuomorphism,\n* inspirowany terminalem,\n* mobilny,\n* elegancki,\n* humorystyczny,\n\n\nlub dowolny inny według własnego uznania.\n\n\n## Animacje\n\n\nAnimacje nie są bezwzględnie wymagane, ale mile widziane są animacje:\n\n\n* przesuwania kafelków,\n* łączenia kafelków,\n* pojawiania się nowych kafelków,\n* zdobywania punktów,\n* osiągnięcia 2048,\n* przegranej.\n\n\nAnimacje nie mogą jednak wpływać negatywnie na logikę gry ani powodować błędów podczas szybkiego wykonywania kolejnych ruchów.\n\n\n## Responsywność\n\n\nGra powinna działać poprawnie przynajmniej na typowym ekranie komputera.\n\n\nDodatkowym atutem będzie responsywność umożliwiająca wygodne granie również na telefonach i tabletach.\n\n\nPlansza powinna zachować kwadratowe proporcje.\n\n\n## Poprawność logiki\n\n\nNajważniejszym elementem zadania jest poprawna implementacja mechaniki.\n\n\nZwróć szczególną uwagę na przypadki brzegowe związane z kolejnością przesuwania i łączenia kafelków.\n\n\nPrzykładowe oczekiwane rezultaty dla ruchu w lewo:\n\n\n`[2, 2, 2, 0] → [4, 2, 0, 0]`\n\n\n`[2, 2, 2, 2] → [4, 4, 0, 0]`\n\n\n`[4, 4, 8, 0] → [8, 8, 0, 0]`\n\n\n`[2, 0, 2, 2] → [4, 2, 0, 0]`\n\n\n`[4, 0, 4, 4] → [8, 4, 0, 0]`\n\n\n`[8, 8, 16, 16] → [16, 32, 0, 0]`\n\n\n`[2, 4, 8, 16] → [2, 4, 8, 16]`\n\n\nAnalogiczne zasady obowiązują dla ruchów w prawo, w górę i w dół.\n\n\nW powyższych przykładach `0` oznacza puste pole.\n\n\n## Wymagania techniczne\n\n\nRezultat musi być kompletną działającą aplikacją.\n\n\nNie przedstawiaj jedynie:\n\n\n* pseudokodu,\n* fragmentów kodu,\n* opisu architektury,\n* makiety,\n* instrukcji jak grę można stworzyć.\n\n\nNależy dostarczyć kompletną implementację.\n\n\nGra musi być możliwa do uruchomienia lokalnie.\n\n\nJeżeli projekt wymaga instalacji zależności lub uruchomienia serwera developerskiego, przygotuj odpowiednią konfigurację projektu oraz krótką instrukcję uruchomienia.\n\n\nJeżeli możesz stworzyć wersję działającą bez instalowania zależności, np. poprzez samo otwarcie `index.html`, również jest to poprawne rozwiązanie.\n\n\n## Organizacja kodu\n\n\nSam zdecyduj o strukturze projektu.\n\n\nKod powinien być:\n\n\n* czytelny,\n* logicznie podzielony,\n* pozbawiony oczywistych duplikacji,\n* możliwy do dalszego rozwijania.\n\n\nNie komplikuj jednak architektury bez potrzeby.\n\n\n## Test końcowy\n\n\nPrzed uznaniem zadania za ukończone sprawdź co najmniej:\n\n\n1. Czy gra rozpoczyna się z dwoma kafelkami.\n2. Czy wszystkie cztery kierunki działają.\n3. Czy kafelki przesuwają się do końca w wybranym kierunku.\n4. Czy kafelki o tych samych wartościach poprawnie się łączą.\n5. Czy kafelek może zostać połączony maksymalnie raz w trakcie pojedynczego ruchu.\n6. Czy po poprawnym ruchu pojawia się dokładnie jeden nowy kafelek.\n7. Czy po ruchu, który niczego nie zmienia, nowy kafelek się nie pojawia.\n8. Czy wynik jest prawidłowo naliczany.\n9. Czy gra wykrywa uzyskanie kafelka 2048.\n10. Czy można kontynuować grę po osiągnięciu 2048.\n11. Czy poprawnie wykrywany jest brak możliwych ruchów.\n12. Czy można rozpocząć nową grę.\n13. Czy szybkie naciskanie klawiszy nie psuje stanu planszy.\n\n\n## Oczekiwany rezultat\n\n\nStwórz grę, uruchom ją i doprowadź projekt do stanu, w którym użytkownik może od razu rozpocząć rozgrywkę.\n\n\nPodejmuj samodzielnie decyzje dotyczące technologii, designu, struktury projektu i dodatkowych funkcji.\n\n\nNie pytaj mnie o preferowany framework, język, bibliotekę ani styl wizualny — wybierz je sam."
+    },
+    {
+      "role": "assistant",
+      "text": "Najpierw sprawdzę zawartość projektu i jego instrukcje, potem zbuduję grę w lekkiej formie uruchamianej lokalnie i sprawdzę jej działanie w przeglądarce."
+    },
+    {
+      "role": "tool",
+      "tool": "shell",
+      "status": "completed",
+      "text": "Narzędzie shell: zakończone."
+    },
+    {
+      "role": "tool",
+      "tool": "shell",
+      "status": "completed",
+      "text": "Narzędzie shell: zakończone."
+    },
+    {
+      "role": "assistant",
+      "text": "Projekt jest pusty i nie zawiera istniejącej aplikacji ani konfiguracji, więc przygotowuję samodzielny `index.html` bez zależności. Będzie zawierał całą logikę, responsywny interfejs, sterowanie klawiaturą i dotykiem oraz zapis najlepszego wyniku."
+    },
+    {
+      "role": "tool",
+      "tool": "write",
+      "status": "completed",
+      "text": "Narzędzie write · index.html: zakończone."
+    },
+    {
+      "role": "tool",
+      "tool": "browser",
+      "status": "completed",
+      "text": "Narzędzie browser: zakończone."
+    },
+    {
+      "role": "tool",
+      "tool": "browser",
+      "status": "completed",
+      "text": "Narzędzie browser: zakończone."
+    },
+    {
+      "role": "tool",
+      "tool": "browser",
+      "status": "completed",
+      "text": "Narzędzie browser: zakończone."
+    },
+    {
+      "role": "assistant",
+      "text": "Kod jest gotowy. Próba uruchomienia lokalnego serwera została zablokowana przez ograniczenia środowiska, a przeglądarka odrzuciła `file://`, więc sprawdzę składnię i zachowanie rzeczywistego skryptu gry w izolowanym środowisku Node; sama gra nadal nie wymaga serwera."
+    },
+    {
+      "role": "tool",
+      "tool": "shell",
+      "status": "completed",
+      "text": "Narzędzie shell: zakończone."
+    },
+    {
+      "role": "tool",
+      "tool": "write",
+      "status": "completed",
+      "text": "Narzędzie write · index.html: zakończone."
+    },
+    {
+      "role": "tool",
+      "tool": "shell",
+      "status": "completed",
+      "text": "Narzędzie shell: zakończone."
+    },
+    {
+      "role": "assistant",
+      "text": "Gotowa gra znajduje się w pliku [index.html](<katalog-próby>/index.html). Uruchomisz ją, otwierając ten plik w przeglądarce — nie wymaga instalacji ani serwera.\n\nMa planszę 4 × 4, punktację i rekord zapisywany lokalnie, sterowanie strzałkami, WASD i gestami dotykowymi, komunikaty o osiągnięciu 2048 i przegranej oraz możliwość kontynuowania gry po zwycięstwie.\n\nSprawdziłem składnię skryptu i w symulacji potwierdziłem start z dwoma kafelkami, obsługę wszystkich kierunków i reset nowej gry. Nie udało się otworzyć gry w przeglądarce tego środowiska: lokalny serwer zablokowały uprawnienia, a przeglądarka odrzuciła adres `file://`. Ograniczenie dotyczyło środowiska testowego; plik jest gotowy do lokalnego otwarcia."
+    }
+  ]
+}

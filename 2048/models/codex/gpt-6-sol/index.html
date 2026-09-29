@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3efe6">
+    <title>2048 — małe ruchy, wielki wynik</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="game-logic.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="." aria-label="2048 — strona gry"><span class="brand-mark">◩</span> LITTLE MOVES <span class="brand-divider">/</span> BIG NUMBERS</a>
+        <span class="topbar-note">GRA LOGICZNA · 01 / 01</span>
+      </header>
+
+      <section class="hero" aria-labelledby="game-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> CZTERY NA CZTERY. NIESKOŃCZENIE WIELE MOŻLIWOŚCI.</p>
+          <h1 id="game-title">Dobrze się<br><em>składa.</em><span class="title-dot">●</span></h1>
+          <p class="intro">Łącz te same liczby. Zrób miejsce na następny ruch. Dotrzyj do <strong>2048</strong> — i graj dalej, jeśli masz ochotę.</p>
+        </div>
+        <div class="hero-stamp" aria-hidden="true"><span>2<sup>11</sup></span><small>CEL GRY</small></div>
+      </section>
+
+      <section class="game-layout" aria-label="Gra 2048">
+        <div class="play-column">
+          <div class="board-topline"><span>PLANSZA <b>01</b></span><span id="board-status">TWÓJ RUCH ↘</span></div>
+          <div id="board" class="board" role="grid" aria-label="Plansza gry 2048, 4 na 4 pola"></div>
+          <div class="board-bottomline"><span>RUCH <b id="moves">00</b></span><span>POŁĄCZ → PODWÓJ → POWTÓRZ</span></div>
+        </div>
+
+        <aside class="sidebar">
+          <div class="score-grid">
+            <div class="score-card score-current"><span>WYNIK</span><strong id="score">0</strong><small>TERAZ</small></div>
+            <div class="score-card score-best"><span>REKORD</span><strong id="best">0</strong><small>NA TYM URZĄDZENIU</small></div>
+          </div>
+
+          <button id="new-game" class="new-game" type="button"><span>Nowa gra</span><span aria-hidden="true">↗</span></button>
+
+          <div id="message" class="message" role="status" aria-live="polite" hidden>
+            <span id="message-kicker" class="message-kicker"></span>
+            <h2 id="message-title"></h2>
+            <p id="message-text"></p>
+            <div id="message-actions" class="message-actions"></div>
+          </div>
+
+          <div class="how-to">
+            <span class="side-label">JAK GRAĆ</span>
+            <div class="instruction"><span class="instruction-number">01</span><p>Przesuwaj kafelki <strong>strzałkami</strong> lub <strong>WASD</strong>. Na telefonie przesuń palcem po planszy.</p></div>
+            <div class="instruction"><span class="instruction-number">02</span><p>Dwie takie same liczby łączą się w jedną. Każdy udany ruch dodaje nowy kafelek.</p></div>
+            <div class="instruction"><span class="instruction-number">03</span><p>Cel to <strong>2048</strong>. Gdy zabraknie możliwych ruchów, gra się kończy.</p></div>
+          </div>
+
+          <div class="controls" aria-label="Sterowanie przyciskami">
+            <span class="side-label">STEROWANIE</span>
+            <div class="control-pad">
+              <button type="button" data-direction="up" aria-label="W górę">↑</button>
+              <button type="button" data-direction="left" aria-label="W lewo">←</button>
+              <button type="button" data-direction="down" aria-label="W dół">↓</button>
+              <button type="button" data-direction="right" aria-label="W prawo">→</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+      <footer class="footer"><span>JEDEN RUCH MOŻE ZMIENIĆ WSZYSTKO.</span><span>2048 / GRAJ DLA PRZYJEMNOŚCI</span></footer>
+    </main>
+  </body>
+</html>

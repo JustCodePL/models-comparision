@@ -29,7 +29,7 @@ export default function Comparison2048() {
         <div>
           <p className="eyebrow">BENCHMARK 001 · FRONTEND</p>
           <h1>Gra <span>2048</span></h1>
-          <p className="lead">Osiem modeli dostało ten sam prompt. Nie naprawialiśmy ich kodu — testujemy i publikujemy dokładnie to, co powstało.</p>
+          <p className="lead">Każdy model dostał ten sam prompt. Nie naprawialiśmy ich kodu — testujemy i publikujemy dokładnie to, co powstało.</p>
         </div>
         <div className="benchmark-stats">
           <div><strong>{models.length}</strong><span>modeli</span></div>

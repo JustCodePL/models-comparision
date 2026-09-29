@@ -1,0 +1,36 @@
+{
+  "slug": "gpt-6-astra",
+  "name": "GPT-6 Astra",
+  "provider": "codex",
+  "modelId": "gpt-6-astra",
+  "status": "success",
+  "summary": "Gra z osobnym silnikiem; 9 wspólnych kontroli i 11 testów modelu zaliczonych.",
+  "artifact": {
+    "kind": "web",
+    "entrypoint": "index.html",
+    "include": [
+      "README.md",
+      "app.js",
+      "engine.js",
+      "index.html",
+      "style.css"
+    ]
+  },
+  "attempts": [
+    {
+      "id": "attempt-1",
+      "sessionId": "01a0ef1b-357b-79e2-b12d-0007b009a73e",
+      "title": "Pierwsza i jedyna próba",
+      "status": "success",
+      "startedAt": "2026-09-29T21:38:52.163101Z",
+      "durationSeconds": 389,
+      "tokens": {
+        "input": 401402,
+        "output": 11955
+      },
+      "summary": "Pięć plików aplikacji i 11 testów modelu. Jedna sesja bez kolejnych poleceń.",
+      "transcript": "attempts/attempt-1.json"
+    }
+  ],
+  "evaluation": []
+}
