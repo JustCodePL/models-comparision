@@ -3,7 +3,7 @@ import { getComparison, getModels, publicUrl } from "../lib/data";
 import { getExperiments, mediaUrl } from "../lib/experiments";
 import type { MediaItem } from "../lib/types";
 
-type Entry = { href: string; title: string; summary: string; date: string; image?: string; icon?: string; facts: string[] };
+type Entry = { href: string; title: string; summary: string; date: string; image?: string; imagePosition?: string; icon?: string; facts: string[] };
 
 const months = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
 function monthLabel(date: string) {
@@ -34,15 +34,19 @@ export default function Home() {
       const chosen = experiment.variants.find((variant) => variant.name === experiment.verdict.chosen);
       const results = experiment.cases.flatMap((item) => item.results);
       const visual = (media: MediaItem) => (media.type === "image" ? media.src : media.type === "video" ? media.poster : undefined);
-      const coverSrc = results.filter((result) => result.variant === chosen?.id).map((result) => visual(result.media)).find(Boolean)
-        ?? results.map((result) => visual(result.media)).find(Boolean)
-        ?? experiment.reference?.src;
+      const coverMedia = results.filter((result) => result.variant === chosen?.id).map((result) => result.media).find(visual)
+        ?? results.map((result) => result.media).find(visual)
+        ?? experiment.reference;
+      const coverSrc = coverMedia && visual(coverMedia);
+      // Portrait (9:16) covers are cropped around the middle, where faces usually are; landscape ones keep the top.
+      const portrait = coverMedia?.width && coverMedia.height && coverMedia.height > coverMedia.width;
       return {
         href: `/eksperymenty/${experiment.slug}/`,
         title: experiment.title,
         summary: experiment.summary,
         date: experiment.date,
         image: coverSrc ? mediaUrl(experiment, coverSrc) : undefined,
+        imagePosition: experiment.coverPosition ?? (portrait ? "center 40%" : undefined),
         icon: experiment.category === "dźwięk" ? "♪" : undefined,
         facts: [variantsLabel(experiment.variants.length), `wybrany: ${experiment.verdict.chosen}`],
       };
@@ -61,7 +65,7 @@ export default function Home() {
           <li key={entry.href}>
             <Link href={entry.href} className="entry">
               <span className="entry-number">{index + 1}</span>
-              {entry.image ? <img src={entry.image} alt="" loading="lazy" /> : <span className="entry-placeholder" aria-hidden="true">{entry.icon}</span>}
+              {entry.image ? <img src={entry.image} alt="" loading="lazy" style={entry.imagePosition ? { objectPosition: entry.imagePosition } : undefined} /> : <span className="entry-placeholder" aria-hidden="true">{entry.icon}</span>}
               <div className="entry-copy">
                 <h2>{entry.title}</h2>
                 <p>{entry.summary}</p>

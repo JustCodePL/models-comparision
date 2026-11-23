@@ -197,6 +197,7 @@ a[data-lightbox] { cursor: zoom-in; }
   .entry { grid-template-columns: 1fr; gap: 12px; }
   .entry-number { display: none; }
   .entry img, .entry-placeholder { width: 100%; }
+  .entry-placeholder { aspect-ratio: auto; height: 88px; }
   .legend .status-pill { min-width: 0; }
   .lightbox { padding: 56px 8px 72px; }
   .lightbox-prev, .lightbox-next { top: auto; bottom: 12px; transform: none; }

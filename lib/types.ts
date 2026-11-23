@@ -111,4 +111,6 @@ export type Experiment = {
   verdict: { chosen: string; text: string };
   findings: string[];
   notices?: string[];
+  /** CSS object-position for the cover on the home list, e.g. "center 35%" for a portrait frame with faces near the top. */
+  coverPosition?: string;
 };
