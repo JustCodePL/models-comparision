@@ -158,7 +158,9 @@ figure { margin: 0; }
   .variant-row { grid-template-columns: 1fr; gap: 14px; }
   .result-row { grid-template-columns: 1fr; gap: 10px; }
   .result-label { flex-direction: row; align-items: center; }
-  .result-head .result-cells { margin-left: 0; }
+  .result-head .result-cells { display: none; }
+  /* On phones every result takes the full width; the caption under it says which attempt it is. */
+  .result-cells { grid-template-columns: 1fr !important; }
 }
 
 /* Home: list of experiments */
