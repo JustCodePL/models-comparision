@@ -12,9 +12,9 @@ test("eksport zawiera wszystkie publiczne trasy i 404", () => {
   for (const route of routes) assert.ok(fs.existsSync(path.join(out, route)), `Brak ${route}`);
 });
 
-test("odnośniki do artefaktów zawierają prefiks repozytorium", () => {
+test("odnośniki do artefaktów prowadzą od katalogu głównego", () => {
   const html = fs.readFileSync(path.join(out, "2048/kimi-k3/index.html"), "utf8");
-  assert.match(html, /\/models-comparision\/artifacts\/2048\/openrouter\/kimi-k3\//);
+  assert.match(html, /"\/artifacts\/2048\/openrouter\/kimi-k3\//);
 });
 
 test("wyeksportowano artefakty i zrzuty", () => {
@@ -27,8 +27,14 @@ test("wyeksportowano artefakty i zrzuty", () => {
   }
 });
 
-test("media eksperymentów są w eksporcie z prefiksem repozytorium", () => {
+test("media eksperymentów są w eksporcie", () => {
   const html = fs.readFileSync(path.join(out, "eksperymenty/klatki-startowe-lokomotywa/index.html"), "utf8");
-  assert.match(html, /\/models-comparision\/media\/klatki-startowe-lokomotywa\/A01_flux3_5501\.webp/);
+  assert.match(html, /"\/media\/klatki-startowe-lokomotywa\/A01_flux3_5501\.webp/);
   assert.ok(fs.existsSync(path.join(out, "media/klatki-startowe-lokomotywa/A01_flux3_5501.webp")));
+});
+
+test("bez ENABLE_ROBOTS=1 strona ma noindex", () => {
+  const html = fs.readFileSync(path.join(out, "index.html"), "utf8");
+  if (process.env.ENABLE_ROBOTS === "1") assert.doesNotMatch(html, /noindex/);
+  else assert.match(html, /<meta name="robots" content="noindex, nofollow"\/>/);
 });

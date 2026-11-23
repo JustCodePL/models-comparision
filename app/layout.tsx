@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { site } from "../lib/site";
 
 export const metadata: Metadata = {
   title: "Porównania modeli — JustCode",
-  description: "Publiczne, odtwarzalne porównania modeli: programistycznych i generatywnych (obraz, wideo, dźwięk)."
+  description: "Publiczne, odtwarzalne porównania modeli: programistycznych i generatywnych (obraz, wideo, dźwięk).",
+  metadataBase: new URL(site.url),
+  robots: site.indexing ? undefined : { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -16,10 +19,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <span className="brand-mark">JC</span>
             <span>Model Lab</span>
           </Link>
-          <a className="header-link" href="https://github.com/JustCodePL/models-comparision">Kod źródłowy ↗</a>
         </header>
         {children}
         <footer>JustCode Model Lab · wyniki publikujemy również wtedy, gdy model sobie nie poradził.</footer>
+        {site.tracking ? (
+          <script defer src={site.tracking.scriptUrl} data-website-id={site.tracking.websiteId} />
+        ) : null}
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 Publiczny katalog odtwarzalnych porównań modeli. Pierwszy benchmark sprawdza, jak modele programistyczne poradziły sobie z przygotowaniem kompletnej gry 2048 w przeglądarce. Drugi rodzaj stron to eksperymenty z modelami generatywnymi (obraz, wideo, dźwięk), np. z produkcji kanału Arek Igiełka.
 
-Strona: [justcodepl.github.io/models-comparision](https://justcodepl.github.io/models-comparision/)
+Strona: [models-comparision.justcode.ac](https://models-comparision.justcode.ac/), wersja testowa: `models-comparision.justcode.ovh` (basic auth).
 
 ## Najważniejsze zasady
 
@@ -53,10 +53,27 @@ npm run transcripts:import
 
 Można wskazać inną kopię bazy przez `OPENCODE_DB`. Importer publikuje wyłącznie wiadomości użytkownika, tekstowe odpowiedzi modelu i krótkie statusy narzędzi. Operacje plikowe pokazują ścieżki względne wobec katalogu danego modelu, a skaner blokuje podejrzane dane.
 
-## Adres testowy
+## Wdrożenie
 
-Push na `develop` buduje obraz Dockera (`NextJSStatic` z `JustCodePL/Actions`) i wdraża `models-comparision.justcode.ovh` za basic auth, tak jak w `mr-slipshod` (`.github/workflows/dev.yml`, `deploy/dev.yml`). Sekrety są w Infisicalu, projekt „Porównania modeli”, a login do basic auth w Bitwardenie: `[DEV] Porównania modeli basicauth`. Obraz Dockera nie ma przeglądarki, więc `npm run build` używa wtedy zapisanej ewaluacji `2048/evaluation.json` i zrzutów `2048/previews/`. Po sprawdzeniu zmiany na adresie testowym scalamy `develop` do `main`, co publikuje GitHub Pages.
+Strona działa na naszym serwerze (Docker Swarm za Traefikiem), tak jak `mr-slipshod` i `arek-igielka-web`. Repozytorium jest prywatne, bo wspólne workflow z prywatnego `JustCodePL/Actions` nie dają się wywołać z publicznego repo.
 
-## GitHub Pages
+| Gałąź | Adres | Workflow i stos |
+|---|---|---|
+| `develop` | `models-comparision.justcode.ovh`, basic auth, `noindex` | `.github/workflows/dev.yml`, `deploy/dev.yml` |
+| `main` | `models-comparision.justcode.ac`, TLS, indeksowanie | `.github/workflows/prod.yml`, `deploy/prod.yml` |
 
-Next.js używa eksportu statycznego, końcowych ukośników i prefiksu `/models-comparision`. Workflow dla gałęzi `main` instaluje Chromium, uruchamia redakcję, staging oryginalnych artefaktów, wspólną ewaluację Playwright, testy Kimi, eksport Next.js i wdrożenie GitHub Pages.
+Obraz buduje `NextJSStatic` z `JustCodePL/Actions`. Nie ma w nim przeglądarki, więc `npm run build` używa zapisanej ewaluacji `2048/evaluation.json` i zrzutów `2048/previews/`. Pełne testy z Playwrightem uruchamia `.github/workflows/test.yml` przy każdym pushu na `develop` i `main`. Zmianę sprawdzamy na adresie testowym i dopiero potem scalamy `develop` do `main`.
+
+Ustawienia środowisk są w Infisicalu (projekt „Porównania modeli”, `dev` i `prod`) i trafiają do `.env` podczas budowania:
+
+| Zmienna | Znaczenie |
+|---|---|
+| `PAGE_URL` | adres strony |
+| `ENABLE_ROBOTS` | `1` tylko na produkcji, w przeciwnym razie `noindex` |
+| `TRACKING_SCRIPT_URL`, `TRACKING_ID` | Umami: `statystyki.justcode.ovh` dla dev, `statystyki.justcode.ac` dla prod, witryna „Porównania modeli” |
+| `MEDIA_BASE_URL` | bucket R2 środowiska z wideo i audio |
+| `BASIC_AUTH_USERS` | tylko dev; login w Bitwardenie: `[DEV] Porównania modeli basicauth` |
+
+## Wideo i audio (R2)
+
+Każda domena ma własny bucket Cloudflare R2: `models-comparision-justcode-ovh` (`https://models-comparision-media.justcode.ovh`) i `models-comparision-justcode-ac` (`https://models-comparision-media.justcode.ac`). Pliki leżą pod `<slug>/<plik>`. W `experiment.json` wideo i audio mają `src` w postaci `media/<plik>`, a strona składa z tego `MEDIA_BASE_URL/<slug>/<plik>`. Obrazy WebP zostają w repozytorium.
