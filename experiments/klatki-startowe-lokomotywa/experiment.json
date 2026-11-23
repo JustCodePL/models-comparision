@@ -10,7 +10,7 @@
   "method": [
     "Każdy model dostał ten sam opis kadru (po angielsku) i ten sam dopisek o stylu.",
     "W kadrach z lokomotywą model dostał też obraz wzorcowy. W kadrze z pasażerami nie, bo wtedy ludzie dostawali cechy zwierząt.",
-    "Rozdzielczość 1472×832, dwie próby na kadr (seed 5501 i 5502). Nic nie poprawialiśmy i nie wybieraliśmy lepszych prób.",
+    "Rozdzielczość 1472×832, dwie próby na kadr różniące się tylko losowym startem (seed 5501 i 5502). Nic nie poprawialiśmy i nie wybieraliśmy lepszych prób.",
     "FLUX 3 Klein najpierw przepisuje opis innym modelem (Qwen 3.5 9B). Ten czas jest wliczony."
   ],
   "promptSuffix": " Bright sunny premium family 3D animation, soft rounded shapes, warm daylight, clean readable composition, no text, no letters, no logo.",

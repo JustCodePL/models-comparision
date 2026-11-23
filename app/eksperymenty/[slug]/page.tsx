@@ -16,6 +16,10 @@ function formatSeconds(seconds: number) {
   return seconds < 90 ? `${seconds} s` : `${(seconds / 60).toFixed(1).replace(".", ",")} min`;
 }
 
+function timesLabel(count: number) {
+  return ["", "raz", "dwa razy", "trzy razy", "cztery razy"][count] ?? `${count} razy`;
+}
+
 export default async function ExperimentPage({ params }: { params: Promise<{ slug: string }> }) {
   const experiment = getExperiment((await params).slug);
   if (!experiment) notFound();
@@ -83,6 +87,14 @@ export default async function ExperimentPage({ params }: { params: Promise<{ slu
             {item.challenge && <p className="muted">Na co patrzymy: {item.challenge}</p>}
             {item.prompt && <details className="prompt-box"><summary>Opis, który dostał model</summary><pre>{item.prompt}{experiment.promptSuffix}</pre></details>}
             <div className="result-table">
+              {seeds.length > 1 && (
+                <div className="result-row result-head">
+                  <p className="muted small">Każdy model rysował ten kadr {timesLabel(seeds.length)} z tym samym opisem. Próby różnią się tylko losowym startem (seed), więc widać, jak bardzo wynik zależy od przypadku.</p>
+                  <div className="result-cells" style={{ gridTemplateColumns: `repeat(${seeds.length}, minmax(0, 1fr))` }}>
+                    {seeds.map((seed, index) => <span key={String(seed)}>Próba {index + 1}{seed !== undefined && <small> · seed {seed}</small>}</span>)}
+                  </div>
+                </div>
+              )}
               {experiment.variants.map((variant) => (
                 <div className="result-row" key={variant.id}>
                   <div className="result-label"><strong>{variant.name}</strong><span className={`status-pill ${variant.status}`}>{variant.label}</span></div>
@@ -90,7 +102,8 @@ export default async function ExperimentPage({ params }: { params: Promise<{ slu
                     {seeds.map((seed) => {
                       const result = item.results.find((entry) => entry.variant === variant.id && entry.seed === seed);
                       if (!result) return <div className="result-missing" key={String(seed)}>brak wyniku</div>;
-                      const caption = [seed !== undefined && `seed ${seed}`, result.seconds !== undefined && formatSeconds(result.seconds), result.note].filter(Boolean).join(" · ");
+                      const attempt = seeds.length > 1 ? `próba ${seeds.indexOf(seed) + 1}` : undefined;
+                      const caption = [attempt, seed !== undefined && `seed ${seed}`, result.seconds !== undefined && formatSeconds(result.seconds), result.note].filter(Boolean).join(" · ");
                       return (
                         <figure key={String(seed)}>
                           <MediaView experiment={experiment} media={result.media} alt={`${item.title}: ${variants.get(result.variant)?.name}${caption ? `, ${caption}` : ""}`} />
