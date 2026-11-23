@@ -4,63 +4,67 @@
   "series": "Arek Igiełka",
   "category": "obraz",
   "date": "2026-11-05",
-  "summary": "Cztery lokalne modele obrazu rysują te same trzy trudne ujęcia z „Lokomotywy” Tuwima: lokomotywę z twarzą na stacji, pasażerów w wagonie i pociąg na torze widziany z daleka.",
-  "question": "Który model najlepiej przygotuje klatkę startową, z której potem powstaje ujęcie wideo w LTX-2.5? Liczą się zgodność z opisem, wierność postaci z obrazu referencyjnego i poprawna geometria torów.",
-  "hardware": "MacBook Pro M5 Max, 128 GB pamięci, wszystko lokalnie",
+  "summary": "Cztery modele rysują te same trzy kadry do teledysku „Lokomotywa”. Szukamy modelu do klatek startowych, z których potem powstaje wideo.",
+  "question": "Który model najlepiej narysuje klatkę startową? Patrzymy, czy obraz zgadza się z opisem, czy lokomotywa wygląda jak na obrazie wzorcowym i czy tory są poprawne.",
+  "hardware": "MacBook Pro M5 Max, 128 GB pamięci, wszystko na komputerze, bez chmury",
   "method": [
-    "Każdy model dostał ten sam opis ujęcia z listy ujęć teledysku i ten sam dopisek o stylu. Opisy są po angielsku, bo tak działały wszystkie modele.",
-    "Ujęcia A01 i J08 mają obraz referencyjny stylu lokomotywy. Ujęcie B06 (ludzie w wagonie) idzie bez referencji, bo referencja przenosiła na ludzi cechy zwierząt.",
-    "Rozdzielczość 1472×832, dwa ziarna (5501 i 5502) na ujęcie i model. Wyniki pokazujemy bez poprawek i bez wybierania lepszych prób.",
-    "FLUX.2 klein działał w Draw Things, pozostałe modele w ComfyUI. FLUX 3 Klein zawsze najpierw przepisuje opis własnym modelem językowym (Qwen 3.5 9B), więc jego czas obejmuje też ten krok."
+    "Każdy model dostał ten sam opis kadru (po angielsku) i ten sam dopisek o stylu.",
+    "W kadrach z lokomotywą model dostał też obraz wzorcowy. W kadrze z pasażerami nie, bo wtedy ludzie dostawali cechy zwierząt.",
+    "Rozdzielczość 1472×832, dwie próby na kadr (seed 5501 i 5502). Nic nie poprawialiśmy i nie wybieraliśmy lepszych prób.",
+    "FLUX 3 Klein najpierw przepisuje opis innym modelem (Qwen 3.5 9B). Ten czas jest wliczony."
   ],
   "promptSuffix": " Bright sunny premium family 3D animation, soft rounded shapes, warm daylight, clean readable composition, no text, no letters, no logo.",
   "variants": [
     {
       "id": "flux2",
       "name": "FLUX.2 klein 4B",
-      "modelId": "flux_2_klein_4b_q8p (Draw Things)",
-      "license": "Apache 2.0",
+      "label": "Do szkiców",
       "status": "partial",
-      "settings": "4 kroki, CFG 1",
+      "summary": "Najszybszy. Dobrze powtarza lokomotywę z obrazu wzorcowego, ale kopiuje też jego układ.",
       "time": "ok. 10 s na obraz",
-      "summary": "Najszybszy. Z referencją dobrze powtarza wygląd lokomotywy, ale kopiuje też układ i zawartość obrazu referencyjnego."
+      "settings": "4 kroki, CFG 1, Draw Things",
+      "license": "Apache 2.0",
+      "modelId": "flux_2_klein_4b_q8p"
     },
     {
       "id": "flux3",
       "name": "FLUX 3 Klein",
-      "modelId": "flux3-image-klein-bf16 + Qwen 3.5 9B (przepisanie opisu)",
-      "license": "FLUX Kommunity",
+      "label": "Wybrany",
       "status": "success",
-      "settings": "16 kroków, CFG 1, sampler euler",
-      "time": "501–576 s na obraz w tym teście",
-      "summary": "Najlepszy z modeli, których licencja pozwala na użycie na kanale. Nadal zdarza mu się dodatkowa szyna i kopiowanie znaku z rogu referencji."
+      "summary": "Najlepszy z modeli, których możemy używać na kanale. Czasem dorysuje szynę albo skopiuje znak z rogu obrazu wzorcowego.",
+      "time": "ok. 9 min na obraz",
+      "settings": "16 kroków, CFG 1, ComfyUI",
+      "license": "FLUX Kommunity",
+      "modelId": "flux3-image-klein-bf16"
     },
     {
       "id": "edit2511",
       "name": "Qwen-Image-Edit 2511",
-      "modelId": "qwen_image_edit_2511_bf16",
-      "license": "Apache 2.0",
+      "label": "Odrzucony",
       "status": "failed",
-      "settings": "40 kroków, CFG 3, shift 3,1",
-      "time": "440–1077 s na obraz",
-      "summary": "Najwolniejszy i z najgorszymi torami: rozgałęzienia i drugi tor mimo opisu jednego toru. W jednym ujęciu lokomotywa zgubiła twarz."
+      "summary": "Najwolniejszy i z najgorszymi torami: rysuje rozjazdy i drugi tor. W jednym kadrze lokomotywa straciła twarz.",
+      "time": "7–18 min na obraz",
+      "settings": "40 kroków, CFG 3, ComfyUI",
+      "license": "Apache 2.0",
+      "modelId": "qwen_image_edit_2511_bf16"
     },
     {
       "id": "qwen21",
       "name": "Qwen-Image 2.1",
-      "modelId": "qwen_image_2.1_bf16",
-      "license": "Qwen Research (niekomercyjna)",
+      "label": "Tylko porównanie",
       "status": "success",
-      "settings": "25 kroków, CFG 1",
-      "time": "95–145 s na obraz",
-      "summary": "Obrazowo najlepszy i szybki, ale licencja nie pozwala na użycie komercyjne, więc był tylko punktem odniesienia."
+      "summary": "Najładniejsze obrazy, ale licencja nie pozwala używać go na kanale.",
+      "time": "1,5–2,5 min na obraz",
+      "settings": "25 kroków, CFG 1, ComfyUI",
+      "license": "Qwen Research (tylko niekomercyjnie)",
+      "modelId": "qwen_image_2.1_bf16"
     }
   ],
   "cases": [
     {
       "id": "A01",
-      "title": "Lokomotywa z twarzą na stacji",
-      "challenge": "Jedna twarz tylko na kabinie, gładkie drzwi kotła bez oczu i ust, długi pociąg za lokomotywą.",
+      "title": "Lokomotywa na stacji",
+      "challenge": "jedna twarz, tylko na kabinie; przód kotła bez oczu i ust; długi pociąg z tyłu.",
       "usesReference": true,
       "prompt": "The same friendly steam locomotive as in the reference image: blue cab with exactly one big smiling face on the cab front, black boiler with brass bands, tall black chimney, brass headlamp, red front grille, blue spoked wheels. The round front door of the boiler is plain black metal with a small brass star and has no face, no eyes and no mouth. Standing at a small sunny country station with red roof, flower baskets and lamp posts, wide shot, a long train behind.",
       "results": [
@@ -155,7 +159,7 @@
     {
       "id": "B06",
       "title": "Pasażerowie w wagonie",
-      "challenge": "Trzy osoby bez cech zwierząt, poprawne ręce i liczba postaci, kiełbasy w dłoniach.",
+      "challenge": "trzy osoby bez cech zwierząt, poprawne ręce, kiełbasy w dłoniach.",
       "usesReference": false,
       "prompt": "Inside a bright train wagon with red and turquoise walls, big sunny windows and a wooden floor. Three jolly round cheerful human passengers, a man and two women in colorful old-fashioned clothes, sitting on a wide bench holding long sausages, warm and friendly, no animals.",
       "results": [
@@ -249,8 +253,8 @@
     },
     {
       "id": "J08",
-      "title": "Pociąg na torze z daleka",
-      "challenge": "Dokładnie jeden tor z dwiema równoległymi szynami, pochylony horyzont, pociąg jadący w lewo.",
+      "title": "Pociąg z daleka",
+      "challenge": "dokładnie jeden tor z dwiema szynami, lekko przechylony horyzont, pociąg jedzie w lewo.",
       "usesReference": true,
       "prompt": "Wide view from far away and from the side, the horizon slightly tilted. Along a long green slope one single railway track with two parallel rails runs across the frame, seen from the side. On it, heading left, the same friendly steam locomotive as in the reference image with rust-red wagons behind it, white steam streaming back. Green hills and blue sky behind. No other tracks, no people.",
       "results": [
@@ -345,23 +349,23 @@
   ],
   "verdict": {
     "chosen": "FLUX 3 Klein",
-    "text": "Klatki startowe na kanale robi od tego testu FLUX 3 Klein, a FLUX.2 klein 4B zostaje do szybkich szkiców. Qwen-Image 2.1 dał najładniejsze obrazy, ale jego licencja wyklucza kanał. Qwen-Image-Edit 2511 odpadł przez tory i czas."
+    "text": "Klatki do teledysków robi teraz FLUX 3 Klein. FLUX.2 klein 4B zostaje do szybkich szkiców."
   },
   "findings": [
-    "Każdy model potrafi dorysować drugą szynę albo drugi tor. W opisie trzeba pisać wprost o jednym torze z dwiema szynami, a klatkę sprawdzać w powiększeniu, bo model wideo powtarza błąd z klatki startowej.",
-    "Bez wyraźnego zakazu modele dorysowują drugą twarz na drzwiach kotła. Pomaga zdanie, że drzwi są gładkie, ze znaczkiem i bez twarzy.",
-    "Referencja stylu przenosi też układ kadru i przedmioty. Sceny bez lokomotywy lepiej generować bez niej.",
-    "Obraz referencyjny ma w rogu słaby znak, który FLUX potrafi skopiować. Każdą klatkę z tą referencją trzeba sprawdzić w rogu."
+    "Każdy model potrafi dorysować drugą szynę albo drugi tor. Trzeba to wprost napisać w opisie i obejrzeć klatkę w powiększeniu, bo model wideo powtórzy błąd.",
+    "Bez zakazu modele rysują drugą twarz na przodzie kotła. Pomaga zdanie, że przód kotła nie ma twarzy.",
+    "Obraz wzorcowy przenosi też układ kadru i przedmioty. Kadry bez lokomotywy lepiej robić bez niego.",
+    "W rogu obrazu wzorcowego jest słaby znak, który FLUX potrafi skopiować. Róg każdej klatki trzeba sprawdzić."
   ],
   "notices": [
-    "Wszystkie obrazy wygenerowała sztuczna inteligencja. Wyniki FLUX 3 Klein przeszły przegląd przed publikacją, zgodnie z licencją FLUX Kommunity.",
-    "Qwen-Image 2.1 pokazujemy wyłącznie jako wynik ewaluacji, bez użycia komercyjnego."
+    "Wszystkie obrazy wygenerowała AI. Obrazy z FLUX 3 Klein sprawdziliśmy przed publikacją, tak jak wymaga licencja.",
+    "Qwen-Image 2.1 pokazujemy tylko dla porównania."
   ],
   "reference": {
     "type": "image",
     "src": "media/reference.webp",
     "width": 1472,
     "height": 828,
-    "caption": "Obraz referencyjny stylu lokomotywy (ujęcia A01 i J08)"
+    "caption": "Obraz wzorcowy lokomotywy (kadry „Lokomotywa na stacji” i „Pociąg z daleka”)"
   }
 }

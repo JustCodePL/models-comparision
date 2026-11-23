@@ -7,5 +7,5 @@ export function MediaView({ experiment, media, alt }: { experiment: Experiment; 
     return <video controls preload="metadata" playsInline src={url} poster={media.poster ? mediaUrl(experiment, media.poster) : undefined} width={media.width} height={media.height} />;
   }
   if (media.type === "audio") return <audio controls preload="metadata" src={url} />;
-  return <a href={url} target="_blank" rel="noreferrer"><img src={url} alt={alt} width={media.width} height={media.height} loading="lazy" /></a>;
+  return <a href={url} data-lightbox="" data-caption={alt}><img src={url} alt={alt} width={media.width} height={media.height} loading="lazy" /></a>;
 }

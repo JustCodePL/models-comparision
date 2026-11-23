@@ -2,74 +2,64 @@ import Link from "next/link";
 import { getComparison, getModels, publicUrl } from "../lib/data";
 import { getExperiments, mediaUrl } from "../lib/experiments";
 
+type Entry = { href: string; title: string; summary: string; date: string; image?: string; facts: string[] };
+
+const months = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+function monthLabel(date: string) {
+  const [year, month] = date.split("-");
+  return `${months[Number(month) - 1]} ${year}`;
+}
+
 export default function Home() {
   const comparison = getComparison();
   const models = getModels();
-  const completed = models.filter((model) => model.status === "success").length;
-  const failed = models.filter((model) => model.status === "failed").length;
-  const experiments = getExperiments();
+  const working = models.filter((model) => model.status === "success").length;
+
+  const entries: Entry[] = [
+    {
+      href: "/2048/",
+      title: "Gra 2048",
+      summary: comparison.description,
+      date: comparison.publishedAt,
+      image: publicUrl("previews/2048/kimi-k3.png"),
+      facts: [`${models.length} modeli`, `${working} gier działa`],
+    },
+    ...getExperiments().map((experiment) => {
+      const chosen = experiment.variants.find((variant) => variant.name === experiment.verdict.chosen);
+      const cover = experiment.cases[0]?.results.find((result) => result.variant === chosen?.id && result.media.type === "image")?.media ?? experiment.reference;
+      return {
+        href: `/eksperymenty/${experiment.slug}/`,
+        title: experiment.title,
+        summary: experiment.summary,
+        date: experiment.date,
+        image: cover ? mediaUrl(experiment, cover) : undefined,
+        facts: [`${experiment.variants.length} modele`, `wybrany: ${experiment.verdict.chosen}`],
+      };
+    }),
+  ].sort((a, b) => a.date.localeCompare(b.date));
 
   return (
     <main>
-      <section className="hero">
-        <p className="eyebrow">PUBLICZNE PORÓWNANIA · BEZ RETUSZU</p>
-        <h1>Ten sam problem.<br /><span>Różne modele.</span></h1>
-        <p className="lead">Pokazujemy kod, rozmowę i wynik wspólnej ewaluacji. Udane implementacje i porażki są tak samo ważną częścią obrazu.</p>
+      <section className="intro">
+        <h1>Testy modeli AI</h1>
+        <p className="lead">Dajemy kilku modelom to samo zadanie i pokazujemy, co zrobił każdy z nich.</p>
       </section>
 
-      <section className="section-heading">
-        <div>
-          <p className="eyebrow">BENCHMARK 001</p>
-          <h2>Dostępne porównania</h2>
-        </div>
-        <span className="muted">Aktualizacja {comparison.publishedAt}</span>
-      </section>
-
-      <Link href="/2048/" className="comparison-card">
-        <div className="comparison-preview">
-          <img src={publicUrl("previews/2048/kimi-k3.png")} alt="Zrzut ekranu gry 2048 wygenerowanej przez Kimi K3" />
-          <span className="number-watermark">2048</span>
-        </div>
-        <div className="comparison-copy">
-          <div className="tag-row"><span className="tag">GRA</span><span className="tag">FRONTEND</span><span className="tag">{models.length} MODELI</span></div>
-          <h3>2048 w przeglądarce</h3>
-          <p>{comparison.description}</p>
-          <div className="score-strip">
-            <span><strong>{completed}</strong> sukcesy</span>
-            <span><strong>{failed}</strong> porażki</span>
-            <span className="card-action">Otwórz porównanie →</span>
-          </div>
-        </div>
-      </Link>
-
-      {experiments.length > 0 && (
-        <>
-          <section className="section-heading spaced">
-            <div>
-              <p className="eyebrow">OBRAZ · WIDEO · DŹWIĘK</p>
-              <h2>Eksperymenty z modelami generatywnymi</h2>
-            </div>
-            <span className="muted">{experiments.length} {experiments.length === 1 ? "eksperyment" : "eksperymenty"}</span>
-          </section>
-          <div className="experiment-list">
-            {experiments.map((experiment) => {
-              const chosen = experiment.variants.find((variant) => variant.name === experiment.verdict.chosen);
-              const cover = experiment.cases[0]?.results.find((result) => result.variant === chosen?.id && result.media.type === "image")?.media ?? experiment.reference;
-              return (
-                <Link href={`/eksperymenty/${experiment.slug}/`} className="experiment-card" key={experiment.slug}>
-                  {cover && <img src={mediaUrl(experiment, cover)} alt={experiment.title} loading="lazy" />}
-                  <div className="comparison-copy">
-                    <div className="tag-row"><span className="tag">{experiment.series}</span><span className="tag">{experiment.category}</span><span className="tag">{experiment.variants.length} modele</span></div>
-                    <h3>{experiment.title}</h3>
-                    <p>{experiment.summary}</p>
-                    <div className="score-strip"><span><strong>{experiment.verdict.chosen}</strong> wybrany</span><span className="card-action">Otwórz eksperyment →</span></div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </>
-      )}
+      <ol className="entry-list">
+        {entries.map((entry, index) => (
+          <li key={entry.href}>
+            <Link href={entry.href} className="entry">
+              <span className="entry-number">{index + 1}</span>
+              {entry.image ? <img src={entry.image} alt="" loading="lazy" /> : <span className="entry-placeholder" />}
+              <div className="entry-copy">
+                <h2>{entry.title}</h2>
+                <p>{entry.summary}</p>
+                <p className="entry-facts">{[monthLabel(entry.date), ...entry.facts].join(" · ")}</p>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ol>
     </main>
   );
 }

@@ -70,6 +70,8 @@ export type ExperimentVariant = {
   modelId: string;
   license?: string;
   status: OutcomeStatus;
+  /** Short outcome in plain words, e.g. "Wybrany", "Do szkiców", "Odrzucony". The colour comes from status. */
+  label: string;
   settings?: string;
   time?: string;
   summary: string;

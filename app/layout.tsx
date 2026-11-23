@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { Lightbox } from "../components/lightbox";
 import { site } from "../lib/site";
 
 export const metadata: Metadata = {
-  title: "Porównania modeli — JustCode",
-  description: "Publiczne, odtwarzalne porównania modeli: programistycznych i generatywnych (obraz, wideo, dźwięk).",
+  title: "Testy modeli AI — JustCode",
+  description: "Dajemy kilku modelom AI to samo zadanie i pokazujemy, co zrobił każdy z nich.",
   metadataBase: new URL(site.url),
   robots: site.indexing ? undefined : { index: false, follow: false },
 };
@@ -17,11 +18,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <header className="site-header">
           <Link className="brand" href="/">
             <span className="brand-mark">JC</span>
-            <span>Model Lab</span>
+            <span>Testy modeli AI</span>
           </Link>
         </header>
         {children}
-        <footer>JustCode Model Lab · wyniki publikujemy również wtedy, gdy model sobie nie poradził.</footer>
+        <footer>JustCode · Pokazujemy też wyniki, które się nie udały.</footer>
+        <Lightbox />
         {site.tracking ? (
           <script defer src={site.tracking.scriptUrl} data-website-id={site.tracking.websiteId} />
         ) : null}

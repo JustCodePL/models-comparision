@@ -16,7 +16,10 @@ test("każdy eksperyment ma poprawny schemat, a media istnieją albo są pod pe�
     for (const key of ["title", "series", "category", "date", "summary", "question", "hardware"]) assert.ok(experiment[key], `${slug}: brak ${key}`);
     const ids = new Set(experiment.variants.map((variant) => variant.id));
     assert.equal(ids.size, experiment.variants.length, `${slug}: powtórzony wariant`);
-    for (const variant of experiment.variants) assert.ok(allowed.has(variant.status), `${slug}/${variant.id}: zły status`);
+    for (const variant of experiment.variants) {
+      assert.ok(allowed.has(variant.status), `${slug}/${variant.id}: zły status`);
+      assert.ok(variant.label, `${slug}/${variant.id}: brak etykiety wyniku`);
+    }
     assert.ok(experiment.variants.some((variant) => variant.name === experiment.verdict.chosen), `${slug}: werdykt wskazuje nieznany model`);
     const media = [experiment.reference, ...experiment.cases.flatMap((item) => item.results.map((result) => {
       assert.ok(ids.has(result.variant), `${slug}: nieznany wariant ${result.variant}`);
