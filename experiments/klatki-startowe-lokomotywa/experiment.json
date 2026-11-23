@@ -1,0 +1,367 @@
+{
+  "slug": "klatki-startowe-lokomotywa",
+  "title": "Klatki startowe do teledysku",
+  "series": "Arek Igiełka",
+  "category": "obraz",
+  "date": "2026-11-05",
+  "summary": "Cztery lokalne modele obrazu rysują te same trzy trudne ujęcia z „Lokomotywy” Tuwima: lokomotywę z twarzą na stacji, pasażerów w wagonie i pociąg na torze widziany z daleka.",
+  "question": "Który model najlepiej przygotuje klatkę startową, z której potem powstaje ujęcie wideo w LTX-2.5? Liczą się zgodność z opisem, wierność postaci z obrazu referencyjnego i poprawna geometria torów.",
+  "hardware": "MacBook Pro M5 Max, 128 GB pamięci, wszystko lokalnie",
+  "method": [
+    "Każdy model dostał ten sam opis ujęcia z listy ujęć teledysku i ten sam dopisek o stylu. Opisy są po angielsku, bo tak działały wszystkie modele.",
+    "Ujęcia A01 i J08 mają obraz referencyjny stylu lokomotywy. Ujęcie B06 (ludzie w wagonie) idzie bez referencji, bo referencja przenosiła na ludzi cechy zwierząt.",
+    "Rozdzielczość 1472×832, dwa ziarna (5501 i 5502) na ujęcie i model. Wyniki pokazujemy bez poprawek i bez wybierania lepszych prób.",
+    "FLUX.2 klein działał w Draw Things, pozostałe modele w ComfyUI. FLUX 3 Klein zawsze najpierw przepisuje opis własnym modelem językowym (Qwen 3.5 9B), więc jego czas obejmuje też ten krok."
+  ],
+  "promptSuffix": " Bright sunny premium family 3D animation, soft rounded shapes, warm daylight, clean readable composition, no text, no letters, no logo.",
+  "variants": [
+    {
+      "id": "flux2",
+      "name": "FLUX.2 klein 4B",
+      "modelId": "flux_2_klein_4b_q8p (Draw Things)",
+      "license": "Apache 2.0",
+      "status": "partial",
+      "settings": "4 kroki, CFG 1",
+      "time": "ok. 10 s na obraz",
+      "summary": "Najszybszy. Z referencją dobrze powtarza wygląd lokomotywy, ale kopiuje też układ i zawartość obrazu referencyjnego."
+    },
+    {
+      "id": "flux3",
+      "name": "FLUX 3 Klein",
+      "modelId": "flux3-image-klein-bf16 + Qwen 3.5 9B (przepisanie opisu)",
+      "license": "FLUX Kommunity",
+      "status": "success",
+      "settings": "16 kroków, CFG 1, sampler euler",
+      "time": "501–576 s na obraz w tym teście",
+      "summary": "Najlepszy z modeli, których licencja pozwala na użycie na kanale. Nadal zdarza mu się dodatkowa szyna i kopiowanie znaku z rogu referencji."
+    },
+    {
+      "id": "edit2511",
+      "name": "Qwen-Image-Edit 2511",
+      "modelId": "qwen_image_edit_2511_bf16",
+      "license": "Apache 2.0",
+      "status": "failed",
+      "settings": "40 kroków, CFG 3, shift 3,1",
+      "time": "440–1077 s na obraz",
+      "summary": "Najwolniejszy i z najgorszymi torami: rozgałęzienia i drugi tor mimo opisu jednego toru. W jednym ujęciu lokomotywa zgubiła twarz."
+    },
+    {
+      "id": "qwen21",
+      "name": "Qwen-Image 2.1",
+      "modelId": "qwen_image_2.1_bf16",
+      "license": "Qwen Research (niekomercyjna)",
+      "status": "success",
+      "settings": "25 kroków, CFG 1",
+      "time": "95–145 s na obraz",
+      "summary": "Obrazowo najlepszy i szybki, ale licencja nie pozwala na użycie komercyjne, więc był tylko punktem odniesienia."
+    }
+  ],
+  "cases": [
+    {
+      "id": "A01",
+      "title": "Lokomotywa z twarzą na stacji",
+      "challenge": "Jedna twarz tylko na kabinie, gładkie drzwi kotła bez oczu i ust, długi pociąg za lokomotywą.",
+      "usesReference": true,
+      "prompt": "The same friendly steam locomotive as in the reference image: blue cab with exactly one big smiling face on the cab front, black boiler with brass bands, tall black chimney, brass headlamp, red front grille, blue spoked wheels. The round front door of the boiler is plain black metal with a small brass star and has no face, no eyes and no mouth. Standing at a small sunny country station with red roof, flower baskets and lamp posts, wide shot, a long train behind.",
+      "results": [
+        {
+          "variant": "flux2",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/A01_flux2_5501.webp",
+            "width": 1472,
+            "height": 832
+          }
+        },
+        {
+          "variant": "flux2",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/A01_flux2_5502.webp",
+            "width": 1472,
+            "height": 832
+          }
+        },
+        {
+          "variant": "flux3",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/A01_flux3_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 576
+        },
+        {
+          "variant": "flux3",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/A01_flux3_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 526
+        },
+        {
+          "variant": "edit2511",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/A01_edit2511_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 801
+        },
+        {
+          "variant": "edit2511",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/A01_edit2511_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 821
+        },
+        {
+          "variant": "qwen21",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/A01_qwen21_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 145
+        },
+        {
+          "variant": "qwen21",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/A01_qwen21_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 105
+        }
+      ]
+    },
+    {
+      "id": "B06",
+      "title": "Pasażerowie w wagonie",
+      "challenge": "Trzy osoby bez cech zwierząt, poprawne ręce i liczba postaci, kiełbasy w dłoniach.",
+      "usesReference": false,
+      "prompt": "Inside a bright train wagon with red and turquoise walls, big sunny windows and a wooden floor. Three jolly round cheerful human passengers, a man and two women in colorful old-fashioned clothes, sitting on a wide bench holding long sausages, warm and friendly, no animals.",
+      "results": [
+        {
+          "variant": "flux2",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/B06_flux2_5501.webp",
+            "width": 1472,
+            "height": 832
+          }
+        },
+        {
+          "variant": "flux2",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/B06_flux2_5502.webp",
+            "width": 1472,
+            "height": 832
+          }
+        },
+        {
+          "variant": "flux3",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/B06_flux3_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 501
+        },
+        {
+          "variant": "flux3",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/B06_flux3_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 526
+        },
+        {
+          "variant": "edit2511",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/B06_edit2511_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 481
+        },
+        {
+          "variant": "edit2511",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/B06_edit2511_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 440
+        },
+        {
+          "variant": "qwen21",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/B06_qwen21_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 100
+        },
+        {
+          "variant": "qwen21",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/B06_qwen21_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 95
+        }
+      ]
+    },
+    {
+      "id": "J08",
+      "title": "Pociąg na torze z daleka",
+      "challenge": "Dokładnie jeden tor z dwiema równoległymi szynami, pochylony horyzont, pociąg jadący w lewo.",
+      "usesReference": true,
+      "prompt": "Wide view from far away and from the side, the horizon slightly tilted. Along a long green slope one single railway track with two parallel rails runs across the frame, seen from the side. On it, heading left, the same friendly steam locomotive as in the reference image with rust-red wagons behind it, white steam streaming back. Green hills and blue sky behind. No other tracks, no people.",
+      "results": [
+        {
+          "variant": "flux2",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/J08_flux2_5501.webp",
+            "width": 1472,
+            "height": 832
+          }
+        },
+        {
+          "variant": "flux2",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/J08_flux2_5502.webp",
+            "width": 1472,
+            "height": 832
+          }
+        },
+        {
+          "variant": "flux3",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/J08_flux3_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 541
+        },
+        {
+          "variant": "flux3",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/J08_flux3_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 551
+        },
+        {
+          "variant": "edit2511",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/J08_edit2511_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 1041
+        },
+        {
+          "variant": "edit2511",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/J08_edit2511_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 1077
+        },
+        {
+          "variant": "qwen21",
+          "seed": 5501,
+          "media": {
+            "type": "image",
+            "src": "media/J08_qwen21_5501.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 140
+        },
+        {
+          "variant": "qwen21",
+          "seed": 5502,
+          "media": {
+            "type": "image",
+            "src": "media/J08_qwen21_5502.webp",
+            "width": 1472,
+            "height": 832
+          },
+          "seconds": 115
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "chosen": "FLUX 3 Klein",
+    "text": "Klatki startowe na kanale robi od tego testu FLUX 3 Klein, a FLUX.2 klein 4B zostaje do szybkich szkiców. Qwen-Image 2.1 dał najładniejsze obrazy, ale jego licencja wyklucza kanał. Qwen-Image-Edit 2511 odpadł przez tory i czas."
+  },
+  "findings": [
+    "Każdy model potrafi dorysować drugą szynę albo drugi tor. W opisie trzeba pisać wprost o jednym torze z dwiema szynami, a klatkę sprawdzać w powiększeniu, bo model wideo powtarza błąd z klatki startowej.",
+    "Bez wyraźnego zakazu modele dorysowują drugą twarz na drzwiach kotła. Pomaga zdanie, że drzwi są gładkie, ze znaczkiem i bez twarzy.",
+    "Referencja stylu przenosi też układ kadru i przedmioty. Sceny bez lokomotywy lepiej generować bez niej.",
+    "Obraz referencyjny ma w rogu słaby znak, który FLUX potrafi skopiować. Każdą klatkę z tą referencją trzeba sprawdzić w rogu."
+  ],
+  "notices": [
+    "Wszystkie obrazy wygenerowała sztuczna inteligencja. Wyniki FLUX 3 Klein przeszły przegląd przed publikacją, zgodnie z licencją FLUX Kommunity.",
+    "Qwen-Image 2.1 pokazujemy wyłącznie jako wynik ewaluacji, bez użycia komercyjnego."
+  ],
+  "reference": {
+    "type": "image",
+    "src": "media/reference.webp",
+    "width": 1472,
+    "height": 828,
+    "caption": "Obraz referencyjny stylu lokomotywy (ujęcia A01 i J08)"
+  }
+}

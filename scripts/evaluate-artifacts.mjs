@@ -128,4 +128,6 @@ for (const ref of manifest.models) {
 await browser.close();
 await new Promise((resolve) => server.close(resolve));
 fs.writeFileSync(path.join(root, "2048/evaluation.json"), `${JSON.stringify(report, null, 2)}\n`);
+// Kopia zrzutów w repo pozwala zbudować stronę bez przeglądarki (scripts/evaluate-or-reuse.mjs).
+fs.cpSync(previewDir, path.join(root, "2048/previews"), { recursive: true });
 console.log("Ewaluacja artefaktów i zrzuty ekranu: OK.");

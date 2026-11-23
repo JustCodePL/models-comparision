@@ -54,3 +54,59 @@ export type ComparisonManifest = {
   publishedAt: string;
   models: Array<{ provider: ModelEntry["provider"]; slug: string }>;
 };
+
+export type MediaItem = {
+  type: "image" | "video" | "audio";
+  src: string;
+  width?: number;
+  height?: number;
+  poster?: string;
+  caption?: string;
+};
+
+export type ExperimentVariant = {
+  id: string;
+  name: string;
+  modelId: string;
+  license?: string;
+  status: OutcomeStatus;
+  settings?: string;
+  time?: string;
+  summary: string;
+};
+
+export type ExperimentResult = {
+  variant: string;
+  seed?: number;
+  seconds?: number;
+  note?: string;
+  media: MediaItem;
+};
+
+export type ExperimentCase = {
+  id: string;
+  title: string;
+  challenge?: string;
+  usesReference?: boolean;
+  prompt?: string;
+  results: ExperimentResult[];
+};
+
+export type Experiment = {
+  slug: string;
+  title: string;
+  series: string;
+  category: "obraz" | "wideo" | "dźwięk";
+  date: string;
+  summary: string;
+  question: string;
+  hardware: string;
+  method: string[];
+  promptSuffix?: string;
+  variants: ExperimentVariant[];
+  reference?: MediaItem;
+  cases: ExperimentCase[];
+  verdict: { chosen: string; text: string };
+  findings: string[];
+  notices?: string[];
+};

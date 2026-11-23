@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Porównania modeli — JustCode",
-  description: "Publiczne, odtwarzalne porównania modeli programistycznych."
+  description: "Publiczne, odtwarzalne porównania modeli: programistycznych i generatywnych (obraz, wideo, dźwięk)."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

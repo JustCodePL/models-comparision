@@ -22,4 +22,20 @@ for (const ref of comparison.models) {
     fs.cpSync(from, path.join(destination, item), { recursive: true });
   }
 }
+
+// Media eksperymentów (obrazy z repo); wideo i audio z R2 mają pełne adresy i nie są kopiowane.
+const mediaRoot = path.join(root, "public/media");
+fs.rmSync(mediaRoot, { recursive: true, force: true });
+const experimentsDir = path.join(root, "experiments");
+if (fs.existsSync(experimentsDir)) {
+  for (const slug of fs.readdirSync(experimentsDir)) {
+    const media = path.join(experimentsDir, slug, "media");
+    if (fs.existsSync(media)) fs.cpSync(media, path.join(mediaRoot, slug), { recursive: true });
+  }
+}
+
+// Zrzuty 2048 zapisane w repo, na wypadek budowania bez przeglądarki (obraz Dockera).
+const committedPreviews = path.join(root, "2048/previews");
+if (fs.existsSync(committedPreviews)) fs.cpSync(committedPreviews, path.join(root, "public/previews/2048"), { recursive: true });
+
 console.log("Artefakty przygotowane bez modyfikacji kodu modeli.");
