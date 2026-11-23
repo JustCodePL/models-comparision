@@ -28,7 +28,9 @@ test("każdy eksperyment ma poprawny schemat, a media istnieją albo są pod pe�
     for (const item of media) {
       if (/^https:\/\//.test(item.src)) continue;
       assert.match(item.src, /^media\/[^/]+$/);
-      assert.ok(fs.existsSync(path.join(dir, slug, item.src)), `${slug}: brak ${item.src}`);
+      // Video and audio live in R2; only images (and video posters) are in the repository.
+      if (item.type === "image") assert.ok(fs.existsSync(path.join(dir, slug, item.src)), `${slug}: brak ${item.src}`);
+      if (item.poster) assert.ok(fs.existsSync(path.join(dir, slug, item.poster)), `${slug}: brak ${item.poster}`);
     }
   }
 });

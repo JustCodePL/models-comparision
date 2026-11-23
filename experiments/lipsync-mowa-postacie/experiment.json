@@ -1,0 +1,207 @@
+{
+  "slug": "lipsync-mowa-postacie",
+  "title": "Mówiące postacie 3D: ruch ust i głos",
+  "series": "Arek Igiełka",
+  "category": "wideo",
+  "date": "2026-11-15",
+  "summary": "Dwie krótkie scenki z postaciami 3D mówiącymi po polsku. Porównujemy sposoby, żeby usta postaci ruszały się w rytm słów, a głos był głosem postaci.",
+  "question": "Jak lokalnie zrobić scenę, w której postać 3D mówi po polsku swoim głosem i porusza ustami w rytm słów?",
+  "hardware": "MacBook Pro M5 Max, 128 GB pamięci, wszystko na komputerze, bez chmury",
+  "method": [
+    "Postacie i teksty są nasze. W pierwszej scence rozmawiają Dziadek Jabłko i wnuczka Śliwka, postacie z głową owocu. W drugiej babcia uczy wnuka lepić pierogi.",
+    "Głosy postaci zrobił Fish Audio Drama 3 na podstawie opisu słownego, bez nagrań prawdziwych osób. Potem tym samym głosem nagrał każdą kwestię.",
+    "A2Vid to tryb LTX-2.5, który dostaje klatkę startową i gotowe nagranie kwestii. Ma poruszać ustami postaci w rytm tego nagrania.",
+    "W drugim sposobie LTX-2.5 dostaje polską kwestię w opisie ujęcia i sam tworzy obraz razem z mową. Usta pasują wtedy do dźwięku, ale głos jest głosem modelu.",
+    "Zamiana głosu (Chatterbox VC) zmienia barwę głosu modelu na głos postaci z Drama 3. Tempo i miejsca słów zostają takie same.",
+    "W „Pierogach” jest jeszcze wariant z czystym nagraniem Drama 3. DTW to dopasowanie tempa kwestii do ruchu ust: program znajduje, gdzie w mowie modelu pada każde słowo, i w tych miejscach rozciąga albo skraca nagranie.",
+    "Ruch ust zmierzył program: w każdej klatce sprawdza, jak szeroko są otwarte usta, i porównuje to z głośnością głosu. Głosy wybraliśmy na podstawie pomiarów i rozpoznawania mowy (Whisper). Na słuch nikt ich jeszcze nie oceniał.",
+    "Kadr pionowy 832×1472, 24 klatki na sekundę. Klatki startowe narysował FLUX 3 Klein."
+  ],
+  "variants": [
+    {
+      "id": "a2v",
+      "name": "LTX-2.5 A2Vid + głos Drama 3",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Usta nie idą za nagraniem. W planie dwóch postaci Śliwka w ogóle nie mówi, w zbliżeniu rusza ustami w złych miejscach.",
+      "time": "ok. 20–22 min renderu na ujęcie 4 s",
+      "settings": "skala A2Vid 5, klatka startowa także na końcu ujęcia, 97 klatek",
+      "license": "LTX-2 Community, Fish Audio Community License 1.0",
+      "modelId": "ltx-2.5-a2vid + fish-drama-3-8bit"
+    },
+    {
+      "id": "ltx",
+      "name": "LTX-2.5 (głos modelu)",
+      "label": "Punkt odniesienia",
+      "status": "partial",
+      "summary": "Usta pasują do mowy, bo obraz i dźwięk powstają razem. Głos nie jest jednak głosem postaci, a w „Pierogach” Whisper znalazł w nim 2 błędy w 5 kwestiach.",
+      "time": "ok. 70–80 s renderu na 1 s ujęcia",
+      "settings": "LTX-2.5 distilled, polska kwestia w opisie ujęcia, klatka startowa tylko na początku",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-distilled"
+    },
+    {
+      "id": "ltx_vc",
+      "name": "LTX-2.5 + Chatterbox VC",
+      "label": "Wybrany na razie",
+      "status": "success",
+      "summary": "Ruch ust jak w głosie modelu, a głos ma barwę postaci. Whisper po zamianie rozpoznał słowa wszystkich kwestii.",
+      "time": "ok. 70–80 s renderu na 1 s ujęcia, do tego zamiana głosu (bez pomiaru czasu)",
+      "settings": "jak LTX-2.5, potem zamiana głosu na wzorzec z Drama 3",
+      "license": "LTX-2 Community, Chatterbox: MIT, głosy: Fish Audio Community License 1.0",
+      "modelId": "ltx-2.5-distilled + ResembleAI/chatterbox (VC)"
+    },
+    {
+      "id": "ltx_dtw",
+      "name": "LTX-2.5 + Drama 3 dopasowany DTW",
+      "label": "Do odsłuchu",
+      "status": "partial",
+      "summary": "Ruch ust prawie taki sam jak przy zamianie głosu. Niektóre fragmenty trzeba było przyspieszyć nawet 2,5 raza, co może brzmieć nienaturalnie.",
+      "time": "ok. 70–80 s renderu na 1 s ujęcia, do tego dopasowanie nagrania",
+      "settings": "obraz z LTX-2.5, kwestia Drama 3 rozciągana kawałkami bez zmiany wysokości głosu, tempo 0,8–2,5 raza",
+      "license": "LTX-2 Community, Fish Audio Community License 1.0",
+      "modelId": "ltx-2.5-distilled + fish-drama-3-8bit"
+    }
+  ],
+  "cases": [
+    {
+      "id": "owoce-plan",
+      "title": "Owocowe dramy: kwestia Śliwki w planie dwóch postaci",
+      "challenge": "Śliwka mówi „Dziadku, znalazłam w ogrodzie złoty pierścionek!”. Dziadek słucha i powinien mieć zamknięte usta.",
+      "results": [
+        {
+          "variant": "a2v",
+          "seconds": 1218,
+          "note": "Śliwka nie otwiera ust i odwraca głowę w stronę kamery. Korelacja ust 0,01",
+          "media": {
+            "type": "video",
+            "src": "media/owoce-plan_a2v_0.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/owoce-plan_a2v_0-poster.webp"
+          }
+        },
+        {
+          "variant": "ltx",
+          "seconds": 287,
+          "note": "dźwięk prosto z modelu, bez zamiany głosu",
+          "media": {
+            "type": "video",
+            "src": "media/owoce-plan_ltx_1.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/owoce-plan_ltx_1-poster.webp"
+          }
+        },
+        {
+          "variant": "ltx_vc",
+          "seconds": 287,
+          "note": "ten sam render po zamianie głosu. Korelacja ust 0,52",
+          "media": {
+            "type": "video",
+            "src": "media/owoce-plan_ltx_vc_2.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/owoce-plan_ltx_vc_2-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "owoce-zblizenie",
+      "title": "Owocowe dramy: ta sama kwestia w zbliżeniu",
+      "challenge": "czy większa twarz w kadrze pomaga A2Vid.",
+      "results": [
+        {
+          "variant": "a2v",
+          "seconds": 1302,
+          "note": "usta się ruszają, ale najszerzej w pauzie po „Dziadku”. Korelacja ust 0,19",
+          "media": {
+            "type": "video",
+            "src": "media/owoce-zblizenie_a2v_0.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/owoce-zblizenie_a2v_0-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "owoce-scena",
+      "title": "Owocowe dramy: cała scena",
+      "challenge": "cztery kwestie w dwóch planach i dwóch zbliżeniach, 18 s. Słuchający ma zamknięte usta.",
+      "results": [
+        {
+          "variant": "ltx_vc",
+          "seconds": 1502,
+          "note": "4 ujęcia razem. Korelacja ust w ujęciach od 0,38 do 0,52",
+          "media": {
+            "type": "video",
+            "src": "media/owoce-scena_ltx_vc_0.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/owoce-scena_ltx_vc_0-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pierogi",
+      "title": "Pierogi: cała scena",
+      "challenge": "babcia i wnuk, pięć kwestii, 20 s. Obraz jest ten sam, różni się tylko ścieżka dźwięku.",
+      "results": [
+        {
+          "variant": "ltx",
+          "seconds": 1645,
+          "note": "5 ujęć razem, bez odrzuconych prób. Średnia korelacja ust 0,43",
+          "media": {
+            "type": "video",
+            "src": "media/pierogi_ltx_0.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/pierogi_ltx_0-poster.webp"
+          }
+        },
+        {
+          "variant": "ltx_vc",
+          "seconds": 1645,
+          "note": "wariant A. Średnia korelacja ust 0,46",
+          "media": {
+            "type": "video",
+            "src": "media/pierogi_ltx_vc_1.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/pierogi_ltx_vc_1-poster.webp"
+          }
+        },
+        {
+          "variant": "ltx_dtw",
+          "seconds": 1645,
+          "note": "wariant B. Średnia korelacja ust 0,43",
+          "media": {
+            "type": "video",
+            "src": "media/pierogi_ltx_dtw_2.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/pierogi_ltx_dtw_2-poster.webp"
+          }
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "chosen": "LTX-2.5 + Chatterbox VC",
+    "text": "Na razie wybieramy LTX-2.5 z zamianą głosu. To wybór zespołu na podstawie pomiarów. Odsłuch i ocena Artura jeszcze przed nami, a wariant z dopasowanym nagraniem Drama 3 czeka na to porównanie."
+  },
+  "findings": [
+    "Korelacja ust mówi, jak dobrze otwieranie ust idzie za głośnością głosu. 0 znaczy, że wcale, a 1, że idealnie. Liczymy ją po wyrównaniu ewentualnego przesunięcia obrazu i dźwięku, najwyżej o pół sekundy.",
+    "A2Vid dał 0,01 w planie dwóch postaci i 0,19 w zbliżeniu. Gdy LTX-2.5 sam tworzy mowę, wynik wynosi od 0,38 do 0,52 w scence z owocami i średnio 0,43–0,46 w „Pierogach”.",
+    "Zamiana głosu nie przesuwa słów w czasie, więc usta dalej pasują do dźwięku. Po zamianie Whisper rozpoznał słowa w 4 z 4 kwestii owocowej scenki i w 5 z 5 kwestii „Pierogów”.",
+    "W „Pierogach” warianty A i B ruszają ustami prawie tak samo. Różnicę usłyszy się dopiero w brzmieniu, bo w B niektóre fragmenty są mocno przyspieszone."
+  ],
+  "notices": [
+    "Obraz, mowę i głosy wygenerowała AI: LTX-2.5, Fish Audio Drama 3 i Chatterbox.",
+    "Built with Fish Audio.",
+    "Głosy postaci powstały z opisu słownego. Nie klonowaliśmy głosu żadnej prawdziwej osoby."
+  ]
+}

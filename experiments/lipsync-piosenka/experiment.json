@@ -1,0 +1,289 @@
+{
+  "slug": "lipsync-piosenka",
+  "title": "Śpiewające warzywa: ruch ust do piosenki",
+  "series": "Arek Igiełka",
+  "category": "wideo",
+  "date": "2026-11-08",
+  "summary": "Model wideo LTX-2.5 dostaje piosenkę „Na straganie” i ma ruszać ustami śpiewającej cebuli. Porównujemy ustawienia modelu na tej samej frazie, a obok wklejanie gotowych kształtów ust skryptem.",
+  "question": "Jak ustawić model, żeby postać ruszała ustami na każdym słowie, usta pasowały wielkością do buzi, a sama postać leżała spokojnie w skrzynce?",
+  "hardware": "MacBook Pro M5 Max, 128 GB pamięci, wszystko na komputerze, bez chmury",
+  "method": [
+    "A2Vid to tryb modelu LTX-2.5, w którym model dostaje nagranie i porusza ustami postaci w jego rytmie. Tak powstało wszystko poza ostatnim wariantem.",
+    "Kotwica to klatka, którą model musi pokazać w danej chwili. Zwykle jest to klatka sceny z zamkniętymi ustami, na początku i na końcu segmentu. Kotwica z otwartymi ustami to ta sama klatka z ustami otwartymi w edytorze obrazu (FLUX 3 Klein).",
+    "Siła lip syncu (a2v guidance scale) mówi, jak mocno obraz ma iść za nagraniem. Domyślnie wynosi 3.",
+    "Część pierwsza (8 listopada): ta sama fraza cebuli „Czy byś nie chciał takiej żony?”, 3,7 s, ten sam seed 16101 (seed to liczba, od której zaczyna się losowanie). Zmienialiśmy tylko siłę, kotwice i opis ujęcia.",
+    "Część druga (7 listopada): ta sama kwestia cebuli w segmentach różnej długości. Model dostał sam śpiew wydzielony z piosenki programem Demucs, siła była domyślna. Seedy są tu różne, a opis starszy, więc to porównanie jest luźniejsze.",
+    "Ruch ust oceniliśmy na paskach kadrów z ust, podpisanych słowem, które w tej chwili słychać. Wielkość otwarcia mierzyliśmy względem szerokości zamkniętych ust.",
+    "Rozdzielczość 1472×832, 24 klatki na sekundę. Klipy są z dźwiękiem."
+  ],
+  "variants": [
+    {
+      "id": "sila3",
+      "name": "A2Vid, siła 3",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Według dziennika usta ruszały się tylko na 2–3 słowach z 6. Cebula kilka razy mocno zaciska oczy.",
+      "time": "ok. 18 min na 3,7 s",
+      "settings": "siła 3 (domyślna), klatka sceny na początku i końcu",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "sila5",
+      "name": "A2Vid, siła 5",
+      "label": "Lepszy ruch ust",
+      "status": "partial",
+      "summary": "Ten sam seed, a usta ruszają się na każdym z 6 słów. Otwarcia są dalej małe, oczy zamknięte tylko raz.",
+      "time": "ok. 19 min na 3,7 s",
+      "settings": "siła 5, klatka sceny na początku i końcu",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "sila7",
+      "name": "A2Vid, siła 7",
+      "label": "Bez poprawy",
+      "status": "partial",
+      "summary": "Usta ruszają się tak samo jak przy sile 5, ale cebula częściej mruga i mruży oczy.",
+      "time": "ok. 19 min na 3,7 s",
+      "settings": "siła 7, klatka sceny na początku i końcu",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "kotwica-szeroka",
+      "name": "Siła 5 i kotwica z otwartymi ustami",
+      "label": "Odrzucony",
+      "status": "partial",
+      "summary": "Śpiew jest najwyraźniejszy, ale usta otwierają się za szeroko jak na tak małą buzię, widać zęby i język. Po obejrzeniu gotowej sceny zrezygnowaliśmy z tej kotwicy.",
+      "time": "ok. 19 min na 3,7 s",
+      "settings": "siła 5, na początku klatka z szeroko otwartymi ustami, na końcu klatka sceny",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "male-usta",
+      "name": "Małe usta, klatka sceny na obu końcach",
+      "label": "Wybrany",
+      "status": "success",
+      "summary": "Usta otwierają się na 0,3–0,5 szerokości zamkniętych ust i ruszają się na 5 z 6 słów. Na pierwszym słowie cebula mruga. Ten klip wszedł do gotowej sceny.",
+      "time": "ok. 18 min na 3,7 s",
+      "settings": "opis „małe usta otwierają się trochę”, w opisie „leży spokojnie w skrzynce”, zamknięte oczy i szerokie usta w negative, klatka sceny na początku i końcu. Dziennik podaje siłę 5, ale plik ustawień tego renderu jej nie zawiera, więc najpewniej zadziałała domyślna 3.",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "male-usta-kotwica",
+      "name": "Małe usta i skromna kotwica",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Kotwica z lekko otwartymi ustami nie zmniejszyła ust. Cebula śpiewa pierwsze słowa z zamkniętymi oczami i prawie bez ruchu ust.",
+      "time": "ok. 18 min na 3,7 s",
+      "settings": "jak wyżej, ale na początku klatka z małym „o”",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "krotkie",
+      "name": "Frazy po 1,5–2 s, kotwice otwarte na obu końcach",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Przez całą frazę usta stoją w jednym otwartym „O”.",
+      "time": "ok. 10 min na 2 s",
+      "settings": "siła 3, sam śpiew, klatka z otwartymi ustami na początku i końcu",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "cala-kwestia",
+      "name": "Cała kwestia 7 s w jednym segmencie",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Po niecałej sekundzie cebula wstaje na nóżkach i wychodzi górą z kadru. Wraca na miejsce po ok. 5 s.",
+      "time": "ok. 35 min na 7 s",
+      "settings": "siła 3, sam śpiew, na początku klatka z półotwartymi ustami, na końcu klatka sceny",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "srednie",
+      "name": "Segment ok. 3,5 s",
+      "label": "Przyjęta długość",
+      "status": "success",
+      "summary": "Usta otwierają się i zamykają na kolejnych słowach, na końcu są zamknięte, a cebula zostaje w skrzynce. Tę długość segmentu przyjęliśmy.",
+      "time": "ok. 17 min na 3,4 s",
+      "settings": "siła 3, sam śpiew, na początku klatka z otwartymi ustami, na końcu klatka sceny",
+      "license": "LTX-2 Community",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "sylaby",
+      "name": "Kształty ust według sylab",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Skrypt wkleja gotowe kształty ust (zamknięte, A, O, E) na film bez śpiewu. Usta wyglądają jak naklejka i potrafią zachodzić na nos.",
+      "time": "film bazowy ok. 8 min, trzy kształty ust po ok. 3 min",
+      "settings": "film bazowy z LTX-2.5 bez dźwięku, kształty ust z FLUX 3 Klein, czasy sylab z rozpoznawania mowy (Whisper)",
+      "license": "LTX-2 Community, FLUX Kommunity",
+      "modelId": "viseme_lipsync.py"
+    }
+  ],
+  "cases": [
+    {
+      "id": "cebula-sila-kotwice",
+      "title": "Cebula: siła, kotwice i małe usta",
+      "challenge": "czy usta ruszają się na każdym z 6 słów, czy pasują wielkością do buzi, czy oczy są otwarte i czy cebula leży w skrzynce.",
+      "results": [
+        {
+          "variant": "sila3",
+          "seed": 16101,
+          "seconds": 1105,
+          "media": {
+            "type": "video",
+            "src": "media/cebula-sila-kotwice_sila3_16101.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-sila-kotwice_sila3_16101-poster.webp"
+          }
+        },
+        {
+          "variant": "sila5",
+          "seed": 16101,
+          "seconds": 1151,
+          "media": {
+            "type": "video",
+            "src": "media/cebula-sila-kotwice_sila5_16101.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-sila-kotwice_sila5_16101-poster.webp"
+          }
+        },
+        {
+          "variant": "sila7",
+          "seed": 16101,
+          "seconds": 1115,
+          "media": {
+            "type": "video",
+            "src": "media/cebula-sila-kotwice_sila7_16101.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-sila-kotwice_sila7_16101-poster.webp"
+          }
+        },
+        {
+          "variant": "kotwica-szeroka",
+          "seed": 16101,
+          "seconds": 1121,
+          "media": {
+            "type": "video",
+            "src": "media/cebula-sila-kotwice_kotwica-szeroka_16101.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-sila-kotwice_kotwica-szeroka_16101-poster.webp"
+          }
+        },
+        {
+          "variant": "male-usta",
+          "seed": 16101,
+          "seconds": 1086,
+          "media": {
+            "type": "video",
+            "src": "media/cebula-sila-kotwice_male-usta_16101.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-sila-kotwice_male-usta_16101-poster.webp"
+          }
+        },
+        {
+          "variant": "male-usta-kotwica",
+          "seed": 16101,
+          "seconds": 1090,
+          "media": {
+            "type": "video",
+            "src": "media/cebula-sila-kotwice_male-usta-kotwica_16101.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-sila-kotwice_male-usta-kotwica_16101-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cebula-dlugosc",
+      "title": "Cebula: długość segmentu i kształty ust ze skryptu",
+      "challenge": "czy usta zmieniają kształt na kolejnych słowach i czy cebula zostaje na swoim miejscu.",
+      "results": [
+        {
+          "variant": "krotkie",
+          "seconds": 583,
+          "note": "„Czy byś nie chciał”, 2 s, seed 15004",
+          "media": {
+            "type": "video",
+            "src": "media/cebula-dlugosc_krotkie_0.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-dlugosc_krotkie_0-poster.webp"
+          }
+        },
+        {
+          "variant": "cala-kwestia",
+          "seconds": 2125,
+          "note": "cała kwestia, 7 s, seed 15301",
+          "media": {
+            "type": "video",
+            "src": "media/cebula-dlugosc_cala-kwestia_1.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-dlugosc_cala-kwestia_1-poster.webp"
+          }
+        },
+        {
+          "variant": "srednie",
+          "seconds": 996,
+          "note": "„Czy byś nie chciał takiej żony?”, 3,4 s, seed 15401",
+          "media": {
+            "type": "video",
+            "src": "media/cebula-dlugosc_srednie_2.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-dlugosc_srednie_2-poster.webp"
+          }
+        },
+        {
+          "variant": "sylaby",
+          "note": "cała kwestia, 7 s",
+          "media": {
+            "type": "video",
+            "src": "media/cebula-dlugosc_sylaby_3.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/cebula-dlugosc_sylaby_3-poster.webp"
+          }
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "chosen": "Małe usta, klatka sceny na obu końcach",
+    "text": "Kwestie dzielimy na segmenty po ok. 3–3,5 s, cięte w pauzach śpiewu. Na obu końcach segmentu jest klatka sceny z zamkniętymi ustami, a opis prosi o małe usta i postać leżącą w skrzynce. Siłę lip syncu ustawiamy na 5. Kotwicę z lekko otwartymi ustami dodajemy tylko postaciom, które bez niej nie otwierają ust."
+  },
+  "findings": [
+    "Przy tym samym seedzie siła 5 dała ruch ust na każdym słowie, a domyślna 3 tylko na dwóch, trzech. Siła 7 nie dodała nic, cebula za to częściej mrużyła oczy.",
+    "Segment ok. 3,5 s wypadł najlepiej. Przy 2 s usta zastygały w jednym „O”, a przy 7 s cebula wstawała ze skrzynki.",
+    "Kotwica z otwartymi ustami daje wyraźny śpiew, ale model przesadza z wielkością ust. Przy małych buziach lepiej działa opis małych ust i klatka z zamkniętymi ustami na obu końcach. Marchewka i kapusta, które na klatce mają zaciśnięte usta, bez kotwicy w ogóle nie śpiewały, więc dostały skromną kotwicę w środku segmentu.",
+    "Kształty ust wklejane skryptem po sylabach nie pasują do twarzy, więc ich nie używamy.",
+    "Rozpoznawanie mowy (Whisper) podało w tej scenie początki słów o ok. 0,8 s za wcześnie. Granice segmentów bierzemy z pauz w samym śpiewie."
+  ],
+  "notices": [
+    "Wszystkie klipy wygenerowała AI (LTX-2.5, klatki FLUX 3 Klein). Licencja LTX wymaga tej informacji.",
+    "Muzyka i śpiew też powstały z pomocą AI (Suno). Słowa: Jan Brzechwa, „Na straganie”."
+  ],
+  "reference": {
+    "type": "video",
+    "src": "media/reference.mp4",
+    "width": 1280,
+    "height": 724,
+    "poster": "media/reference-poster.webp",
+    "caption": "Punkt odniesienia: seler ze sceny 5 śpiewa „A to feler”. Do takiej gry brwi i oczu oraz ruchu ust do końca słów dążyliśmy przy cebuli."
+  }
+}

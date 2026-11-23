@@ -27,7 +27,6 @@ export function mediaUrl(experiment: Experiment, media: MediaItem | string): str
   if (/^https?:\/\//.test(src)) return src;
   const type = typeof media === "string" ? "image" : media.type;
   if (type !== "image") {
-    if (!site.mediaBaseUrl) throw new Error(`MEDIA_BASE_URL is not set, needed for ${src}`);
     return `${site.mediaBaseUrl}/${experiment.slug}/${src.replace(/^media\//, "")}`;
   }
   return publicUrl(`${src.replace(/^media\//, `media/${experiment.slug}/`)}`);

@@ -1,0 +1,219 @@
+{
+  "slug": "ruch-lokomotywa",
+  "title": "Ruch w teledysku: pociąg i konduktor",
+  "series": "Arek Igiełka",
+  "category": "wideo",
+  "date": "2026-11-06",
+  "summary": "Trzy sposoby na ruch w dwóch ujęciach do teledysku „Lokomotywa”: pociąg jadący po torze i konduktor, który macha z wagonu.",
+  "question": "Jak dostać ujęcie, w którym pociąg naprawdę jedzie po torze, a konduktor macha przez całe ujęcie? Patrzymy, czy ruch zgadza się z opisem i czy kształty się nie psują.",
+  "hardware": "MacBook Pro M5 Max, 128 GB pamięci, wszystko na komputerze, bez chmury",
+  "method": [
+    "Każdy model dostał gotową klatkę startową i opis ruchu po angielsku.",
+    "Zwykłe LTX-2.5 i Wan 2.2 robią wideo z jednej klatki i opisu. W ujęciu z pociągiem oba dostały tę samą klatkę, ten sam opis i ten sam seed, czyli losowy start (10341).",
+    "Layout-To-Render to dodatek do LTX-2.5. Ruch bierze z prostej animacji w Blenderze (szare bryły bez kolorów), a wygląd z klatki startowej. Pierwsza klatka animacji musi pokrywać się z klatką startową.",
+    "Pociąg z Blenderem ma inną klatkę startową niż próba bez Blendera: kamera stoi bliżej, a tor biegnie wzdłuż kadru. Konduktor ma we wszystkich próbach tę samą klatkę.",
+    "Klipy są bez dźwięku. Podany czas to cały render jednego klipu."
+  ],
+  "variants": [
+    {
+      "id": "ltx",
+      "name": "LTX-2.5",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Ruch jest, ale inny niż w opisie: kamera skręca za tor, a konduktor w drugiej połowie ujęcia przestaje machać.",
+      "time": "ok. 5 min na klip 3,7 s",
+      "settings": "model destylowany 22B, 8 + 3 kroki, 1472×832, 24 klatki na sekundę",
+      "license": "LTX-2 Community (treści trzeba oznaczać jako AI)",
+      "modelId": "ltx-2.5-22b-distilled"
+    },
+    {
+      "id": "wan",
+      "name": "Wan 2.2 I2V A14B",
+      "label": "Odrzucony",
+      "status": "partial",
+      "summary": "Tło i tor uciekają jak przy szybkiej jeździe, ale pociąg stoi w jednym miejscu kadru i obraca się przodem do kamery. Render trwał prawie pięć razy dłużej niż w LTX.",
+      "time": "ok. 24 min na klip 5 s",
+      "settings": "30 kroków, CFG 3,5, 832×448, 16 klatek na sekundę, Draw Things",
+      "license": "Apache 2.0",
+      "modelId": "wan_v2.2_a14b_hne_i2v_i8x"
+    },
+    {
+      "id": "layout",
+      "name": "LTX-2.5 Layout-To-Render",
+      "label": "Wybrany",
+      "status": "success",
+      "summary": "Pociąg i konduktor ruszają się tak, jak w animacji z Blendera. Z klatki startowej trzeba usunąć to, czego model nie umie poruszyć.",
+      "time": "ok. 11,5 min na klip 3,4 s",
+      "settings": "LTX-2.5 z dodatkiem Layout-To-Render (siła 1,0), 8 + 3 kroki, 1472×832, 24 klatki na sekundę, seed 42",
+      "license": "LTX-2 Community (treści trzeba oznaczać jako AI)",
+      "modelId": "ltx-2.5-22b-ic-lora-layout-to-render-1.0"
+    },
+    {
+      "id": "blender",
+      "name": "Animacja z Blendera",
+      "label": "Wzór ruchu",
+      "status": "not-evaluated",
+      "summary": "Szare bryły z kul i walców. Wyznaczają tylko układ kadru i ruch dla Layout-To-Render.",
+      "settings": "81 klatek, kamera i ruch jak w ujęciu",
+      "license": "GNU GPL (program)",
+      "modelId": "blender"
+    }
+  ],
+  "cases": [
+    {
+      "id": "J08",
+      "title": "Pociąg z daleka: zwykłe LTX i Wan",
+      "challenge": "pociąg jedzie w lewo po jednym torze, kamera jedzie obok, a trawa i wzgórza uciekają do tyłu.",
+      "prompt": "The camera pans smoothly to the left following the train from far away. The train is already racing at full speed and keeps the same speed the whole time. The grass, the sleepers and the green hills rush steadily past behind and below the train from left to right, showing clear fast movement of the whole landscape. The train moves slowly forward inside the frame and stays fully visible. The wheels spin and white steam streams back from the chimney. The two rails stay straight and parallel. The face on the cab stays one calm happy face and all parts keep their shape.",
+      "results": [
+        {
+          "variant": "ltx",
+          "seed": 10341,
+          "seconds": 296,
+          "note": "kamera skręca za tor, pod koniec pociąg odjeżdża od kamery",
+          "media": {
+            "type": "video",
+            "src": "media/J08_ltx_10341.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/J08_ltx_10341-poster.webp"
+          }
+        },
+        {
+          "variant": "wan",
+          "seed": 10341,
+          "seconds": 1454,
+          "note": "pociąg stoi w kadrze, para bucha spod kół",
+          "media": {
+            "type": "video",
+            "src": "media/J08_wan_10341.mp4",
+            "width": 832,
+            "height": 448,
+            "poster": "media/J08_wan_10341-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "J08-layout-1",
+      "title": "Pociąg z boku: ruch z Blendera, pierwsza próba",
+      "challenge": "pociąg jedzie po torze, koła się kręcą i nic się nie odkształca. Klatka startowa ma korbowód i małą chmurkę pary.",
+      "prompt": "A friendly blue steam locomotive with a smiling face races along a straight railway track across a sunny green meadow, pulling rust-red wagons, its wheels spinning and white steam streaming back, while the camera travels beside it.",
+      "results": [
+        {
+          "variant": "blender",
+          "note": "animacja, z której model bierze ruch",
+          "media": {
+            "type": "video",
+            "src": "media/J08-layout-1_blender_0.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/J08-layout-1_blender_0-poster.webp"
+          }
+        },
+        {
+          "variant": "layout",
+          "note": "korbowód się wygina, para rośnie w chmurę nad kabiną",
+          "media": {
+            "type": "video",
+            "src": "media/J08-layout-1_layout_1.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/J08-layout-1_layout_1-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "J08-layout-2",
+      "title": "Pociąg z boku: poprawiona klatka",
+      "challenge": "ta sama animacja z Blendera. Z klatki startowej usunęliśmy korbowód i parę, a szprychy kół są rozmyte ruchem.",
+      "prompt": "A friendly blue vintage locomotive with a smiling face races along a straight railway track across a sunny green meadow, pulling rust-red wagons, its softly blurred spoked wheels spinning fast. Clear clean air, the face stays fully visible, the camera travels beside the train.",
+      "results": [
+        {
+          "variant": "layout",
+          "seconds": 692,
+          "note": "bez błędów, wersja przyjęta",
+          "media": {
+            "type": "video",
+            "src": "media/J08-layout-2_layout_0.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/J08-layout-2_layout_0-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "L02",
+      "title": "Konduktor macha z wagonu",
+      "challenge": "konduktor macha jedną ręką przez całe ujęcie i patrzy w kamerę. W Blenderze jest tylko ludzik z kul i walców, który macha.",
+      "results": [
+        {
+          "variant": "ltx",
+          "note": "w drugiej połowie kładzie rękę na poręczy i zamyka oczy",
+          "media": {
+            "type": "video",
+            "src": "media/L02_ltx_0.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/L02_ltx_0-poster.webp"
+          }
+        },
+        {
+          "variant": "blender",
+          "note": "animacja, z której model bierze ruch",
+          "media": {
+            "type": "video",
+            "src": "media/L02_blender_1.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/L02_blender_1-poster.webp"
+          }
+        },
+        {
+          "variant": "layout",
+          "seconds": 672,
+          "note": "macha do końca ujęcia",
+          "media": {
+            "type": "video",
+            "src": "media/L02_layout_2.mp4",
+            "width": 1280,
+            "height": 724,
+            "poster": "media/L02_layout_2-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "L02-dlon",
+      "title": "Konduktor: dłoń z bliska",
+      "challenge": "kształt dłoni w kolejnych klatkach ujęcia z Layout-To-Render.",
+      "results": [
+        {
+          "variant": "layout",
+          "note": "w ostatniej klatce różowa plama na palcach",
+          "media": {
+            "type": "image",
+            "src": "media/L02-dlon_layout_0.webp",
+            "width": 900,
+            "height": 600
+          }
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "chosen": "LTX-2.5 Layout-To-Render",
+    "text": "Ujęcia, w których liczy się tor albo jadący pojazd, robimy teraz przez Layout-To-Render. Tak samo ujęcia z postacią, w których zwykłe LTX gubi gest. Resztę ujęć dalej robi zwykłe LTX-2.5."
+  },
+  "findings": [
+    "Zwykłe LTX w ujęciu z daleka obróciło kamerę za tor i pod koniec pociąg odjeżdżał od kamery. Do opublikowanego filmu trafił fragment tego klipu puszczony od końca, więc pociąg nadjeżdża z daleka.",
+    "Wan 2.2 dobrze oddał pęd tła, ale pociąg prawie nie przesuwał się w kadrze i obracał się przodem do kamery. Render trwał 24 minuty, a obraz ma tylko 832×448.",
+    "Layout-To-Render trzyma tor i pociąg tam, gdzie są w animacji. To, czego model nie umie poruszyć, zamienia się w błąd: w pierwszej próbie korbowód się wyginał, a para urosła w chmurę nad kabiną. Po usunięciu ich z klatki startowej ujęcie wyszło czyste.",
+    "Do machania wystarczył ludzik z kul i walców. Konduktor macha do końca i patrzy w kamerę, a tło za nim prawie stoi. W ostatnich klatkach na palcach pojawia się różowa plama, więc końcówkę trzeba obejrzeć w powiększeniu i w razie potrzeby uciąć."
+  ],
+  "notices": [
+    "Wszystkie klipy wygenerowała AI. Licencja LTX-2.5 wymaga oznaczania takich treści."
+  ]
+}

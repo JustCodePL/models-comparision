@@ -16,6 +16,8 @@ function formatSeconds(seconds: number) {
   return seconds < 90 ? `${seconds} s` : `${(seconds / 60).toFixed(1).replace(".", ",")} min`;
 }
 
+const taskLabel = { obraz: "rysował ten kadr", wideo: "robił to ujęcie", "dźwięk": "nagrywał tę kwestię" } as const;
+
 function timesLabel(count: number) {
   return ["", "raz", "dwa razy", "trzy razy", "cztery razy"][count] ?? `${count} razy`;
 }
@@ -89,16 +91,16 @@ export default async function ExperimentPage({ params }: { params: Promise<{ slu
             <div className="result-table">
               {seeds.length > 1 && (
                 <div className="result-row result-head">
-                  <p className="muted small">Każdy model rysował ten kadr {timesLabel(seeds.length)} z tym samym opisem. Próby różnią się tylko losowym startem (seed), więc widać, jak bardzo wynik zależy od przypadku.</p>
-                  <div className="result-cells" style={{ gridTemplateColumns: `repeat(${seeds.length}, minmax(0, 1fr))` }}>
+                  <p className="muted small">Każdy model {taskLabel[experiment.category]} {timesLabel(seeds.length)} z tym samym opisem. Próby różnią się tylko losowym startem (seed), więc widać, jak bardzo wynik zależy od przypadku.</p>
+                  <div className="result-cells" style={{ gridTemplateColumns: `repeat(${Math.max(seeds.length, 2)}, minmax(0, 1fr))` }}>
                     {seeds.map((seed, index) => <span key={String(seed)}>Próba {index + 1}{seed !== undefined && <small> · seed {seed}</small>}</span>)}
                   </div>
                 </div>
               )}
-              {experiment.variants.map((variant) => (
+              {experiment.variants.filter((variant) => item.results.some((result) => result.variant === variant.id)).map((variant) => (
                 <div className="result-row" key={variant.id}>
                   <div className="result-label"><strong>{variant.name}</strong><span className={`status-pill ${variant.status}`}>{variant.label}</span></div>
-                  <div className="result-cells" style={{ gridTemplateColumns: `repeat(${seeds.length}, minmax(0, 1fr))` }}>
+                  <div className="result-cells" style={{ gridTemplateColumns: `repeat(${Math.max(seeds.length, 2)}, minmax(0, 1fr))` }}>
                     {seeds.map((seed) => {
                       const result = item.results.find((entry) => entry.variant === variant.id && entry.seed === seed);
                       if (!result) return <div className="result-missing" key={String(seed)}>brak wyniku</div>;

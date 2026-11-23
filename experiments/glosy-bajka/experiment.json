@@ -1,0 +1,333 @@
+{
+  "slug": "glosy-bajka",
+  "title": "Głosy do bajki mówionej",
+  "series": "Arek Igiełka",
+  "category": "dźwięk",
+  "date": "2026-11-11",
+  "summary": "Sześć lokalnych modeli czyta tę samą krótką scenkę z narratorem, pieskiem Burkiem i kotką Mruczką. Szukamy polskich głosów do bajki mówionej dla małych dzieci.",
+  "question": "Który model najlepiej przeczyta bajkę po polsku? Słuchamy, czy narrator brzmi ciepło i spokojnie, czy Burek i Mruczka brzmią jak postacie z kreskówki i czy model nie przekręca słów.",
+  "hardware": "MacBook Pro M5 Max, 128 GB pamięci, wszystko na komputerze, bez chmury",
+  "method": [
+    "TTS to model, który czyta tekst na głos. Każdy model dostał ten sam tekst scenki: sześć kwestii, ok. 40 s. Na stronie są pierwsze trzy kwestie, po jednej na rolę.",
+    "Głosy postaci zaprojektował VoxCPM2 z polskich opisów, np. „głos małego chłopca w wieku siedmiu lat, bardzo wesoły, ciekawski”. Pozostałe modele klonowały te próbki. Klonowanie głosu oznacza, że model mówi barwą głosu z krótkiej próbki. Żaden głos nie pochodzi od prawdziwej osoby.",
+    "Każdą kwestię model nagrał dwa lub trzy razy. Próby różniły się tylko losowym startem (seed). Najlepszą wybrał program: Whisper zamieniał nagranie na tekst i liczył słowa usłyszane inaczej, niż były w tekście, a pomiary sprawdzały wysokość głosu, przester i urwane końcówki.",
+    "Runda 1: 14 ustawień z 6 modeli i jeden wariant z zamianą głosu. Na stronie jest po jednym ustawieniu, przeważnie tym, które Artur ocenił w odsłuchu.",
+    "Runda 2: nowe próbki głosów z opisów, bo w rundzie 1 próbki miały wady. Na każdą rolę Artur dostał trzy nagrania z Drama 3 i Higgsa i wybrał jedno. Na stronie są dwa: wybrane i najlepsze z drugiego modelu.",
+    "W rundzie 2 wybrane nagrania są o ok. 2 dB cichsze od drugiego nagrania w tej samej roli. Przy porównaniu warto to wyrównać, bo głośniejsze nagranie łatwo uznać za lepsze."
+  ],
+  "variants": [
+    {
+      "id": "drama3",
+      "name": "Fish Audio Drama 3",
+      "label": "Wybrany: Burek i Mruczka",
+      "status": "success",
+      "summary": "Daje się prowadzić zwykłym opisem gry w nawiasie, także po polsku. Narrator z niego dostał w odsłuchu bardzo dobrą ocenę, a w rundzie 2 dał głosy Burka i Mruczki.",
+      "time": "ok. 0,5–0,7 s pracy na 1 s nagrania, ok. 47 GB pamięci",
+      "settings": "wersja 8-bitowa, każda kwestia osobno, opis gry w nawiasie kwadratowym, np. [warm, calm storyteller, smiling]",
+      "license": "Fish Audio Community License (za darmo przy przychodzie poniżej 500 tys. USD rocznie, z dopiskiem „Built with Fish Audio”)",
+      "modelId": "fish-drama-3-8bit"
+    },
+    {
+      "id": "higgs-tagi",
+      "name": "Higgs TTS 3 z tagami emocji",
+      "label": "Wybrany: narrator",
+      "status": "success",
+      "summary": "Znaczniki emocji w tekście dały spokojniejszego narratora z lepszą grą niż ten sam model bez nich. W rundzie 2 wygrał rolę narratora. Nagrywa tylko do 12 kHz, więc brzmi trochę ciemniej.",
+      "time": "ok. 0,5 s pracy na 1 s nagrania, ok. 12 GB pamięci",
+      "settings": "klon z próbki, znaczniki w tekście, np. <|emotion:contentment|><|prosody:speed_slow|>, temperatura 0,9",
+      "license": "Boson Higgs Audio v3 z Creator Use Grant (na YouTube wolno, z podpisem o Higgs Audio w opisie)",
+      "modelId": "higgs-audio-v3-tts-4b"
+    },
+    {
+      "id": "higgs",
+      "name": "Higgs TTS 3 bez tagów",
+      "label": "Gorszy niż z tagami",
+      "status": "partial",
+      "summary": "Najmniej przekręconych słów w całym teście, ale narrator bez znaczników emocji wypadł w odsłuchu słabiej.",
+      "time": "ok. 0,5 s pracy na 1 s nagrania, ok. 12 GB pamięci",
+      "settings": "klon z próbki, sam tekst, temperatura 0,9",
+      "license": "Boson Higgs Audio v3 z Creator Use Grant",
+      "modelId": "higgs-audio-v3-tts-4b"
+    },
+    {
+      "id": "voxcpm2",
+      "name": "VoxCPM2",
+      "label": "Do projektowania głosów",
+      "status": "partial",
+      "summary": "Robi głos z samego opisu słownego i z niego powstały wszystkie próbki postaci. Jako lektor czytał żywo, ale z chrypką, a Burek trzeszczał.",
+      "time": "ok. 0,3–0,4 s pracy na 1 s nagrania, ok. 9 GB pamięci",
+      "settings": "klon z próbki i opis gry w nawiasie, cfg 2, 10 kroków",
+      "license": "Apache 2.0",
+      "modelId": "voxcpm2-bf16"
+    },
+    {
+      "id": "moss",
+      "name": "MOSS-TTS v1.5",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Przekręcał imię Mruczki („Mucko”) i czytał „Hau” jak angielskie „How”. Potrzebuje 26 GB pamięci, ponad dwa razy więcej niż Higgs.",
+      "time": "ok. 0,7–0,9 s pracy na 1 s nagrania, ok. 26 GB pamięci",
+      "settings": "klon z próbki, język „Polish”",
+      "license": "Apache 2.0",
+      "modelId": "moss-tts-v1.5"
+    },
+    {
+      "id": "omnivoice",
+      "name": "OmniVoice",
+      "label": "Tylko porównanie (licencja)",
+      "status": "partial",
+      "summary": "Narrator brzmiał bardzo naturalnie. Mruczka miała pogłos i zmieniała głos w trakcie kwestii. Licencja nie pozwala używać go na kanale.",
+      "time": "ok. 0,2 s pracy na 1 s nagrania, ok. 5 GB pamięci",
+      "settings": "klon z próbki, 32 kroki, język polski",
+      "license": "CC-BY-NC (tylko niekomercyjnie)",
+      "modelId": "omnivoice-bf16"
+    },
+    {
+      "id": "chatterbox",
+      "name": "Chatterbox Multilingual V3",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Punkt odniesienia z wcześniejszych testów. Narrator miał trzaski, a Mruczka przeczytała „Ciii” jak zwykłe słowo.",
+      "time": "ok. 2 s pracy na 1 s nagrania (pomiar zawyżony, bo obok liczył inny model), ok. 6 GB pamięci",
+      "settings": "exaggeration 0,5, cfg 0,5",
+      "license": "MIT (w dźwięku jest niesłyszalny znak wodny)",
+      "modelId": "chatterbox-multilingual-v3"
+    },
+    {
+      "id": "vc",
+      "name": "Drama 3 + zamiana głosu Chatterbox VC",
+      "label": "Nie przeszedł dalej",
+      "status": "partial",
+      "summary": "Narrator z Drama 3 czytał też kwestie postaci, a zamiana głosu zmieniała barwę gotowego nagrania na Burka albo Mruczkę. Rytm i melodia zostają jednak od dorosłego narratora.",
+      "time": "jak Drama 3, plus ok. 2–4 s na kwestię na zamianę głosu (3,5 GB pamięci)",
+      "settings": "Drama 3 z głosem narratora i opisem gry, potem Chatterbox VC na próbkę postaci",
+      "license": "Fish Audio Community License i MIT",
+      "modelId": "fish-drama-3-8bit + chatterbox-vc"
+    }
+  ],
+  "cases": [
+    {
+      "id": "N1",
+      "title": "Narrator, runda 1",
+      "challenge": "ciepły, spokojny głos do bajki dla małych dzieci, czysty dźwięk bez chrypki.",
+      "prompt": "Na skraju małego miasteczka, tuż przy stacji kolejowej, mieszkał piesek Burek. Pewnego ranka spotkał na peronie kotkę Mruczkę.",
+      "results": [
+        {
+          "variant": "drama3",
+          "note": "w odsłuchu bardzo dobry narrator",
+          "media": {
+            "type": "audio",
+            "src": "media/N1_drama3_0.m4a"
+          }
+        },
+        {
+          "variant": "higgs-tagi",
+          "note": "spokojny, z emocjami",
+          "media": {
+            "type": "audio",
+            "src": "media/N1_higgs-tagi_1.m4a"
+          }
+        },
+        {
+          "variant": "higgs",
+          "note": "mniej emocji niż z tagami",
+          "media": {
+            "type": "audio",
+            "src": "media/N1_higgs_2.m4a"
+          }
+        },
+        {
+          "variant": "voxcpm2",
+          "note": "żywy, ale z chrypką",
+          "media": {
+            "type": "audio",
+            "src": "media/N1_voxcpm2_3.m4a"
+          }
+        },
+        {
+          "variant": "moss",
+          "media": {
+            "type": "audio",
+            "src": "media/N1_moss_4.m4a"
+          }
+        },
+        {
+          "variant": "omnivoice",
+          "note": "bardzo naturalny",
+          "media": {
+            "type": "audio",
+            "src": "media/N1_omnivoice_5.m4a"
+          }
+        },
+        {
+          "variant": "chatterbox",
+          "note": "trzaski",
+          "media": {
+            "type": "audio",
+            "src": "media/N1_chatterbox_6.m4a"
+          }
+        }
+      ]
+    },
+    {
+      "id": "B1",
+      "title": "Burek, runda 1",
+      "challenge": "wesoły, dziecięcy głos pieska, polskie „Hau!”, zdania twierdzące bez wznoszenia na końcu.",
+      "prompt": "Hau! Dzień dobry, Mruczko! Dokąd tak się skradasz?",
+      "results": [
+        {
+          "variant": "higgs-tagi",
+          "note": "za mało dziecięcy, „Hau” jak angielskie „How”",
+          "media": {
+            "type": "audio",
+            "src": "media/B1_higgs-tagi_0.m4a"
+          }
+        },
+        {
+          "variant": "voxcpm2",
+          "note": "ładna barwa, ale trzeszczy",
+          "media": {
+            "type": "audio",
+            "src": "media/B1_voxcpm2_1.m4a"
+          }
+        },
+        {
+          "variant": "vc",
+          "note": "Whisper słyszy „Ho!” zamiast „Hau!”",
+          "media": {
+            "type": "audio",
+            "src": "media/B1_vc_2.m4a"
+          }
+        }
+      ]
+    },
+    {
+      "id": "M1",
+      "title": "Mruczka, runda 1",
+      "challenge": "„Ciii…” szeptem, miękki i trochę chytry głos kotki, sucho i blisko, bez pogłosu.",
+      "prompt": "Ciii… Nie tak głośno, Burku. Czekam na pociąg z mlekiem.",
+      "results": [
+        {
+          "variant": "higgs-tagi",
+          "note": "pogłos",
+          "media": {
+            "type": "audio",
+            "src": "media/M1_higgs-tagi_0.m4a"
+          }
+        },
+        {
+          "variant": "omnivoice",
+          "note": "pogłos, głos zmienia się w kwestii",
+          "media": {
+            "type": "audio",
+            "src": "media/M1_omnivoice_1.m4a"
+          }
+        },
+        {
+          "variant": "chatterbox",
+          "note": "pogłos, za wolno, „Ciii” jak słowo",
+          "media": {
+            "type": "audio",
+            "src": "media/M1_chatterbox_2.m4a"
+          }
+        }
+      ]
+    },
+    {
+      "id": "N2",
+      "title": "Narrator, runda 2",
+      "challenge": "nowe próbki głosu z opisów, bez chrypki. Drama 3 i Higgs czytają dłuższy fragment.",
+      "prompt": "Na skraju małego miasteczka, tuż przy stacji kolejowej, mieszkał piesek Burek. Pewnego ranka spotkał na peronie kotkę Mruczkę. Burek zamerdał ogonem tak mocno, że aż zakurzyło się na peronie. A w oddali było już słychać: puf, puf, puf…",
+      "results": [
+        {
+          "variant": "higgs-tagi",
+          "note": "wybrany",
+          "seconds": 11.1,
+          "media": {
+            "type": "audio",
+            "src": "media/N2_higgs-tagi_0.m4a"
+          }
+        },
+        {
+          "variant": "drama3",
+          "note": "finalista",
+          "seconds": 11.6,
+          "media": {
+            "type": "audio",
+            "src": "media/N2_drama3_1.m4a"
+          }
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "title": "Burek, runda 2",
+      "challenge": "dziecięcy głos i opadające końce zdań. W tekście dla modelu „Hau!” jest zapisane jako „Hał!”, żeby nie wyszło angielskie „How”.",
+      "prompt": "Hau! Dzień dobry, Mruczko! Dokąd tak się skradasz? Ja dzisiaj pilnuję całej stacji. Widziałem już trzy pociągi i jednego bardzo grubego gołębia.",
+      "results": [
+        {
+          "variant": "drama3",
+          "note": "wybrany",
+          "seconds": 5.5,
+          "media": {
+            "type": "audio",
+            "src": "media/B2_drama3_0.m4a"
+          }
+        },
+        {
+          "variant": "higgs-tagi",
+          "note": "finalista",
+          "seconds": 5.7,
+          "media": {
+            "type": "audio",
+            "src": "media/B2_higgs-tagi_1.m4a"
+          }
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Mruczka, runda 2",
+      "challenge": "słodka, lekka kotka bez pogłosu. „Ciii…” jest zapisane jako „Szszsz…”, żeby wyszedł cichy syk.",
+      "prompt": "Ciii… Nie tak głośno, Burku. Czekam na pociąg z mlekiem. Może przywiezie też kość. Ale tylko wtedy, gdy ładnie poprosisz pana konduktora.",
+      "results": [
+        {
+          "variant": "drama3",
+          "note": "wybrana",
+          "seconds": 7.2,
+          "media": {
+            "type": "audio",
+            "src": "media/M2_drama3_0.m4a"
+          }
+        },
+        {
+          "variant": "higgs-tagi",
+          "note": "finalistka",
+          "seconds": 7.3,
+          "media": {
+            "type": "audio",
+            "src": "media/M2_higgs-tagi_1.m4a"
+          }
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "chosen": "Fish Audio Drama 3",
+    "text": "Głównym silnikiem głosów jest Fish Audio Drama 3. Mówią nim Burek i Mruczka. Narratora czyta Higgs TTS 3 ze znacznikami emocji, który zostaje też silnikiem zapasowym."
+  },
+  "findings": [
+    "Modele powtarzają wady próbki głosu. Pogłos z próbki Mruczki Artur usłyszał w nagraniach czterech modeli, a chrypkę z próbki narratora w VoxCPM2. Dlatego w rundzie 2 powstały nowe, czyste próbki.",
+    "Drama 3 bierze z próbki barwę i wysokość głosu, ale nie przenosi jej szumu. W ciszy między słowami jego nagrania były dużo czystsze niż sama próbka.",
+    "Prawie każdy model czytał „Hau!” jak angielskie „How”. Pomógł zapis „Hał!”. „Ciii…” modele czytały jak słowo albo pomijały, a zapis „Szszsz…” dał cichy syk w czterech próbach na cztery.",
+    "Mało przekręconych słów nie oznacza dobrego głosu. Higgs bez znaczników miał najmniej pomyłek, a w odsłuchu wypadł słabiej niż z nimi.",
+    "Cała scenka w jednym przebiegu brzmi bardziej jak rozmowa, ale Drama 3 z polskimi opisami gry pominął wtedy całą kwestię Mruczki. Kwestie nagrywane osobno były pewniejsze."
+  ],
+  "notices": [
+    "Wszystkie nagrania wygenerowała AI na komputerze lokalnym.",
+    "Głosy postaci powstały z opisów słownych. Nie klonowaliśmy głosu żadnej prawdziwej osoby.",
+    "Built with Fish Audio.",
+    "This audio was created with Boson AI's Higgs Audio.",
+    "OmniVoice pokazujemy tylko dla porównania, bo jego licencja nie pozwala na użycie komercyjne."
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "slug": "lipsync-mowa-ludzie",
+  "title": "Mówiący ludzie: ruch ust",
+  "series": "Arek Igiełka",
+  "category": "wideo",
+  "date": "2026-11-09",
+  "summary": "Szukaliśmy sposobu, żeby realistyczna postać mówiła po polsku i ruszała ustami do słów. Sprawdziliśmy sześć podejść w pionowych ujęciach 9:16.",
+  "question": "Które podejście daje ruch ust zgodny z polską mową u realistycznych ludzi? Patrzymy, czy usta otwierają się na słowach i zamykają w pauzach, czy mówi właściwa osoba i czy ruch nie jest przesadny.",
+  "hardware": "MacBook Pro M5 Max, 128 GB pamięci. Obraz i ruch ust liczone na komputerze, zamiana głosu w chmurze ElevenLabs",
+  "method": [
+    "Klatki startowe narysował FLUX 3 Klein w rozdzielczości 832×1472. Ruch robił LTX-2.5, poza testem MiniMax H3.",
+    "W ujęciach z jedną osobą każde podejście dostało tę samą polską kwestię. Głos pochodził z ElevenLabs (głos Hanna), a w zbliżeniu z syntezatora mowy macOS.",
+    "A2Vid to tryb LTX-2.5, w którym model dostaje gotowe nagranie i sam rusza ustami postaci. Speech-to-Speech zamienia jeden głos na inny i zostawia czas każdego słowa bez zmian.",
+    "Otwarcie ust mierzyliśmy klatka po klatce narzędziem Apple Vision, a słowa sprawdzał Whisper. Ostateczną ocenę dawał Artur po obejrzeniu klipów.",
+    "Przy każdym podejściu pokazujemy najlepszy klip z kilku prób."
+  ],
+  "variants": [
+    {
+      "id": "a2vid",
+      "name": "LTX-2.5 A2Vid",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Model dostaje nagranie i sam rusza ustami. W zbliżeniu usta mówiły tylko w środku kwestii, a w planie średnim nie szły za sylabami.",
+      "time": "ok. 19–22 min na ujęcie 3,7 s w zbliżeniu, ok. 12 min na 2,7 s w planie średnim",
+      "settings": "832×1472, siła nagrania (a2v_scale) 5–7, klatka startowa z FLUX 3 Klein",
+      "license": "LTX-2 Community (treść trzeba oznaczyć jako AI)",
+      "modelId": "ltx-2.5-a2vid"
+    },
+    {
+      "id": "musetalk",
+      "name": "MuseTalk 1.5",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Dorabia usta na gotowym filmie. Jest szybki i nie zmienia reszty kadru, ale usta prawie się nie otwierają i są rozmyte.",
+      "time": "ok. 32 s na ujęcie 4,7 s, do tego render bazowy LTX ok. 6 min",
+      "settings": "na MPS w fp16, baza: ujęcie LTX-2.5 bez mowy, margines dolny 25",
+      "license": "MIT; dwa modele pomocnicze trenowano na danych tylko do użytku niekomercyjnego",
+      "modelId": "musetalk-1.5"
+    },
+    {
+      "id": "dubbing",
+      "name": "LTX-2.5 + dubbing",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "LTX robi ujęcie ze spokojnymi ustami, a gotowy głos kładziemy na wierzch i dopasowujemy tylko początek i koniec frazy. Postać wyglądała, jakby nie mówiła.",
+      "time": "ok. 5,3 min renderu na ujęcie 4,7 s",
+      "settings": "opis „lips barely part, no teeth visible”, głos ElevenLabs ustawiony na pierwszy ruch ust, tempo zmienione najwyżej o 10%",
+      "license": "LTX-2 Community; głos z płatnego planu ElevenLabs",
+      "modelId": "ltx-2.5-distilled"
+    },
+    {
+      "id": "ltx",
+      "name": "LTX-2.5 (obraz i mowa razem)",
+      "label": "Częściowo",
+      "status": "partial",
+      "summary": "Model tworzy obraz i dźwięk w jednym przebiegu, więc usta pasują do słów. Przy jednej osobie usta były przesadne, a głos modelu brzmiał sztucznie.",
+      "time": "ok. 5–5,5 min na ujęcie 4,7 s",
+      "settings": "zwykły LTX-2.5, polska kwestia wpisana w opis ujęcia, klatka startowa tylko na początku",
+      "license": "LTX-2 Community (treść trzeba oznaczyć jako AI)",
+      "modelId": "ltx-2.5-distilled"
+    },
+    {
+      "id": "ltx_sts",
+      "name": "LTX-2.5 + ElevenLabs Speech-to-Speech",
+      "label": "Najlepszy z testów",
+      "status": "partial",
+      "summary": "Dwie osoby w kadrze, LTX tworzy obraz i mowę, a Speech-to-Speech zamienia głos modelu na głos postaci. Ruch ust był najlepszy ze wszystkich prób, ale w pełnej scenie nadal za słaby.",
+      "time": "ok. 5 min renderu na ujęcie 4 s, zamiana głosu kilka sekund na kwestię",
+      "settings": "eleven_multilingual_sts_v2, głosy Hanna i Mikołaj z biblioteki ElevenLabs, każda kwestia osobno i sprawdzona Whisperem",
+      "license": "LTX-2 Community; ElevenLabs w płatnym planie",
+      "modelId": "ltx-2.5-distilled + eleven_multilingual_sts_v2"
+    },
+    {
+      "id": "h3",
+      "name": "MiniMax H3",
+      "label": "Odrzucony",
+      "status": "failed",
+      "summary": "Test po angielsku, bo polskiego nie ma wśród stabilnych języków modelu. Głowy ruszały się spokojniej niż w pierwszej próbie, ale całość wypadła słabo. Klipu nie pokazujemy obok polskich.",
+      "time": "ok. 28–30 min na ujęcie 9,4 s w 640×1152",
+      "settings": "lokalnie w ComfyUI, z nagraniem ElevenLabs albo z mową modelu, LoRA turbo, 4 kroki",
+      "license": "nie sprawdzaliśmy",
+      "modelId": "minimax-h3"
+    }
+  ],
+  "cases": [
+    {
+      "id": "zblizenie",
+      "title": "Jedna osoba mówi, zbliżenie",
+      "challenge": "czy usta ruszają się przez całą kwestię i zamykają w pauzach, gdy twarz zajmuje pół kadru.",
+      "results": [
+        {
+          "variant": "a2vid",
+          "seconds": 1150,
+          "note": "głos z syntezatora macOS; usta mówią tylko przez ok. 1,5 s z 3,3 s mowy",
+          "media": {
+            "type": "video",
+            "src": "media/zblizenie_a2vid_0.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/zblizenie_a2vid_0-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sredni",
+      "title": "Jedna osoba mówi, plan średni",
+      "challenge": "postać widać od pasa w górę, więc usta są małe. Wszystkie klipy mają tę samą kwestię.",
+      "results": [
+        {
+          "variant": "a2vid",
+          "seconds": 692,
+          "note": "usta nie idą za sylabami, postać mocno skręca tułów",
+          "media": {
+            "type": "video",
+            "src": "media/sredni_a2vid_0.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/sredni_a2vid_0-poster.webp"
+          }
+        },
+        {
+          "variant": "musetalk",
+          "seconds": 32,
+          "note": "sam MuseTalk na gotowym ujęciu; usta otwierają się słabo",
+          "media": {
+            "type": "video",
+            "src": "media/sredni_musetalk_1.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/sredni_musetalk_1-poster.webp"
+          }
+        },
+        {
+          "variant": "dubbing",
+          "note": "usta ledwo się ruszają i nie zamykają się w pauzie; po ok. 2,5 s zmienia się tło",
+          "media": {
+            "type": "video",
+            "src": "media/sredni_dubbing_2.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/sredni_dubbing_2-poster.webp"
+          }
+        },
+        {
+          "variant": "ltx",
+          "seconds": 310,
+          "note": "głos wygenerował model; usta za szerokie, widać zęby",
+          "media": {
+            "type": "video",
+            "src": "media/sredni_ltx_3.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/sredni_ltx_3-poster.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rozmowa",
+      "title": "Rozmowa dwóch osób",
+      "challenge": "czy mówi ta osoba, której kwestia trwa, a słuchająca ma zamknięte usta.",
+      "results": [
+        {
+          "variant": "ltx",
+          "seconds": 286,
+          "note": "głos wygenerował model; po ostatnim słowie oboje patrzą w kamerę",
+          "media": {
+            "type": "video",
+            "src": "media/rozmowa_ltx_0.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/rozmowa_ltx_0-poster.webp"
+          }
+        },
+        {
+          "variant": "ltx_sts",
+          "seconds": 286,
+          "note": "ten sam obraz, głosy zamienione przez Speech-to-Speech",
+          "media": {
+            "type": "video",
+            "src": "media/rozmowa_ltx_sts_1.mp4",
+            "width": 832,
+            "height": 1472,
+            "poster": "media/rozmowa_ltx_sts_1-poster.webp"
+          }
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "chosen": "LTX-2.5 + ElevenLabs Speech-to-Speech",
+    "text": "Najlepiej wypadła rozmowa dwóch osób w jednym kadrze: LTX-2.5 tworzy obraz i mowę razem, a ElevenLabs zamienia głos modelu na głos postaci. Artur przyjął ten przepis na dłuższym klipie z tego samego testu. Pierwsza pełna scena zrobiona w ten sposób nadal miała słaby ruch ust i zniekształcone twarze przy mówieniu, więc zrezygnowaliśmy z realistycznych ludzi i wróciliśmy do postaci w stylu animacji 3D."
+  },
+  "findings": [
+    "Zgodność ust z dźwiękiem liczyliśmy jako korelację otwarcia ust z głośnością mowy: 1 to pełna zgodność, 0 brak związku. A2Vid w planie średnim miał 0,27, prawie tyle co próba kontrolna z nagraniem puszczonym od tyłu (0,26), czyli usta nie szły za mową.",
+    "MuseTalk miał 0,47, ale samo ujęcie bazowe, bez żadnego dopasowania, miało już 0,38. Na obrazie różnica jest mała: usta otwierają się słabo, nie widać zębów, a okolica ust jest bardziej rozmyta niż reszta twarzy.",
+    "Usta najlepiej pasowały do słów, gdy LTX tworzył obraz i dźwięk w jednym przebiegu. Polską kwestię z opisu ujęcia model wypowiedział bez błędu w 6 próbach na 6. Przy jednej osobie mówiącej do kamery usta wychodziły jednak za szerokie, a dopisek o spokojnej mowie tego nie zmieniał.",
+    "Speech-to-Speech zostawia czas słów prawie bez zmian (do kilkudziesięciu milisekund), więc ruch ust dalej pasuje do nowego głosu. Czasem przekręca słowo, dlatego każdą kwestię sprawdzaliśmy Whisperem i powtarzaliśmy.",
+    "Po ostatniej kwestii postacie odwracają się do kamery i uśmiechają, więc ujęcie trzeba uciąć zaraz po ostatnim słowie."
+  ],
+  "notices": [
+    "Obraz, ruch i głosy wygenerowała AI. Osoby na nagraniach nie istnieją.",
+    "Nie klonowaliśmy niczyjego głosu. Hanna i Mikołaj to gotowe głosy z biblioteki ElevenLabs, użyte w płatnym planie. W zbliżeniu słychać syntezator mowy z systemu macOS.",
+    "To były testy. Żaden z tych klipów nie trafił na kanał."
+  ]
+}
