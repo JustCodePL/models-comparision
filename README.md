@@ -2,7 +2,7 @@
 
 Publiczny katalog odtwarzalnych porównań modeli. Pierwszy benchmark sprawdza, jak modele programistyczne poradziły sobie z przygotowaniem kompletnej gry 2048 w przeglądarce. Drugi rodzaj stron to eksperymenty z modelami generatywnymi (obraz, wideo, dźwięk), np. z produkcji kanału Arek Igiełka.
 
-Strona: [models-comparision.justcode.ac](https://models-comparision.justcode.ac/), wersja testowa: `models-comparision.justcode.ovh` (basic auth).
+Strona: [models-comparision.justcode.ac](https://models-comparision.justcode.ac/).
 
 ## Najważniejsze zasady
 
@@ -55,25 +55,17 @@ Można wskazać inną kopię bazy przez `OPENCODE_DB`. Importer publikuje wyłą
 
 ## Wdrożenie
 
-Strona działa na naszym serwerze (Docker Swarm za Traefikiem), tak jak `mr-slipshod` i `arek-igielka-web`. Repozytorium jest prywatne, bo wspólne workflow z prywatnego `JustCodePL/Actions` nie dają się wywołać z publicznego repo.
+Repozytorium jest publiczne, a strona to GitHub Pages pod własną domeną `https://models-comparision.justcode.ac` (rekord CNAME w Cloudflare na `justcodepl.github.io`, bez proxy). Push na `main` uruchamia `.github/workflows/pages.yml`: pełne testy z Playwrightem, ewaluację 2048, eksport i publikację. Pull requesty przechodzą te same testy bez publikacji. Nie ma wersji testowej: zmiany sprawdzamy lokalnie (`npm run dev`).
 
-| Gałąź | Adres | Workflow i stos |
-|---|---|---|
-| `develop` | `models-comparision.justcode.ovh`, basic auth, `noindex` | `.github/workflows/dev.yml`, `deploy/dev.yml` |
-| `main` | `models-comparision.justcode.ac`, TLS, indeksowanie | `.github/workflows/prod.yml`, `deploy/prod.yml` |
-
-Obraz buduje `NextJSStatic` z `JustCodePL/Actions`. Nie ma w nim przeglądarki, więc `npm run build` używa zapisanej ewaluacji `2048/evaluation.json` i zrzutów `2048/previews/`. Pełne testy z Playwrightem uruchamia `.github/workflows/test.yml` przy każdym pushu na `develop` i `main`. Zmianę sprawdzamy na adresie testowym i dopiero potem scalamy `develop` do `main`.
-
-Ustawienia środowisk są w Infisicalu (projekt „Porównania modeli”, `dev` i `prod`) i trafiają do `.env` podczas budowania:
+Ustawienia strony są jawne i leżą w workflow:
 
 | Zmienna | Znaczenie |
 |---|---|
 | `PAGE_URL` | adres strony |
-| `ENABLE_ROBOTS` | `1` tylko na produkcji, w przeciwnym razie `noindex` |
-| `TRACKING_SCRIPT_URL`, `TRACKING_ID` | Umami: `statystyki.justcode.ovh` dla dev, `statystyki.justcode.ac` dla prod, witryna „Porównania modeli” |
-| `MEDIA_BASE_URL` | bucket R2 środowiska z wideo i audio |
-| `BASIC_AUTH_USERS` | tylko dev; login w Bitwardenie: `[DEV] Porównania modeli basicauth` |
+| `ENABLE_ROBOTS` | `1` włącza indeksowanie, w przeciwnym razie `noindex` |
+| `TRACKING_SCRIPT_URL`, `TRACKING_ID` | Umami w `statystyki.justcode.ac`, witryna „Porównania modeli” |
+| `MEDIA_BASE_URL` | bucket R2 z wideo i audio |
 
 ## Wideo i audio (R2)
 
-Każda domena ma własny bucket Cloudflare R2: `models-comparision-justcode-ovh` (`https://models-comparision-media.justcode.ovh`) i `models-comparision-justcode-ac` (`https://models-comparision-media.justcode.ac`). Pliki leżą pod `<slug>/<plik>`. W `experiment.json` wideo i audio mają `src` w postaci `media/<plik>`, a strona składa z tego `MEDIA_BASE_URL/<slug>/<plik>`. Obrazy WebP zostają w repozytorium.
+Wideo i audio leżą w buckecie Cloudflare R2 `models-comparision-justcode-ac` (`https://models-comparision-media.justcode.ac`). Pliki leżą pod `<slug>/<plik>`. W `experiment.json` wideo i audio mają `src` w postaci `media/<plik>`, a strona składa z tego `MEDIA_BASE_URL/<slug>/<plik>`. Obrazy WebP zostają w repozytorium.
