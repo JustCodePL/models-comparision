@@ -16,7 +16,7 @@
     "test": "npm run transcripts:check && npm run artifacts:stage && npm run artifacts:evaluate && npm run test:data && npm run test:kimi && npm run test:gpt6 && next build && node --test tests/export.test.mjs"
   },
   "dependencies": {
-    "next": "16.3.3",
+    "next": "16.4.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
